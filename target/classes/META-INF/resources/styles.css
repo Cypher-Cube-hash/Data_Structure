@@ -1,0 +1,572 @@
+/* Add your styles here */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+.homePage {
+    position: relative;
+    height: 100svh;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 60% 40%;
+    background-color: black;
+    padding: 0.5rem;
+    overflow: hidden;
+}
+
+.boxOne {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #0f1f14;
+    overflow: hidden;
+}
+
+.boxOne::before {
+    content: "";
+    position: absolute;
+    inset: -50%;
+    
+    background:
+        radial-gradient(circle at 20% 30%, #2ecc71 0%, transparent 40%),
+        radial-gradient(circle at 80% 40%, #27ae60 0%, transparent 45%),
+        radial-gradient(circle at 60% 80%, #1abc9c 0%, transparent 40%),
+        radial-gradient(circle at 30% 70%, #16a085 0%, transparent 45%),
+        radial-gradient(circle at 90% 90%, #0f9d58 0%, transparent 50%);
+    
+    filter: blur(90px);
+    animation: lavaMove 30s ease-in-out infinite alternate;
+}
+
+@keyframes lavaMove {
+    0% {
+        transform: translate(-10%, -10%) scale(1);
+    }
+    25% {
+        transform: translate(10%, -5%) scale(1.2);
+    }
+    50% {
+        transform: translate(0%, 10%) scale(1.1);
+    }
+    75% {
+        transform: translate(-5%, 5%) scale(1.25);
+    }
+    100% {
+        transform: translate(10%, -10%) scale(1.15);
+    }
+}
+
+.innerDivMainPage {
+    position: absolute;
+    z-index: 2;
+    bottom: 20%;
+    padding-left: 7%;
+    max-width: 90%;
+}
+
+#logo {
+    color: white;
+    font-size: 45px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    text-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+#logo_para {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 18px;
+    line-height: 1.5;
+    max-width: 80%;
+}
+
+/* Box Two - Authentication Panel */
+.boxTwo {
+    height: 100%;
+    width: 100%;
+    padding: 1rem;
+    overflow: hidden;
+}
+
+.inner_div_box_two {
+    /* background: rgba(255, 255, 255, 0.95); */
+    backdrop-filter: blur(10px);
+    height: 100%;
+    width: 100%;
+    /* border-radius: 20px; */
+    display: flex;
+    flex-direction: column;/* 
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.2); */
+}
+
+/* Tabs Container */
+.tabs-container {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;/* 
+    background: #f1f5f9; *//* 
+    padding: 0.5rem; */
+    border-radius: 12px;
+}
+
+.tab {
+    flex: 1;
+    text-align: center;
+    padding: 1rem;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #64748b;
+    text-transform: uppercase;
+}
+
+.tab.active-tab {
+    background: #10b981;
+    color: white;
+    box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3);
+}
+
+/* Form Container */
+.form-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.input-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #cbcbcb;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.form-input {
+    padding: 1rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    background: white;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #10b981;
+    box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1);
+}
+
+.form-input::placeholder {
+    color: #94a3b8;
+}
+
+.forgot-password {
+    text-align: right;
+    color: #10b981;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    margin-top: -0.5rem;
+    transition: color 0.3s ease;
+}
+
+.forgot-password:hover {
+    color: #059669;
+    text-decoration: underline;
+}
+
+.terms-text {
+    color: #64748b;
+    font-size: 13px;
+    text-align: center;
+    line-height: 1.5;
+}
+
+.action-button {
+    width: 100%;
+    padding: 1rem !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    border-radius: 12px !important;
+    background: #10b981 !important;
+    color: white !important;
+    border: none !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    margin-top: 0.5rem !important;
+}
+
+.action-button:hover {
+    background: #059669 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.4) !important;
+}
+
+.action-button::part(vaadin-button) {
+    background: #10b981;
+    color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .homePage {
+        grid-template-columns: 1fr;
+    }
+    
+    .innerDivMainPage {
+        bottom: 10%;
+    }
+    
+    #logo {
+        font-size: 36px;
+    }
+    
+    #logo_para {
+        max-width: 100%;
+    }
+    
+    .inner_div_box_two {
+        padding: 1.5rem;
+    }
+}
+
+/* Loading Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.form-container {
+    animation: fadeIn 0.5s ease-out;
+}
+
+
+
+
+
+
+
+
+
+/* Additional styles for the updated registration form */
+
+.welcome-message {
+    font-size: 24px;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 1rem;
+    text-align: center;
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Name container for side-by-side fields */
+.name-container {
+    display: flex;
+    gap: 1rem;
+    width: 100%;
+}
+
+.half-width {
+    flex: 1;
+    min-width: 0; /* Prevents flex items from overflowing */
+}
+
+/* Enhanced input styling */
+.form-input {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    background: white;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #10b981;
+    box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1);
+}
+
+.form-input:hover {
+    border-color: #94a3b8;
+}
+
+/* Address field specific styling */
+.address-input {
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* Responsive adjustments for mobile */
+@media (max-width: 480px) {
+    .name-container {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .half-width {
+        width: 100%;
+    }
+    
+    .welcome-message {
+        font-size: 20px;
+    }
+}
+
+/* Add smooth scrolling for the form container */
+.form-container {
+    overflow-y: auto;
+    padding-right: 5px;
+    max-height: calc(100vh - 150px);
+}
+
+/* Custom scrollbar for the form container */
+/* .form-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.form-container::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 10px;
+}
+
+.form-container::-webkit-scrollbar-thumb {
+    background: #10b981;
+    border-radius: 10px;
+}
+
+.form-container::-webkit-scrollbar-thumb:hover {
+    background: #059669;
+} */
+
+.form-container {
+    overflow: auto; /* allow scrolling */
+    scrollbar-width: none; /* for Firefox */
+    -ms-overflow-style: none; /* for Internet Explorer and Edge */
+}
+
+/* for Chrome, Safari, and Opera */
+.form-container::-webkit-scrollbar {
+    display: none;
+}
+
+/* Enhanced input group spacing */
+.input-group {
+    margin-bottom: 0.25rem;
+}
+
+/* Add a subtle animation for form transitions */
+.form-container > * {
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Improve the terms text styling */
+.terms-text {
+    color: #64748b;
+    font-size: 13px;
+    text-align: center;
+    line-height: 1.5;
+    margin: 1rem 0 0.5rem 0;
+    padding: 0.5rem;
+    background: #f8fafc;
+    border-radius: 8px;
+}
+
+/* Add a subtle icon or indicator for required fields (optional) */
+.input-label::after {
+    content: "";
+    color: #ef4444;
+    margin-left: 4px;
+}
+
+/* For better visual hierarchy */
+.inner_div_box_two {
+    overflow: hidden; /* Prevents content from overflowing */
+}
+
+
+
+/* Additional styles for the address form */
+
+/* City and State container */
+.city-state-container {
+    display: flex;
+    gap: 1rem;
+    width: 100%;
+}
+
+.city-width {
+    flex: 2; /* City takes up more space */
+}
+
+.state-width {
+    flex: 1; /* State takes up less space */
+}
+
+/* Country ComboBox styling */
+.country-combo {
+    width: 100%;
+}
+
+.country-combo::part(input-field) {
+    padding: 1rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    background: white;
+    min-height: 52px;
+}
+
+.country-combo::part(input-field):focus-within {
+    border-color: #10b981;
+    box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1);
+}
+
+/* Required field indicator */
+.input-label::after {
+    content: " *";
+    color: #ef4444;
+    font-size: 14px;
+}
+
+/* Address Line 2 styling (optional field) */
+.address-line2 .input-label::after {
+    content: " (optional)";
+    color: #94a3b8;
+    font-size: 12px;
+    font-weight: normal;
+}
+
+/* Enhanced form container for better scrolling */
+.form-container {
+    overflow-y: auto;
+}
+
+/* Custom scrollbar for Webkit browsers */
+/* .form-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.form-container::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 10px;
+}
+
+.form-container::-webkit-scrollbar-thumb {
+    background: #10b981;
+    border-radius: 10px;
+}
+
+.form-container::-webkit-scrollbar-thumb:hover {
+    background: #059669;
+}
+ */
+/* Responsive adjustments */
+
+.form-container {
+    overflow: auto; /* allow scrolling */
+    scrollbar-width: none; /* for Firefox */
+    -ms-overflow-style: none; /* for Internet Explorer and Edge */
+}
+
+/* for Chrome, Safari, and Opera */
+.form-container::-webkit-scrollbar {
+    display: none;
+}
+@media (max-width: 480px) {
+    .name-container,
+    .city-state-container {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .half-width,
+    .city-width,
+    .state-width {
+        width: 100%;
+    }
+    
+    .welcome-message {
+        font-size: 20px;
+    }
+}
+
+/* Smooth animations */
+.form-container > * {
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Spacing between form sections */
+.input-group {
+    margin-bottom: 0.5rem;
+}
+
+/* Address Line 2 visual hint */
+.address-hint {
+    font-size: 12px;
+    color: #94a3b8;
+    margin-top: 4px;
+    margin-left: 4px;
+}
+
+/* Terms text styling */
+.terms-text {
+    color: #64748b;
+    font-size: 13px;
+    text-align: center;
+    line-height: 1.5;
+    margin: 1.5rem 0 0.5rem 0;
+    padding: 0.75rem;
+    background: #f8fafc;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+}
