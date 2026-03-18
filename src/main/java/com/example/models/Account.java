@@ -12,7 +12,7 @@ import com.example.utils.AccountUtils;
 @Table(name = "Account")
 public class Account {
     @Id
-    @Column(name = "Account", nullable = false, unique = true)
+    @Column(name = "AccountID", nullable = false, unique = true)
     private String actId;
 
     @Column(name = "Type", nullable = false)
