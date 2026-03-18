@@ -4,7 +4,7 @@ import com.example.models.Product;
 /* We learnt that this jackra extension allows us to connect the models with the 
 general database and if not implemented then we would have to write out
 raw vanila sql/postgrsql/mysql commands */
-import org.springframework.data.jpa.repository.JpaRepository;;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ProductRepository  extends JpaRepository <Product, Integer>{
     //It gives us a total of 10 prebuilt sql methods.
