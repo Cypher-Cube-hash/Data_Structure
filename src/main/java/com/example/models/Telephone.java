@@ -1,6 +1,5 @@
 package com.example.models;
 
-import com.vaadin.flow.component.login.LoginI18n.ErrorMessage;
 
 import jakarta.persistence.Embeddable;
 
@@ -11,6 +10,8 @@ public class Telephone {
     private String areaCode;
     private String exchangeCode;
     private String subscriberLine;
+
+    public Telephone() {}
 
     public Telephone(String countryCode, String areaCode, String exchangeCode, String subscriberLine){
         setCountryCode(countryCode);

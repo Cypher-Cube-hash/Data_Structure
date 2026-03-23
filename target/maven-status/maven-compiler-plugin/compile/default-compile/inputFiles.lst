@@ -1,6 +1,4 @@
 C:\Users\Yochanan Gardner\Downloads\app\app\src\main\java\com\example\Application.java
-C:\Users\Yochanan Gardner\Downloads\app\app\src\main\java\com\example\components\forms\Login.java
-C:\Users\Yochanan Gardner\Downloads\app\app\src\main\java\com\example\components\forms\Register.java
 C:\Users\Yochanan Gardner\Downloads\app\app\src\main\java\com\example\enums\TypeAccount.java
 C:\Users\Yochanan Gardner\Downloads\app\app\src\main\java\com\example\enums\TypeAcctStatus.java
 C:\Users\Yochanan Gardner\Downloads\app\app\src\main\java\com\example\enums\TypeCurrency.java
@@ -31,4 +29,6 @@ C:\Users\Yochanan Gardner\Downloads\app\app\src\main\java\com\example\utils\Cust
 C:\Users\Yochanan Gardner\Downloads\app\app\src\main\java\com\example\utils\ProductUtils.java
 C:\Users\Yochanan Gardner\Downloads\app\app\src\main\java\com\example\utils\RegistartionUtils.java
 C:\Users\Yochanan Gardner\Downloads\app\app\src\main\java\com\example\utils\UserUtils.java
+C:\Users\Yochanan Gardner\Downloads\app\app\src\main\java\com\example\views\components\forms\RegisterForm.java
+C:\Users\Yochanan Gardner\Downloads\app\app\src\main\java\com\example\views\components\forms\SignInForm.java
 C:\Users\Yochanan Gardner\Downloads\app\app\src\main\java\com\example\views\MainView.java

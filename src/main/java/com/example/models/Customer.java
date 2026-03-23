@@ -20,6 +20,7 @@ public class Customer {
     @JoinColumn(name = "UserID", nullable = false, referencedColumnName = "UserID", unique = true)
     private User user;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false, name = "Gender")
     private TypeGender gender;
 
