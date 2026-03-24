@@ -8,6 +8,7 @@ import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import com.example.services.RegistrationServices;
 
 @Route("")
 @PageTitle("Brand-Ex")
@@ -16,9 +17,13 @@ public class MainView extends VerticalLayout {
     private Div signInTab;
     private Div registerTab;
     private Div rowTwoDiv;
+    private final RegistrationServices registrationServices;
+    
 
-    public MainView() {
+    public MainView(RegistrationServices registrationServices) {
+        this.registrationServices = registrationServices; 
         addClassName("homePage");
+
 
         // ─── Box One (left) ──────────────────────────────
         Div boxOne = new Div();
@@ -90,6 +95,6 @@ public class MainView extends VerticalLayout {
         registerTab.addClassName("active-tab");
         signInTab.removeClassName("active-tab");
         rowTwoDiv.removeAll();
-        rowTwoDiv.add(new RegisterForm()); // ← just one line now
+        rowTwoDiv.add(new RegisterForm(registrationServices)); // ← just one line now
     }
 }

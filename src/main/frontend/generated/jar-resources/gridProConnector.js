@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2000-2026 Vaadin Ltd.
+ * Copyright 2000-2024 Vaadin Ltd.
  *
  * This program is available under Vaadin Commercial License and Service Terms.
  *
@@ -54,10 +54,11 @@ window.Vaadin.Flow.gridProConnector = {
 
     // Not needed in case of custom editor as value is set on server-side.
     // Overridden in order to avoid blinking of the cell content.
-    column._setEditorValue = function (editor, value) {};
+    column._setEditorValue = function(editor, value) {
+    };
 
     const stopCellEdit = column._stopCellEdit;
-    column._stopCellEdit = function () {
+    column._stopCellEdit = function() {
       stopCellEdit.apply(this, arguments);
       this._grid.toggleAttribute(LOADING_EDITOR_CELL_ATTRIBUTE, false);
     };
@@ -81,7 +82,7 @@ window.Vaadin.Flow.gridProConnector = {
   },
 
   initCellEditableProvider(column) {
-    column.isCellEditable = function (model) {
+    column.isCellEditable = function(model) {
       // If there is no cell editable data, assume the cell is editable
       const isEditable = model.item.cellEditable && model.item.cellEditable[column._flowId];
       return isEditable === undefined || isEditable;
@@ -92,28 +93,26 @@ window.Vaadin.Flow.gridProConnector = {
     // When stopping editing, getting the updated cell value for columns with
     // custom editors requires a server round-trip. During this time, we hide
     // the cell content and show an update animation.
-    grid.addEventListener('item-property-changed', (e) => {
+    grid.addEventListener('item-property-changed', () => {
       const { column, model } = grid.__edited;
 
       if (column.editorType !== 'custom') {
         return;
       }
 
-      e.preventDefault();
       grid.__pendingCellUpdate = `${model.item.key}:${column.path}`;
       grid.requestContentUpdate();
     });
 
     // Override the method to add the updating-cell part to the cell when it's being updated.
     const generateCellPartNames = grid._generateCellPartNames;
-    grid._generateCellPartNames = function (row, model) {
+    grid._generateCellPartNames = function(row, model) {
       generateCellPartNames.apply(this, arguments);
 
       iterateRowCells(row, (cell) => {
-        const isUpdating =
-          model && cell._column && grid.__pendingCellUpdate === `${model.item.key}:${cell._column.path}`;
+        const isUpdating = model && grid.__pendingCellUpdate === `${model.item.key}:${cell._column.path}`;
         const target = cell._focusButton || cell;
-        updatePart(target, 'updating-cell', isUpdating);
+        updatePart(target, isUpdating, 'updating-cell');
       });
     };
   },

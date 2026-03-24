@@ -5,9 +5,17 @@ import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Input;
+import com.vaadin.flow.component.html.Span;
+import com.example.models.Address;
+import com.example.services.RegistrationServices;
+import com.example.models.Telephone;
+
+
+
 
 public class RegisterForm extends Div {
 
+    private final RegistrationServices registrationServices;
     private Input firstNameInput;
     private Input lastNameInput;
     private Input emailInput;
@@ -16,8 +24,13 @@ public class RegisterForm extends Div {
     private Input cityInput;
     private Input stateInput;
     private ComboBox<String> countryCombo;
+    private Input countryCodeInput;
+    private Input areaCodeInput;
+    private Input exchangeCodeInput;
+    private Input subscriberLineInput;
 
-    public RegisterForm() {
+    public RegisterForm(RegistrationServices registrationServices) {
+        this.registrationServices = registrationServices;
         addClassName("form-container");
 
         Div joinDiv = new Div();
@@ -26,8 +39,12 @@ public class RegisterForm extends Div {
 
         Div nameContainer = buildNameContainer();
 
-        Div emailGroup = buildInputGroup("Email *", "john.doe@example.com", "text", true);
+        Div emailGroup = buildInputGroup("Email *", "john.doe@example.com", "email", true);
         emailInput = extractInput(emailGroup);
+
+
+
+        Div telephoneSection = buildTelephoneContainer();
 
         Div addressLine1Group = buildInputGroup("Address Line 1 *", "Street address, P.O. box", "text", true);
         addressLine1Input = extractInput(addressLine1Group);
@@ -52,6 +69,7 @@ public class RegisterForm extends Div {
             joinDiv,
             nameContainer,
             emailGroup,
+            telephoneSection,
             addressLine1Group,
             addressLine2Group,
             cityStateContainer,
@@ -68,24 +86,30 @@ public class RegisterForm extends Div {
 
         Div firstNameGroup = new Div();
         firstNameGroup.addClassNames("input-group", "half-width");
+
         Div firstLabel = new Div();
         firstLabel.addClassName("input-label");
         firstLabel.setText("First Name *");
+
         firstNameInput = new Input();
         firstNameInput.setPlaceholder("John");
         firstNameInput.addClassName("form-input");
         firstNameInput.setRequiredIndicatorVisible(true);
+
         firstNameGroup.add(firstLabel, firstNameInput);
 
         Div lastNameGroup = new Div();
         lastNameGroup.addClassNames("input-group", "half-width");
+
         Div lastLabel = new Div();
         lastLabel.addClassName("input-label");
         lastLabel.setText("Last Name *");
+
         lastNameInput = new Input();
         lastNameInput.setPlaceholder("Doe");
         lastNameInput.addClassName("form-input");
         lastNameInput.setRequiredIndicatorVisible(true);
+
         lastNameGroup.add(lastLabel, lastNameInput);
 
         container.add(firstNameGroup, lastNameGroup);
@@ -99,24 +123,30 @@ public class RegisterForm extends Div {
 
         Div cityGroup = new Div();
         cityGroup.addClassNames("input-group", "city-width");
+
         Div cityLabel = new Div();
         cityLabel.addClassName("input-label");
         cityLabel.setText("City *");
+
         cityInput = new Input();
         cityInput.setPlaceholder("New York");
         cityInput.addClassName("form-input");
         cityInput.setRequiredIndicatorVisible(true);
+
         cityGroup.add(cityLabel, cityInput);
 
         Div stateGroup = new Div();
         stateGroup.addClassNames("input-group", "state-width");
+
         Div stateLabel = new Div();
         stateLabel.addClassName("input-label");
         stateLabel.setText("State *");
+
         stateInput = new Input();
         stateInput.setPlaceholder("NY");
         stateInput.addClassName("form-input");
         stateInput.setRequiredIndicatorVisible(true);
+
         stateGroup.add(stateLabel, stateInput);
 
         container.add(cityGroup, stateGroup);
@@ -146,7 +176,7 @@ public class RegisterForm extends Div {
         return group;
     }
 
-    // ─── Reusable input group builder ───────────────────
+    // ─── Reusable input group ────────────────────────────
     private Div buildInputGroup(String label, String placeholder, String type, boolean required) {
         Div group = new Div();
         group.addClassName("input-group");
@@ -159,28 +189,102 @@ public class RegisterForm extends Div {
         input.setPlaceholder(placeholder);
         input.setType(type);
         input.addClassName("form-input");
-        if (required) input.setRequiredIndicatorVisible(true);
+
+        if (required) {
+            input.setRequiredIndicatorVisible(true);
+        }
 
         group.add(labelDiv, input);
         return group;
     }
 
-    // Helper to pull the Input out of a group Div
+
+
     private Input extractInput(Div group) {
         return (Input) group.getChildren()
                 .filter(c -> c instanceof Input)
                 .findFirst()
-                .orElse(new Input());
+                .orElseThrow(() -> new RuntimeException("Input not found"));
+    }
+
+    // ─── Telephone Row ────────────────────────────────────
+    private Div buildTelephoneContainer() {
+        Div container = new Div();
+        container.addClassName("telephone-container");
+
+        Div label = new Div();
+        label.addClassName("input-label");
+        label.setText("Phone Number *");
+
+        Div fieldsWrapper = new Div();
+        fieldsWrapper.addClassName("telephone-fields-wrapper");
+
+        countryCodeInput = createPhoneInput("1", "40px");
+        areaCodeInput = createPhoneInput("876", "50px");
+        exchangeCodeInput = createPhoneInput("555", "50px");
+        subscriberLineInput = createPhoneInput("0123", "70px");
+
+        fieldsWrapper.add(
+            new Span("+"),
+            countryCodeInput,
+            new Span("-"),
+            areaCodeInput,
+            new Span("-"),
+            exchangeCodeInput,
+            new Span("-"),
+            subscriberLineInput
+        );
+
+        container.add(label, fieldsWrapper);
+        return container;
+    }
+
+    private Input createPhoneInput(String placeholder, String width) {
+        Input input = new Input();
+        input.setPlaceholder(placeholder);
+        input.addClassName("form-input");
+        input.getStyle().set("width", width);
+
+        // ✅ FIX: required indicator
+        input.setRequiredIndicatorVisible(true);
+
+        return input;
     }
 
     // ─── Submit Handler ──────────────────────────────────
     private void handleRegister() {
-        // TODO: wire to UserService
-        // userService.registerUser(
-        //     firstNameInput.getValue(),
-        //     lastNameInput.getValue(),
-        //     emailInput.getValue(),
-        //     new Address(...)
-        // );
+
+        if (firstNameInput.isEmpty() ||
+            lastNameInput.isEmpty() ||
+            emailInput.isEmpty() ||
+            addressLine1Input.isEmpty() ||
+            cityInput.isEmpty() ||
+            stateInput.isEmpty() ||
+            countryCombo.isEmpty()) {
+            return;
+        }
+
+        String country = countryCombo.getValue() != null ? countryCombo.getValue() : "";
+
+
+
+        registrationServices.addRegisteredUser(
+            firstNameInput.getValue(),
+            lastNameInput.getValue(),
+            emailInput.getValue(),
+            new Address(
+                addressLine1Input.getValue(),
+                addressLine2Input.getValue(),
+                cityInput.getValue(),
+                stateInput.getValue(),
+                country
+            ),
+            new Telephone(
+                countryCodeInput.getValue(),
+                areaCodeInput.getValue(),
+                exchangeCodeInput.getValue(),
+                subscriberLineInput.getValue()
+            )
+        );
     }
 }

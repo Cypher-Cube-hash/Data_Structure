@@ -35,16 +35,16 @@ public class Account {
     private LocalDate updatedAt;
 
     public Account(){
+        this.currency = TypeCurrency.JMD;
+        this.accountStatus = TypeAcctStatus.ACTIVE;
+        this.accountType = TypeAccount.PERSONAL;
         this.createdAt = LocalDate.now();
         this.updatedAt = LocalDate.now();
     }
 
-    public Account(TypeAccount actType, TypeAcctStatus actStatus, Telephone phone, TypeCurrency currency){
+    public Account(Telephone phone){
         this.actId = AccountUtils.accountIdGenerator(11);
-        this.accountType = actType;
-        this.accountStatus = actStatus;
         this.telephone = phone;
-        this.currency = currency;
     }
     public Account(String actId, TypeAccount accountType, TypeAcctStatus accountStatus, 
                   Telephone telephone, TypeCurrency currency, LocalDate createdAt, LocalDate updatedAt) {

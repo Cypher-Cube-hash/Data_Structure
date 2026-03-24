@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2000-2026 Vaadin Ltd.
+ * Copyright 2000-2024 Vaadin Ltd.
  *
  * This program is available under Vaadin Commercial License and Service Terms.
  *
@@ -75,36 +75,16 @@ export function createLookup() {
 }
 
 /**
- * Returns information about a feature within an OpenLayers map instance.
- * Includes whether the feature is a cluster or a single feature, and
- * which layer and source it belongs to.
- * @param map
- * @param feature
- * @returns {{feature: *, layer: *, source: *, isCluster: boolean}}
+ * Searches an OpenLayers map instance for the layer whose source contains a specific feature
+ * @param layers the array of layers configured in the map
+ * @param feature the feature that should be contained in the layers source
+ * @returns {*} the layer that contains the feature, or undefined
  */
-export function getFeatureInfo(map, feature) {
-  const layer = map
-    .getLayers()
-    .getArray()
-    .find((layer) => {
-      const source = layer.getSource && layer.getSource();
-      const isVectorSource = source && source instanceof VectorSource;
-      return isVectorSource && source.getFeatures().includes(feature);
-    });
-  const source = layer && layer.getSource();
+export function getLayerForFeature(layers, feature) {
+  return layers.find((layer) => {
+    const source = layer.getSource && layer.getSource();
+    const isVectorSource = source && source instanceof VectorSource;
 
-  // Unwrap single feature from cluster
-  const clusterFeatures = feature.get('features');
-  if (Array.isArray(clusterFeatures) && clusterFeatures.length === 1) {
-    feature = clusterFeatures[0];
-  }
-
-  const isCluster = Array.isArray(clusterFeatures) && clusterFeatures.length > 1;
-
-  return {
-    feature,
-    layer,
-    source,
-    isCluster
-  };
+    return isVectorSource && source.getFeatures().includes(feature);
+  });
 }
