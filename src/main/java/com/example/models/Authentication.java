@@ -21,12 +21,12 @@ public class Authentication {
     @Column(nullable = false)
     private boolean isActive;
 
-    @OneToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "UserID")
+    
+    @Column(name = "user_id")
     private String userId;
     
-    @OneToOne
-    @JoinColumn(name = "account_id", referencedColumnName = "AccountID")
+    
+    @Column(name = "account_id")
     private String accountId;
     
     @Column(nullable = false)
@@ -200,6 +200,8 @@ public class Authentication {
         return this;
     }
  */
+    
+    
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

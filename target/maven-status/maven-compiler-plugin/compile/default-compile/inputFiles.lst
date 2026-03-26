@@ -7,6 +7,7 @@ C:\Users\Yochanan Gardner\Downloads\app\app\src\main\java\com\example\enums\Type
 C:\Users\Yochanan Gardner\Downloads\app\app\src\main\java\com\example\models\Account.java
 C:\Users\Yochanan Gardner\Downloads\app\app\src\main\java\com\example\models\Address.java
 C:\Users\Yochanan Gardner\Downloads\app\app\src\main\java\com\example\models\Admin.java
+C:\Users\Yochanan Gardner\Downloads\app\app\src\main\java\com\example\models\Authentication.java
 C:\Users\Yochanan Gardner\Downloads\app\app\src\main\java\com\example\models\Customer.java
 C:\Users\Yochanan Gardner\Downloads\app\app\src\main\java\com\example\models\Product.java
 C:\Users\Yochanan Gardner\Downloads\app\app\src\main\java\com\example\models\Registration.java
@@ -15,6 +16,7 @@ C:\Users\Yochanan Gardner\Downloads\app\app\src\main\java\com\example\models\Tem
 C:\Users\Yochanan Gardner\Downloads\app\app\src\main\java\com\example\models\User.java
 C:\Users\Yochanan Gardner\Downloads\app\app\src\main\java\com\example\repositories\AccountRepository.java
 C:\Users\Yochanan Gardner\Downloads\app\app\src\main\java\com\example\repositories\AdminRepository.java
+C:\Users\Yochanan Gardner\Downloads\app\app\src\main\java\com\example\repositories\AuthenticationRepository.java
 C:\Users\Yochanan Gardner\Downloads\app\app\src\main\java\com\example\repositories\CustomerRepository.java
 C:\Users\Yochanan Gardner\Downloads\app\app\src\main\java\com\example\repositories\ProductRepository.java
 C:\Users\Yochanan Gardner\Downloads\app\app\src\main\java\com\example\repositories\RegistrationRepository.java
@@ -22,6 +24,7 @@ C:\Users\Yochanan Gardner\Downloads\app\app\src\main\java\com\example\repositori
 C:\Users\Yochanan Gardner\Downloads\app\app\src\main\java\com\example\repositories\UserRepository.java
 C:\Users\Yochanan Gardner\Downloads\app\app\src\main\java\com\example\services\AccountServices.java
 C:\Users\Yochanan Gardner\Downloads\app\app\src\main\java\com\example\services\AdminServices.java
+C:\Users\Yochanan Gardner\Downloads\app\app\src\main\java\com\example\services\AuthenticationServices.java
 C:\Users\Yochanan Gardner\Downloads\app\app\src\main\java\com\example\services\CustomerServices.java
 C:\Users\Yochanan Gardner\Downloads\app\app\src\main\java\com\example\services\ProductServices.java
 C:\Users\Yochanan Gardner\Downloads\app\app\src\main\java\com\example\services\RegistrationServices.java

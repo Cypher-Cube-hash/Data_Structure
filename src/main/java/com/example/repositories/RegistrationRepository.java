@@ -7,6 +7,6 @@ import com.example.models.Registration;
 
 public interface RegistrationRepository extends JpaRepository <Registration, String> {
     Optional<Registration> findByUser_UserId(String userId);
-    Optional<Registration> findByAccount_AccountId(String accountId);
+    Optional<Registration> findByAccount_ActId(String accountId);
     boolean existsByUser_UserId(String userId);
 } 
