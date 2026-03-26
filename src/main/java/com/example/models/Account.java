@@ -1,7 +1,6 @@
 package com.example.models;
 
 import java.time.LocalDate;
-import java.util.Objects;
 import jakarta.persistence.*;
 import com.example.enums.TypeAccount;
 import com.example.enums.TypeAcctStatus;
@@ -11,6 +10,7 @@ import com.example.utils.AccountUtils;
 @Entity
 @Table(name = "Account")
 public class Account {
+
     @Id
     @Column(name = "AccountID", nullable = false, unique = true)
     private String actId;
@@ -21,9 +21,9 @@ public class Account {
     @Column(name = "Status", nullable = false)
     private TypeAcctStatus accountStatus;
 
-    @Embedded
-    @Column(nullable = true, name = "Contact #")
-    private Telephone telephone;
+    // ✅ SINGLE COLUMN PHONE
+    @Column(name = "contact_info")
+    private String contactInfo;
 
     @Column(name = "Currency", nullable = false)
     private TypeCurrency currency;
@@ -34,89 +34,47 @@ public class Account {
     @Column(nullable = false)
     private LocalDate updatedAt;
 
+    // ✅ Default constructor
     public Account(){
+        this.actId = AccountUtils.accountIdGenerator(11);
+        this.currency = TypeCurrency.JMD;
+        this.accountStatus = TypeAcctStatus.ACTIVE;
+        this.accountType = TypeAccount.PERSONAL;
         this.createdAt = LocalDate.now();
         this.updatedAt = LocalDate.now();
     }
 
-    public Account(TypeAccount actType, TypeAcctStatus actStatus, Telephone phone, TypeCurrency currency){
-        this.actId = AccountUtils.accountIdGenerator(11);
-        this.accountType = actType;
-        this.accountStatus = actStatus;
-        this.telephone = phone;
-        this.currency = currency;
-    }
-    public Account(String actId, TypeAccount accountType, TypeAcctStatus accountStatus, 
-                  Telephone telephone, TypeCurrency currency, LocalDate createdAt, LocalDate updatedAt) {
-        this.actId = actId;
-        this.accountType = accountType;
-        this.accountStatus = accountStatus;
-        this.telephone = telephone;
-        this.currency = currency;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
+    // ✅ Constructor using Telephone → convert to String
+    public Account(Telephone phone){
+        this();
+        this.contactInfo = formatPhone(phone);
     }
 
-    public Account(Account account){
-        this.actId = account.actId;
-        this.accountType = account.accountType;
-        this.accountStatus = account.accountStatus;
-        this.telephone = account.telephone;
-        this.currency = account.currency;
-        this.createdAt = account.createdAt;
-        this.updatedAt = account.updatedAt;
+    // ✅ Utility method to format phone
+    private String formatPhone(Telephone phone){
+        if(phone == null) return null;
+
+        return "+" + phone.getCountryCode() + "-" +
+               phone.getAreaCode() + "-" +
+               phone.getExchangeCode() + "-" +
+               phone.getSubscriberLine();
     }
 
+    // ✅ Getters
+    public String getActId() { return actId; }
+    public TypeAccount getAccountType() { return accountType; }
+    public TypeAcctStatus getAccountStatus() { return accountStatus; }
+    public String getContactInfo() { return contactInfo; }
+    public TypeCurrency getCurrency() { return currency; }
+    public LocalDate getCreatedAt() { return createdAt; }
+    public LocalDate getUpdatedAt() { return updatedAt; }
 
-
-
-
-    public String getActId() {
-        return actId;
+    // ✅ Setter
+    public void setContactInfo(String contactInfo){
+        this.contactInfo = contactInfo;
     }
 
-    public TypeAccount getAccountType() {
-        return accountType;
-    }
-
-    public TypeAcctStatus getAccountStatus() {
-        return accountStatus;
-    }
-
-    public Telephone getTelephone() {
-        return telephone;
-    }
-
-    public TypeCurrency getCurrency() {
-        return currency;
-    }
-
-    public LocalDate getCreatedAt() {
-        return createdAt;
-    }
-
-    public LocalDate getUpdatedAt() {
-        return updatedAt;
-    }
-
-
-    public String getCountryCode() {
-        return telephone != null ? telephone.getCountryCode() : null;
-    }
-
-    public String getAreaCode() {
-        return telephone != null ? telephone.getAreaCode() : null;
-    }
-
-    public String getNumber() {
-        return telephone != null ? telephone.getNumber() : null;
-    }
-
-    public String getFormattedTelephone() {
-        return telephone != null ? telephone.toString() : null;
-    }
-
-    // Business logic getters
+    // ✅ Business logic
     public boolean isActive() {
         return accountStatus == TypeAcctStatus.ACTIVE;
     }
@@ -128,12 +86,4 @@ public class Account {
     public boolean isFrozen() {
         return accountStatus == TypeAcctStatus.SUSPENDED;
     }
-
-
-
-
-
-
-
-
 }

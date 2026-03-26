@@ -1,7 +1,6 @@
 package com.example.models;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Min;
 
 import java.util.Objects;
 
@@ -35,7 +34,6 @@ public class Product {
     private TypeProduct productType;
 
     @Column(nullable = false)
-    @Min(0)
     private int productQuantity;
 
     @Column(length = 25)

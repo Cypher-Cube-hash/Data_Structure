@@ -4,6 +4,7 @@ import java.util.Objects;
 import java.time.LocalDate;
 import jakarta.persistence.*;
 import com.example.utils.RegistartionUtils;
+import com.example.utils.TelephoneConverter;
 
 @Entity
 @Table(name = "Registration")
@@ -21,7 +22,7 @@ public class Registration {
     @JoinColumn(name = "AccountID", nullable = false, unique = true, referencedColumnName = "AccountID")
     private Account account;
 
-    @Embedded
+    @Convert(converter = TelephoneConverter.class)
     @Column(name = "Phone")
     private Telephone phone;
 
@@ -45,6 +46,8 @@ public class Registration {
         this.user = user;
         this.account = account;
         this.phone = phone;
+        this.createAt = LocalDate.now();
+        this.updatedAt = LocalDate.now();
     }
 
     public Registration(String registrationId, User user, Account account, Telephone phone, LocalDate crDate, LocalDate uDate){

@@ -20,6 +20,7 @@ public class Customer {
     @JoinColumn(name = "UserID", nullable = false, referencedColumnName = "UserID", unique = true)
     private User user;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false, name = "Gender")
     private TypeGender gender;
 
@@ -103,9 +104,9 @@ public class Customer {
         return user != null ? user.getUserId() : null;
     }
 
-    public Address getUserAddress() {
+    /* public Address getUserAddress() {
         return user != null ? user.getAddress() : null;
-    }
+    } */
 
     // ============ SETTERS ============
     
