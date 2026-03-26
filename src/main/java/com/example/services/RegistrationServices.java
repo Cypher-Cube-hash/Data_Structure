@@ -69,7 +69,7 @@ public class RegistrationServices {
         repo.save(registration);
 
 
-        TemporaryPassword temp = new TemporaryPassword(otp, 5);
+        TemporaryPassword temp = new TemporaryPassword(otp);
         tempPassword.save(temp);
 
         System.out.println("About to send email to: " + email);

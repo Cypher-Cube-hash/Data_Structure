@@ -20,11 +20,11 @@ public class TemporaryPasswordService {
         return temp.findAll();
     }
 
-    /* @Scheduled(fixedRate = 60000) 
+    @Scheduled(fixedRate = 60000) 
     public void cleanup() {
         temp.deletedExpired();
         System.out.println("Expired passwords cleaned");
-    } */
+    }
     
 
 }

@@ -12,13 +12,13 @@ import com.example.models.TemporaryPassword;
 import jakarta.transaction.Transactional;
 
 public interface TemporaryPasswordRepository extends JpaRepository<TemporaryPassword, Integer>{
-    /* @Modifying
+    @Modifying
     @Transactional
     @Query("DELETE FROM TemporaryPassword t WHERE t.expiresAt < CURRENT_TIMESTAMP")
     void deletedExpired();
 
 
     
-    Optional<TemporaryPassword> findByPass(String pass); */
+    Optional<TemporaryPassword> findByPass(String pass);
 
 }

@@ -1,7 +1,9 @@
 package com.example.models;
 
 import jakarta.persistence.*;
+
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "temporary_password")
@@ -14,8 +16,9 @@ public class TemporaryPassword {
     @Column(name = "temp_pass", nullable = false, unique = true)
     private String pass;
 
-    @Column(name = "duration_time", nullable = false)
-    private long durationTime;
+    /* @Column(name = "duration_time", nullable = false) */
+    @Column(name = "expires_at", nullable = false)
+    private LocalDateTime expiresAt;
 
     @Column(nullable = false, updatable = false)
     private LocalDate createdAt;
@@ -25,9 +28,9 @@ public class TemporaryPassword {
 
     protected TemporaryPassword() {}
 
-    public TemporaryPassword(String pass, long durationTime) {
+    public TemporaryPassword(String pass) {
         this.pass = pass;
-        this.durationTime = durationTime;
+        this.expiresAt = LocalDateTime.now().plusMinutes(5);
         this.createdAt = LocalDate.now();
         this.updatedAt = LocalDate.now();
     }
@@ -41,8 +44,8 @@ public class TemporaryPassword {
         return pass;
     }
 
-    public long getDurationTime() {
-        return durationTime;
+    public LocalDateTime getExpiresAt() {
+        return expiresAt;
     }
 
     public LocalDate getCreatedAt() {
@@ -51,5 +54,9 @@ public class TemporaryPassword {
 
     public LocalDate getUpdatedAt() {
         return updatedAt;
+    }
+
+    public boolean isExpired(){
+        return LocalDateTime.now().isAfter(this.expiresAt);
     }
 }
