@@ -24,8 +24,14 @@ public class UserServices {
             throw new IllegalArgumentException("Email already exists");
         }
 
-        User user = new User(first, last, email, address);
-        return repo.save(user);
+        String fullAddress = address.getLine1() + ", " +
+                         address.getLine2() + ", " +
+                         address.getCity() + ", " +
+                         address.getState() + ", " +
+                         address.getCountry();
+
+    User user = new User(first, last, email, fullAddress);
+    return repo.save(user);
     }
 
 

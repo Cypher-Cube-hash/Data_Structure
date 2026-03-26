@@ -6,10 +6,14 @@ import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Input;
 import com.vaadin.flow.component.html.Span;
+import com.example.models.Account;
 import com.example.models.Address;
 import com.example.services.RegistrationServices;
+import com.vaadin.flow.component.notification.Notification;
 import com.example.models.Telephone;
-
+import com.vaadin.flow.component.UI;
+import com.example.utils.Emailer;
+import com.example.utils.OTPUtil;
 
 
 
@@ -245,28 +249,28 @@ public class RegisterForm extends Div {
         input.addClassName("form-input");
         input.getStyle().set("width", width);
 
-        // ✅ FIX: required indicator
+       
         input.setRequiredIndicatorVisible(true);
 
         return input;
     }
 
-    // ─── Submit Handler ──────────────────────────────────
-    private void handleRegister() {
 
-        if (firstNameInput.isEmpty() ||
-            lastNameInput.isEmpty() ||
-            emailInput.isEmpty() ||
-            addressLine1Input.isEmpty() ||
-            cityInput.isEmpty() ||
-            stateInput.isEmpty() ||
-            countryCombo.isEmpty()) {
-            return;
-        }
+private void handleRegister() {
 
-        String country = countryCombo.getValue() != null ? countryCombo.getValue() : "";
+    if (firstNameInput.isEmpty() ||
+        lastNameInput.isEmpty() ||
+        emailInput.isEmpty() ||
+        addressLine1Input.isEmpty() ||
+        cityInput.isEmpty() ||
+        stateInput.isEmpty() ||
+        countryCombo.isEmpty()) {
 
+        Notification.show("Form submission blocked: missing required fields");
+        return;
+    }
 
+    try {
 
         registrationServices.addRegisteredUser(
             firstNameInput.getValue(),
@@ -277,7 +281,7 @@ public class RegisterForm extends Div {
                 addressLine2Input.getValue(),
                 cityInput.getValue(),
                 stateInput.getValue(),
-                country
+                countryCombo.getValue()
             ),
             new Telephone(
                 countryCodeInput.getValue(),
@@ -286,5 +290,17 @@ public class RegisterForm extends Div {
                 subscriberLineInput.getValue()
             )
         );
+
+        
+
+        Notification.show("Successful Submission");
+        UI.getCurrent().getPage().reload();
+
+    } catch (Exception e) {
+        Notification.show("Error: " + e.getMessage());
     }
 }
+}
+
+
+

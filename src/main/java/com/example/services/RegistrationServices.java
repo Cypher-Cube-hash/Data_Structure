@@ -3,7 +3,7 @@ package com.example.services;
 import com.example.models.Registration;
 import com.example.models.Address;
 import com.example.repositories.RegistrationRepository;
-
+import com.example.repositories.TemporaryPasswordRepository;
 import com.example.models.Account;
 import com.example.models.Telephone;
 import com.example.models.TemporaryPassword;
@@ -13,6 +13,7 @@ import com.example.utils.Emailer;
 import com.example.repositories.AccountRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import com.example.services.TemporaryPasswordService;
 
 
 import java.util.List;
@@ -24,14 +25,16 @@ public class RegistrationServices {
     private final RegistrationRepository repo;
     private final UserRepository user;
     private final AccountRepository account;
+    private final TemporaryPasswordRepository tempPassword;
 
 
 
 
-    public RegistrationServices(RegistrationRepository repo, UserRepository user, AccountRepository account){
+    public RegistrationServices(RegistrationRepository repo, UserRepository user, AccountRepository account, TemporaryPasswordRepository tempPassword){
         this.repo = repo;
         this.user = user;
         this.account = account;
+        this.tempPassword = tempPassword;
     }
 
     public List<Registration> getAllUsers(){
@@ -48,9 +51,15 @@ public class RegistrationServices {
         }
 
         String otp = OTPUtil.generateOTP();
-        
+
+        String fullAddress = address.getLine1() + ", " +
+                     address.getLine2() + ", " +
+                     address.getCity() + ", " +
+                     address.getState() + ", " +
+                     address.getCountry();
+
+        User newUser = new User(firstName, lastName, email, fullAddress);
         //This is for the user Creation.
-        User newUser = new User(firstName, lastName, email, address);
         user.save(newUser);
         //This is for the Account Creation.
         Account newAccount = new Account(telephone);
@@ -60,8 +69,12 @@ public class RegistrationServices {
         repo.save(registration);
 
 
-        TemporaryPassword temp = new TemporaryPassword(otp, System.currentTimeMillis() + 300000);
+        TemporaryPassword temp = new TemporaryPassword(otp, 5);
+        tempPassword.save(temp);
+
+        System.out.println("About to send email to: " + email);
         Emailer.sendEmail(email, otp);
+        System.out.println("Email sent successfully");
             
         return registration;
     }

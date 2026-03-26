@@ -104,9 +104,9 @@ public class Customer {
         return user != null ? user.getUserId() : null;
     }
 
-    public Address getUserAddress() {
+    /* public Address getUserAddress() {
         return user != null ? user.getAddress() : null;
-    }
+    } */
 
     // ============ SETTERS ============
     

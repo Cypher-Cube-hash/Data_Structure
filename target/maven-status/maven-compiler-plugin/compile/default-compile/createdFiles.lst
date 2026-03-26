@@ -27,11 +27,13 @@ com\example\views\components\forms\SignInForm.class
 com\example\repositories\TemporaryPasswordRepository.class
 com\example\services\RegistrationServices.class
 com\example\views\MainView.class
+com\example\utils\TelephoneConverter.class
 com\example\models\User.class
 com\example\utils\UserUtils.class
 com\example\services\ProductServices.class
 com\example\models\Account.class
 com\example\models\TemporaryPassword.class
+com\example\utils\PassWordHasher.class
 com\example\enums\TypeAcctStatus.class
 com\example\enums\TypeProduct.class
 com\example\utils\Emailer.class
