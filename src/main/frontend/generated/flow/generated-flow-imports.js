@@ -59,7 +59,6 @@ import '@vaadin/login/src/vaadin-login-form.js';
 import '@vaadin/login/src/vaadin-login-overlay.js';
 import '@vaadin/map/src/vaadin-map.js';
 import 'Frontend/generated/jar-resources/vaadin-map/mapConnector.js';
-import 'Frontend/generated/jar-resources/vaadin-map/synchronization/index.js';
 import '@vaadin/markdown/src/vaadin-markdown.js';
 import 'Frontend/generated/jar-resources/menubarConnector.js';
 import '@vaadin/menu-bar/src/vaadin-menu-bar.js';
@@ -100,7 +99,6 @@ import '@vaadin/upload/src/vaadin-upload.js';
 import '@vaadin/virtual-list/src/vaadin-virtual-list.js';
 import 'Frontend/generated/jar-resources/virtualListConnector.js';
 import '@vaadin/vaadin-lumo-styles/vaadin-iconset.js';
-import 'Frontend/generated/jar-resources/copilot-version.js';
 const loadOnDemand = (key) => { return Promise.resolve(0); }
 window.Vaadin = window.Vaadin || {};
 window.Vaadin.Flow = window.Vaadin.Flow || {};

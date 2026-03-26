@@ -2,7 +2,7 @@ package com.example.models;
 
 import java.util.Objects;
 
-import org.springframework.cglib.core.Local;
+// import org.springframework.cglib.core.Local;
 
 import java.time.LocalDate;
 import jakarta.persistence.*;
@@ -59,9 +59,6 @@ public class Customer {
         this.updatedAt = customer.updatedAt;
     }
 
-
-
-
     public String getCustomerId() {
         return customerId;
     }
@@ -81,7 +78,6 @@ public class Customer {
     public LocalDate getUpdatedAt() {
         return updatedAt;
     }
-
 
     public String getUserFullName() {
         return user != null ? user.getFullName() : null;

@@ -1,16 +1,17 @@
 package com.example.services;
 
 import com.example.models.User;
+import com.example.repositories.interfaces.IUserRepository;
 import com.example.models.Address;
-import com.example.repositories.UserRepository;
+
 import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
 public class UserServices {
-    private final UserRepository repo;
+    private final IUserRepository repo;
 
-    public UserServices(UserRepository repo){
+    public UserServices(IUserRepository repo){
         this.repo = repo;
     }
 
@@ -19,13 +20,14 @@ public class UserServices {
     }
 
     //Registers the user
-    public User registerUser(String first, String last, String email, Address address){
+    public User registerUser(String first, String last, String email){ //, Address address
         if(repo.existsByEmail(email)){
             throw new IllegalArgumentException("Email already exists");
         }
 
-        User user = new User(first, last, email, address);
-        return repo.save(user);
+        User user = new User(first, last, email); //, address
+        repo.save(user);
+        return user;
     }
 
 

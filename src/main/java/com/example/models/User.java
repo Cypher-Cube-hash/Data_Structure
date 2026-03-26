@@ -39,12 +39,12 @@ public class User{
         this.updatedAt = LocalDate.now();
     }
 
-    public User(String first, String last, String email, Address address){
+    public User(String first, String last, String email){ //, Address address
         this.userId = UserUtils.userIdGenerator(10);
         this.firstName = first;
         this.lastName = last;
         this.email = email;
-        this.address = address;
+        // this.address = address;
         this.createdAt = LocalDate.now();
         this.updatedAt = LocalDate.now();
     }

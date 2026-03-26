@@ -1,17 +1,18 @@
 package com.example.services;
 
 import com.example.models.Registration;
-import com.example.repositories.RegistrationRepository;
 import com.example.models.Account;
 import com.example.models.Telephone;
 import com.example.models.User;
+import com.example.repositories.interfaces.IRegistrationRepository;
+
 import org.springframework.stereotype.Service;
 import java.util.List;
 
 public class RegistrationServices {
-    private final RegistrationRepository repo;
+    private final IRegistrationRepository repo;
 
-    public RegistrationServices(RegistrationRepository repo){
+    public RegistrationServices(IRegistrationRepository repo){
         this.repo = repo;
     }
 
