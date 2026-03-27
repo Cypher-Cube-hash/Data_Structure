@@ -59,6 +59,7 @@ public class AuthenticationServices {
         
 
         Authentication authUser = new Authentication(email, password, active, user_exist.getUserId(), isRegistered.getRegistrationId());
+        auth.save(authUser);
 
         return authUser;
     }

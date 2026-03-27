@@ -100,15 +100,17 @@ public class SignInForm extends Div {
         
         
         try {
-            Optional<TemporaryPassword> tempEntity = tempPass.findByPass(email);
+            Optional<TemporaryPassword> tempEntity = tempPass.findByPass(password);
             TemporaryPassword temp_pass = null;
             if(tempEntity.isPresent()){temp_pass = tempEntity.get();}
+
+            /* Error: Cannot invoke "com.example.models.TemporaryPassword.getPass()" because "temp_pass" is null */
 
             Optional<Authentication> tempAuth = authRepository.findByEmail(email);
             Authentication temp_entity = null;
             if(tempAuth.isPresent()){temp_entity = tempAuth.get();}
 
-            if(temp_pass.getPass() == password){
+            if (temp_pass != null && temp_pass.getPass().equals(password)) {
                 getUI().ifPresent(ui -> ui.navigate("create-password"));
             }else{
                 String hashed_sign_in_password = PassWordHasher.hashPassword(password);
@@ -122,6 +124,9 @@ public class SignInForm extends Div {
         } catch (Exception e) {
             Notification.show("Error: " + e.getMessage());
         }
+
+
+        
     }
     
     private void handleForgotPassword() {

@@ -227,11 +227,12 @@ public class CreatePasswordForm extends Div {
             if(
                 isValidPassword(passwordField.getValue()) && 
                 isValidPassword(confirmPasswordField.getValue()) && 
-                passwordField.getValue() == confirmPasswordField.getValue()
+                passwordField.getValue().equals(confirmPasswordField.getValue())
             ){
                 String password = PassWordHasher.hashPassword(passwordField.getValue());
                 authenticationServices.addAuthentication(emailField.getValue(), password, true);
                 Notification.show("Successful ");
+                getUI().ifPresent(ui -> ui.navigate(""));
                 return;
             }
             
@@ -253,7 +254,6 @@ public class CreatePasswordForm extends Div {
         if (!password.matches(".*[A-Z].*")) return false;
         if (!password.matches(".*[a-z].*")) return false;
         if (!password.matches(".*\\d.*")) return false;
-        if (!password.matches(".*[!@#$%^&*].*")) return false;
         return true;
     }
 
