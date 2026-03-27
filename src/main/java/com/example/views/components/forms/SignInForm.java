@@ -12,9 +12,12 @@ import com.example.models.TemporaryPassword;
 
 import java.util.Optional;
 
+import org.springframework.stereotype.Component;
+
 import com.example.models.Authentication;
 import com.example.utils.PassWordHasher;
 
+@Component
 public class SignInForm extends Div {
 
     
@@ -25,12 +28,10 @@ public class SignInForm extends Div {
     
     // Repositories (you'll need to inject these via constructor)
     private final AuthenticationRepository authRepository;
-    private final TemporaryPasswordRepository tempPasswordRepository;
     private final TemporaryPasswordRepository tempPass;
 
-    public SignInForm(AuthenticationRepository authRepository, TemporaryPasswordRepository tempPasswordRepository, TemporaryPasswordRepository tempPass) {
+    public SignInForm(AuthenticationRepository authRepository, TemporaryPasswordRepository tempPass) {
         this.authRepository = authRepository;
-        this.tempPasswordRepository = tempPasswordRepository;
         this.tempPass = tempPass;
         
         addClassName("form-container");

@@ -1913,3 +1913,46 @@ Caused by: java.lang.Error: Unresolved compilation problem:
 2026-03-26T17:43:30.247-05:00  WARN 22976 --- [HikariPool-41 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-41 - Thread starvation or clock leap detected (housekeeper delta=14m54s322ms828µs400ns).
 2026-03-26T17:59:14.332-05:00  WARN 22976 --- [HikariPool-41 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-41 - Thread starvation or clock leap detected (housekeeper delta=10m44s1ms523µs900ns).
 2026-03-26T19:48:41.281-05:00  WARN 22976 --- [HikariPool-41 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-41 - Thread starvation or clock leap detected (housekeeper delta=1h46m26s890ms163µs900ns).
+2026-03-26T21:27:11.345-05:00  INFO 25608 --- [restartedMain] com.example.Application                  : Starting Application using Java 22.0.2 with PID 25608 (C:\Users\Yochanan Gardner\Downloads\app\app\target\classes started by Yochanan Gardner in C:\Users\Yochanan Gardner\Downloads\app\app)
+2026-03-26T21:27:11.346-05:00 DEBUG 25608 --- [restartedMain] com.example.Application                  : Running with Spring Boot v3.3.3, Spring v6.1.12
+2026-03-26T21:27:11.347-05:00  INFO 25608 --- [restartedMain] com.example.Application                  : No active profile set, falling back to 1 default profile: "default"
+2026-03-26T21:27:11.398-05:00  INFO 25608 --- [restartedMain] o.s.b.devtools.restart.ChangeableUrls    : The Class-Path manifest attribute in C:\Users\Yochanan Gardner\.m2\repository\io\github\cdimascio\java-dotenv\5.2.2\java-dotenv-5.2.2.jar referenced one or more files that do not exist: file:/C:/Users/Yochanan%20Gardner/.m2/repository/io/github/cdimascio/java-dotenv/5.2.2/kotlin-stdlib-1.4.0.jar,file:/C:/Users/Yochanan%20Gardner/.m2/repository/io/github/cdimascio/java-dotenv/5.2.2/kotlin-stdlib-common-1.4.0.jar,file:/C:/Users/Yochanan%20Gardner/.m2/repository/io/github/cdimascio/java-dotenv/5.2.2/annotations-13.0.jar
+2026-03-26T21:27:11.398-05:00  INFO 25608 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-03-26T21:27:11.398-05:00  INFO 25608 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-03-26T21:27:12.104-05:00  INFO 25608 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-03-26T21:27:12.282-05:00  INFO 25608 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 171 ms. Found 8 JPA repository interfaces.
+2026-03-26T21:27:13.088-05:00  INFO 25608 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-03-26T21:27:13.112-05:00  INFO 25608 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-03-26T21:27:13.113-05:00  INFO 25608 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.28]
+2026-03-26T21:27:13.178-05:00  INFO 25608 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-03-26T21:27:13.178-05:00  INFO 25608 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1779 ms
+2026-03-26T21:27:13.339-05:00  INFO 25608 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing AtmosphereFramework
+2026-03-26T21:27:14.326-05:00  INFO 25608 --- [restartedMain] c.v.f.s.VaadinServletContextInitializer  : Search for subclasses and classes with annotations took 789 ms
+2026-03-26T21:27:14.809-05:00  INFO 25608 --- [restartedMain] c.v.b.d.startup.DevModeStartupListener   : Starting dev-mode updaters in C:\Users\Yochanan Gardner\Downloads\app\app folder.
+2026-03-26T21:27:14.845-05:00  INFO 25608 --- [restartedMain] c.v.f.s.f.s.FullDependenciesScanner      : Visited 114 classes. Took 22 ms.
+2026-03-26T21:27:14.848-05:00  INFO 25608 --- [restartedMain] c.v.f.s.frontend.BundleValidationUtil    : Checking if a development mode bundle build is needed
+2026-03-26T21:27:15.251-05:00  INFO 25608 --- [restartedMain] c.v.f.s.frontend.BundleValidationUtil    : A development mode bundle build is not needed
+2026-03-26T21:27:15.279-05:00  INFO 25608 --- [ForkJoinPool.commonPool-worker-2] c.v.f.s.frontend.TaskCopyFrontendFiles   : Copying frontend resources from jar files ...
+2026-03-26T21:27:15.355-05:00  INFO 25608 --- [ForkJoinPool.commonPool-worker-2] c.v.f.s.frontend.TaskCopyFrontendFiles   : Visited 22 resources. Took 76 ms.
+2026-03-26T21:27:15.394-05:00  INFO 25608 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-03-26T21:27:15.451-05:00  INFO 25608 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.2.Final
+2026-03-26T21:27:15.499-05:00  INFO 25608 --- [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-03-26T21:27:15.795-05:00  INFO 25608 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-03-26T21:27:15.821-05:00  INFO 25608 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-03-26T21:27:16.025-05:00  INFO 25608 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@4d70a72d
+2026-03-26T21:27:16.027-05:00  INFO 25608 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-03-26T21:27:16.086-05:00  WARN 25608 --- [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-03-26T21:27:17.081-05:00  INFO 25608 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-03-26T21:27:17.775-05:00  INFO 25608 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-03-26T21:27:18.132-05:00  INFO 25608 --- [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-03-26T21:27:18.605-05:00  WARN 25608 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-03-26T21:27:19.023-05:00  INFO 25608 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2026-03-26T21:27:21.993-05:00  INFO 25608 --- [restartedMain] c.v.f.s.DefaultDeploymentConfiguration   : 
+Vaadin is running in DEVELOPMENT mode - do not use for production deployments.
+2026-03-26T21:27:22.012-05:00  INFO 25608 --- [restartedMain] c.vaadin.flow.spring.SpringInstantiator  : The number of beans implementing 'I18NProvider' is 0. Cannot use Spring beans for I18N, falling back to the default behavior
+2026-03-26T21:27:22.055-05:00  INFO 25608 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2026-03-26T21:27:22.063-05:00  INFO 25608 --- [restartedMain] com.example.Application                  : Started Application in 11.19 seconds (process running for 11.746)
+2026-03-26T21:27:22.070-05:00  INFO 25608 --- [restartedMain] c.v.b.d.DevModeHandlerManagerImpl        : Application running at http://localhost:8080/
+2026-03-26T21:27:22.699-05:00  INFO 25608 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-03-26T21:27:22.700-05:00  INFO 25608 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-03-26T21:27:22.701-05:00  INFO 25608 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
