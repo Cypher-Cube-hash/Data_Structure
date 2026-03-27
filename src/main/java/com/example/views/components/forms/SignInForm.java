@@ -4,11 +4,35 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Input;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.UI;
+import com.example.repositories.AuthenticationRepository;
+import com.example.repositories.TemporaryPasswordRepository;
+import com.example.models.TemporaryPassword;
+
+import java.util.Optional;
+
+import com.example.models.Authentication;
+import com.example.utils.PassWordHasher;
 
 public class SignInForm extends Div {
 
-    public SignInForm() {
+    
+    
+    // Store references to the input fields
+    private Input emailInput;
+    private Input passwordInput;
+    
+    // Repositories (you'll need to inject these via constructor)
+    private final AuthenticationRepository authRepository;
+    private final TemporaryPasswordRepository tempPasswordRepository;
+    private final TemporaryPasswordRepository tempPass;
+
+    public SignInForm(AuthenticationRepository authRepository, TemporaryPasswordRepository tempPasswordRepository, TemporaryPasswordRepository tempPass) {
+        this.authRepository = authRepository;
+        this.tempPasswordRepository = tempPasswordRepository;
+        this.tempPass = tempPass;
+        
         addClassName("form-container");
         
         // Welcome message
@@ -16,16 +40,17 @@ public class SignInForm extends Div {
         welcomeDiv.addClassName("welcome-message");
         welcomeDiv.setText("Welcome Back!");
 
-        // Email field
+        // Email field - store reference
         Div emailGroup = buildInputGroup("Email", "Enter your email", "text", true);
-
-        // Password field
+        
+        // Password field - store reference  
         Div passwordGroup = buildInputGroup("Password", "Enter your password", "password", true);
 
         // Forgot password
         Div forgotPassword = new Div();
         forgotPassword.addClassName("forgot-password");
         forgotPassword.setText("Forgot password?");
+        forgotPassword.addClickListener(e -> handleForgotPassword());
 
         // Sign In button
         Button signInButton = new Button("Sign In");
@@ -49,12 +74,56 @@ public class SignInForm extends Div {
         input.setType(type);
         input.addClassName("form-input");
         if (required) input.setRequiredIndicatorVisible(true);
+        
+        // Store reference based on label
+        if (label.equals("Email")) {
+            this.emailInput = input;
+        } else if (label.equals("Password")) {
+            this.passwordInput = input;
+        }
 
         group.add(labelDiv, input);
         return group;
     }
 
     private void handleSignIn() {
-        // TODO: wire to UserService for authentication
+       
+        String email = emailInput.getValue();
+        String password = passwordInput.getValue();
+        
+        
+        if (email.isEmpty() || password.isEmpty()) {
+            Notification.show("Please enter both email and password");
+            return;
+        }
+        
+        
+        try {
+            Optional<TemporaryPassword> tempEntity = tempPass.findByPass(email);
+            TemporaryPassword temp_pass = null;
+            if(tempEntity.isPresent()){temp_pass = tempEntity.get();}
+
+            Optional<Authentication> tempAuth = authRepository.findByEmail(email);
+            Authentication temp_entity = null;
+            if(tempAuth.isPresent()){temp_entity = tempAuth.get();}
+
+            if(temp_pass.getPass() == password){
+                getUI().ifPresent(ui -> ui.navigate("create-password"));
+            }else{
+                String hashed_sign_in_password = PassWordHasher.hashPassword(password);
+                if(PassWordHasher.verifyPassword(hashed_sign_in_password, temp_entity.getPasswordHash())){
+                    getUI().ifPresent(ui -> ui.navigate("product-page"));
+                }
+            }
+            
+
+
+        } catch (Exception e) {
+            Notification.show("Error: " + e.getMessage());
+        }
+    }
+    
+    private void handleForgotPassword() {
+      
     }
 }
