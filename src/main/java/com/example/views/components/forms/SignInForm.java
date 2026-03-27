@@ -104,18 +104,30 @@ public class SignInForm extends Div {
             TemporaryPassword temp_pass = null;
             if(tempEntity.isPresent()){temp_pass = tempEntity.get();}
 
-            /* Error: Cannot invoke "com.example.models.TemporaryPassword.getPass()" because "temp_pass" is null */
+            
 
             Optional<Authentication> tempAuth = authRepository.findByEmail(email);
             Authentication temp_entity = null;
             if(tempAuth.isPresent()){temp_entity = tempAuth.get();}
 
-            if (temp_pass != null && temp_pass.getPass().equals(password)) {
+            //The first section of the if statement checks wether ot not the entered pass and the temp matches
+            //if so it pushes the cus to create a new one
+
+            //The else section is the second option that would check another table password and matches the values and if o
+            //pushes them to another page. 
+            if (temp_pass != null && !temp_pass.isExpired() && temp_pass.getPass().equals(password)) {
                 getUI().ifPresent(ui -> ui.navigate("create-password"));
-            }else{
-                String hashed_sign_in_password = PassWordHasher.hashPassword(password);
-                if(PassWordHasher.verifyPassword(hashed_sign_in_password, temp_entity.getPasswordHash())){
+            } else {
+                if (temp_entity == null) {
+                    Notification.show("Invalid email or password.");
+                    return;
+                }
+
+                // ✅ Pass raw password directly — do NOT pre-hash it
+                if (PassWordHasher.verifyPassword(password, temp_entity.getPasswordHash())) {
                     getUI().ifPresent(ui -> ui.navigate("product-page"));
+                } else {
+                    Notification.show("Invalid email or password.");
                 }
             }
             

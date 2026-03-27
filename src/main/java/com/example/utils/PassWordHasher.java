@@ -16,10 +16,8 @@ public final class PassWordHasher {
         return hashedPassword;
     }
 
-    public static boolean verifyPassword(String hash_pass, String pass){
+    public static boolean verifyPassword(String entered_password, String hashed_password){
         Argon2PasswordEncoder encoder = new Argon2PasswordEncoder(32,64,1,15*1024,2);
-        boolean match = encoder.matches(pass, hash_pass);
-
-        return match;
+        return encoder.matches(entered_password, hashed_password);
     }
 }

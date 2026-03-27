@@ -1,0 +1,627 @@
+2026-03-26T22:12:46.773-05:00  WARN 25684 --- [scheduling-1] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 1146, SQLState: 42S02
+2026-03-26T22:12:46.774-05:00 ERROR 25684 --- [scheduling-1] o.h.engine.jdbc.spi.SqlExceptionHelper   : Table 'data_structures.temporary_password' doesn't exist
+2026-03-26T22:12:46.793-05:00 ERROR 25684 --- [scheduling-1] o.s.s.s.TaskUtils$LoggingErrorHandler    : Unexpected error occurred in scheduled task
+
+org.springframework.dao.InvalidDataAccessResourceUsageException: JDBC exception executing SQL [delete tp1_0 from temporary_password tp1_0 where tp1_0.expires_at<current_timestamp(6)] [Table 'data_structures.temporary_password' doesn't exist] [n/a]; SQL [n/a]
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.convertHibernateAccessException(HibernateJpaDialect.java:277) ~[spring-orm-6.1.12.jar:6.1.12]
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:241) ~[spring-orm-6.1.12.jar:6.1.12]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.translateExceptionIfPossible(AbstractEntityManagerFactoryBean.java:550) ~[spring-orm-6.1.12.jar:6.1.12]
+	at org.springframework.dao.support.ChainedPersistenceExceptionTranslator.translateExceptionIfPossible(ChainedPersistenceExceptionTranslator.java:61) ~[spring-tx-6.1.12.jar:6.1.12]
+	at org.springframework.dao.support.DataAccessUtils.translateIfNecessary(DataAccessUtils.java:335) ~[spring-tx-6.1.12.jar:6.1.12]
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:160) ~[spring-tx-6.1.12.jar:6.1.12]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.12.jar:6.1.12]
+	at org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:136) ~[spring-data-jpa-3.3.3.jar:3.3.3]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.12.jar:6.1.12]
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:97) ~[spring-aop-6.1.12.jar:6.1.12]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.12.jar:6.1.12]
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:223) ~[spring-aop-6.1.12.jar:6.1.12]
+	at jdk.proxy8/jdk.proxy8.$Proxy226.deletedExpired(Unknown Source) ~[na:na]
+	at com.example.services.TemporaryPasswordService.cleanup(TemporaryPasswordService.java:25) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.scheduling.support.ScheduledMethodRunnable.runInternal(ScheduledMethodRunnable.java:130) ~[spring-context-6.1.12.jar:6.1.12]
+	at org.springframework.scheduling.support.ScheduledMethodRunnable.lambda$run$2(ScheduledMethodRunnable.java:124) ~[spring-context-6.1.12.jar:6.1.12]
+	at io.micrometer.observation.Observation.observe(Observation.java:499) ~[micrometer-observation-1.13.3.jar:1.13.3]
+	at org.springframework.scheduling.support.ScheduledMethodRunnable.run(ScheduledMethodRunnable.java:124) ~[spring-context-6.1.12.jar:6.1.12]
+	at org.springframework.scheduling.support.DelegatingErrorHandlingRunnable.run(DelegatingErrorHandlingRunnable.java:54) ~[spring-context-6.1.12.jar:6.1.12]
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:572) ~[na:na]
+	at java.base/java.util.concurrent.FutureTask.runAndReset(FutureTask.java:358) ~[na:na]
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:305) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642) ~[na:na]
+	at java.base/java.lang.Thread.run(Thread.java:1570) ~[na:na]
+Caused by: org.hibernate.exception.SQLGrammarException: JDBC exception executing SQL [delete tp1_0 from temporary_password tp1_0 where tp1_0.expires_at<current_timestamp(6)] [Table 'data_structures.temporary_password' doesn't exist] [n/a]
+	at org.hibernate.exception.internal.SQLExceptionTypeDelegate.convert(SQLExceptionTypeDelegate.java:66) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:58) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:108) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:94) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.hibernate.sql.exec.internal.StandardJdbcMutationExecutor.execute(StandardJdbcMutationExecutor.java:104) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.hibernate.query.sqm.internal.SimpleDeleteQueryPlan.executeUpdate(SimpleDeleteQueryPlan.java:186) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.hibernate.query.sqm.internal.QuerySqmImpl.doExecuteUpdate(QuerySqmImpl.java:666) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.hibernate.query.sqm.internal.QuerySqmImpl.executeUpdate(QuerySqmImpl.java:639) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.springframework.data.jpa.repository.query.JpaQueryExecution$ModifyingExecution.doExecute(JpaQueryExecution.java:266) ~[spring-data-jpa-3.3.3.jar:3.3.3]
+	at org.springframework.data.jpa.repository.query.JpaQueryExecution.execute(JpaQueryExecution.java:92) ~[spring-data-jpa-3.3.3.jar:3.3.3]
+	at org.springframework.data.jpa.repository.query.AbstractJpaQuery.doExecute(AbstractJpaQuery.java:152) ~[spring-data-jpa-3.3.3.jar:3.3.3]
+	at org.springframework.data.jpa.repository.query.AbstractJpaQuery.execute(AbstractJpaQuery.java:140) ~[spring-data-jpa-3.3.3.jar:3.3.3]
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.doInvoke(RepositoryMethodInvoker.java:170) ~[spring-data-commons-3.3.3.jar:3.3.3]
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.invoke(RepositoryMethodInvoker.java:158) ~[spring-data-commons-3.3.3.jar:3.3.3]
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.doInvoke(QueryExecutorMethodInterceptor.java:169) ~[spring-data-commons-3.3.3.jar:3.3.3]
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.invoke(QueryExecutorMethodInterceptor.java:148) ~[spring-data-commons-3.3.3.jar:3.3.3]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.12.jar:6.1.12]
+	at org.springframework.data.projection.DefaultMethodInvokingMethodInterceptor.invoke(DefaultMethodInvokingMethodInterceptor.java:70) ~[spring-data-commons-3.3.3.jar:3.3.3]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.12.jar:6.1.12]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:379) ~[spring-tx-6.1.12.jar:6.1.12]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119) ~[spring-tx-6.1.12.jar:6.1.12]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.12.jar:6.1.12]
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:138) ~[spring-tx-6.1.12.jar:6.1.12]
+	... 21 common frames omitted
+Caused by: java.sql.SQLSyntaxErrorException: Table 'data_structures.temporary_password' doesn't exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:121) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:912) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1054) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1003) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeLargeUpdate(ClientPreparedStatement.java:1312) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdate(ClientPreparedStatement.java:988) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.executeUpdate(ProxyPreparedStatement.java:61) ~[HikariCP-5.1.0.jar:na]
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.executeUpdate(HikariProxyPreparedStatement.java) ~[HikariCP-5.1.0.jar:na]
+	at org.hibernate.sql.exec.internal.StandardJdbcMutationExecutor.execute(StandardJdbcMutationExecutor.java:90) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	... 39 common frames omitted
+
+2026-03-26T22:13:46.761-05:00  WARN 25684 --- [scheduling-1] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 1146, SQLState: 42S02
+2026-03-26T22:13:46.762-05:00 ERROR 25684 --- [scheduling-1] o.h.engine.jdbc.spi.SqlExceptionHelper   : Table 'data_structures.temporary_password' doesn't exist
+2026-03-26T22:13:46.765-05:00 ERROR 25684 --- [scheduling-1] o.s.s.s.TaskUtils$LoggingErrorHandler    : Unexpected error occurred in scheduled task
+
+org.springframework.dao.InvalidDataAccessResourceUsageException: JDBC exception executing SQL [delete tp1_0 from temporary_password tp1_0 where tp1_0.expires_at<current_timestamp(6)] [Table 'data_structures.temporary_password' doesn't exist] [n/a]; SQL [n/a]
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.convertHibernateAccessException(HibernateJpaDialect.java:277) ~[spring-orm-6.1.12.jar:6.1.12]
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:241) ~[spring-orm-6.1.12.jar:6.1.12]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.translateExceptionIfPossible(AbstractEntityManagerFactoryBean.java:550) ~[spring-orm-6.1.12.jar:6.1.12]
+	at org.springframework.dao.support.ChainedPersistenceExceptionTranslator.translateExceptionIfPossible(ChainedPersistenceExceptionTranslator.java:61) ~[spring-tx-6.1.12.jar:6.1.12]
+	at org.springframework.dao.support.DataAccessUtils.translateIfNecessary(DataAccessUtils.java:335) ~[spring-tx-6.1.12.jar:6.1.12]
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:160) ~[spring-tx-6.1.12.jar:6.1.12]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.12.jar:6.1.12]
+	at org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:136) ~[spring-data-jpa-3.3.3.jar:3.3.3]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.12.jar:6.1.12]
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:97) ~[spring-aop-6.1.12.jar:6.1.12]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.12.jar:6.1.12]
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:223) ~[spring-aop-6.1.12.jar:6.1.12]
+	at jdk.proxy8/jdk.proxy8.$Proxy226.deletedExpired(Unknown Source) ~[na:na]
+	at com.example.services.TemporaryPasswordService.cleanup(TemporaryPasswordService.java:25) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.scheduling.support.ScheduledMethodRunnable.runInternal(ScheduledMethodRunnable.java:130) ~[spring-context-6.1.12.jar:6.1.12]
+	at org.springframework.scheduling.support.ScheduledMethodRunnable.lambda$run$2(ScheduledMethodRunnable.java:124) ~[spring-context-6.1.12.jar:6.1.12]
+	at io.micrometer.observation.Observation.observe(Observation.java:499) ~[micrometer-observation-1.13.3.jar:1.13.3]
+	at org.springframework.scheduling.support.ScheduledMethodRunnable.run(ScheduledMethodRunnable.java:124) ~[spring-context-6.1.12.jar:6.1.12]
+	at org.springframework.scheduling.support.DelegatingErrorHandlingRunnable.run(DelegatingErrorHandlingRunnable.java:54) ~[spring-context-6.1.12.jar:6.1.12]
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:572) ~[na:na]
+	at java.base/java.util.concurrent.FutureTask.runAndReset(FutureTask.java:358) ~[na:na]
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:305) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642) ~[na:na]
+	at java.base/java.lang.Thread.run(Thread.java:1570) ~[na:na]
+Caused by: org.hibernate.exception.SQLGrammarException: JDBC exception executing SQL [delete tp1_0 from temporary_password tp1_0 where tp1_0.expires_at<current_timestamp(6)] [Table 'data_structures.temporary_password' doesn't exist] [n/a]
+	at org.hibernate.exception.internal.SQLExceptionTypeDelegate.convert(SQLExceptionTypeDelegate.java:66) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:58) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:108) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:94) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.hibernate.sql.exec.internal.StandardJdbcMutationExecutor.execute(StandardJdbcMutationExecutor.java:104) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.hibernate.query.sqm.internal.SimpleDeleteQueryPlan.executeUpdate(SimpleDeleteQueryPlan.java:186) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.hibernate.query.sqm.internal.QuerySqmImpl.doExecuteUpdate(QuerySqmImpl.java:666) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.hibernate.query.sqm.internal.QuerySqmImpl.executeUpdate(QuerySqmImpl.java:639) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.springframework.data.jpa.repository.query.JpaQueryExecution$ModifyingExecution.doExecute(JpaQueryExecution.java:266) ~[spring-data-jpa-3.3.3.jar:3.3.3]
+	at org.springframework.data.jpa.repository.query.JpaQueryExecution.execute(JpaQueryExecution.java:92) ~[spring-data-jpa-3.3.3.jar:3.3.3]
+	at org.springframework.data.jpa.repository.query.AbstractJpaQuery.doExecute(AbstractJpaQuery.java:152) ~[spring-data-jpa-3.3.3.jar:3.3.3]
+	at org.springframework.data.jpa.repository.query.AbstractJpaQuery.execute(AbstractJpaQuery.java:140) ~[spring-data-jpa-3.3.3.jar:3.3.3]
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.doInvoke(RepositoryMethodInvoker.java:170) ~[spring-data-commons-3.3.3.jar:3.3.3]
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.invoke(RepositoryMethodInvoker.java:158) ~[spring-data-commons-3.3.3.jar:3.3.3]
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.doInvoke(QueryExecutorMethodInterceptor.java:169) ~[spring-data-commons-3.3.3.jar:3.3.3]
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.invoke(QueryExecutorMethodInterceptor.java:148) ~[spring-data-commons-3.3.3.jar:3.3.3]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.12.jar:6.1.12]
+	at org.springframework.data.projection.DefaultMethodInvokingMethodInterceptor.invoke(DefaultMethodInvokingMethodInterceptor.java:70) ~[spring-data-commons-3.3.3.jar:3.3.3]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.12.jar:6.1.12]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:379) ~[spring-tx-6.1.12.jar:6.1.12]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119) ~[spring-tx-6.1.12.jar:6.1.12]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.12.jar:6.1.12]
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:138) ~[spring-tx-6.1.12.jar:6.1.12]
+	... 21 common frames omitted
+Caused by: java.sql.SQLSyntaxErrorException: Table 'data_structures.temporary_password' doesn't exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:121) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:912) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1054) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1003) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeLargeUpdate(ClientPreparedStatement.java:1312) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdate(ClientPreparedStatement.java:988) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.executeUpdate(ProxyPreparedStatement.java:61) ~[HikariCP-5.1.0.jar:na]
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.executeUpdate(HikariProxyPreparedStatement.java) ~[HikariCP-5.1.0.jar:na]
+	at org.hibernate.sql.exec.internal.StandardJdbcMutationExecutor.execute(StandardJdbcMutationExecutor.java:90) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	... 39 common frames omitted
+
+2026-03-26T22:14:46.755-05:00  WARN 25684 --- [scheduling-1] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 1146, SQLState: 42S02
+2026-03-26T22:14:46.755-05:00 ERROR 25684 --- [scheduling-1] o.h.engine.jdbc.spi.SqlExceptionHelper   : Table 'data_structures.temporary_password' doesn't exist
+2026-03-26T22:14:46.756-05:00 ERROR 25684 --- [scheduling-1] o.s.s.s.TaskUtils$LoggingErrorHandler    : Unexpected error occurred in scheduled task
+
+org.springframework.dao.InvalidDataAccessResourceUsageException: JDBC exception executing SQL [delete tp1_0 from temporary_password tp1_0 where tp1_0.expires_at<current_timestamp(6)] [Table 'data_structures.temporary_password' doesn't exist] [n/a]; SQL [n/a]
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.convertHibernateAccessException(HibernateJpaDialect.java:277) ~[spring-orm-6.1.12.jar:6.1.12]
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:241) ~[spring-orm-6.1.12.jar:6.1.12]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.translateExceptionIfPossible(AbstractEntityManagerFactoryBean.java:550) ~[spring-orm-6.1.12.jar:6.1.12]
+	at org.springframework.dao.support.ChainedPersistenceExceptionTranslator.translateExceptionIfPossible(ChainedPersistenceExceptionTranslator.java:61) ~[spring-tx-6.1.12.jar:6.1.12]
+	at org.springframework.dao.support.DataAccessUtils.translateIfNecessary(DataAccessUtils.java:335) ~[spring-tx-6.1.12.jar:6.1.12]
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:160) ~[spring-tx-6.1.12.jar:6.1.12]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.12.jar:6.1.12]
+	at org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:136) ~[spring-data-jpa-3.3.3.jar:3.3.3]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.12.jar:6.1.12]
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:97) ~[spring-aop-6.1.12.jar:6.1.12]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.12.jar:6.1.12]
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:223) ~[spring-aop-6.1.12.jar:6.1.12]
+	at jdk.proxy8/jdk.proxy8.$Proxy226.deletedExpired(Unknown Source) ~[na:na]
+	at com.example.services.TemporaryPasswordService.cleanup(TemporaryPasswordService.java:25) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.scheduling.support.ScheduledMethodRunnable.runInternal(ScheduledMethodRunnable.java:130) ~[spring-context-6.1.12.jar:6.1.12]
+	at org.springframework.scheduling.support.ScheduledMethodRunnable.lambda$run$2(ScheduledMethodRunnable.java:124) ~[spring-context-6.1.12.jar:6.1.12]
+	at io.micrometer.observation.Observation.observe(Observation.java:499) ~[micrometer-observation-1.13.3.jar:1.13.3]
+	at org.springframework.scheduling.support.ScheduledMethodRunnable.run(ScheduledMethodRunnable.java:124) ~[spring-context-6.1.12.jar:6.1.12]
+	at org.springframework.scheduling.support.DelegatingErrorHandlingRunnable.run(DelegatingErrorHandlingRunnable.java:54) ~[spring-context-6.1.12.jar:6.1.12]
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:572) ~[na:na]
+	at java.base/java.util.concurrent.FutureTask.runAndReset(FutureTask.java:358) ~[na:na]
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:305) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642) ~[na:na]
+	at java.base/java.lang.Thread.run(Thread.java:1570) ~[na:na]
+Caused by: org.hibernate.exception.SQLGrammarException: JDBC exception executing SQL [delete tp1_0 from temporary_password tp1_0 where tp1_0.expires_at<current_timestamp(6)] [Table 'data_structures.temporary_password' doesn't exist] [n/a]
+	at org.hibernate.exception.internal.SQLExceptionTypeDelegate.convert(SQLExceptionTypeDelegate.java:66) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:58) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:108) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:94) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.hibernate.sql.exec.internal.StandardJdbcMutationExecutor.execute(StandardJdbcMutationExecutor.java:104) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.hibernate.query.sqm.internal.SimpleDeleteQueryPlan.executeUpdate(SimpleDeleteQueryPlan.java:186) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.hibernate.query.sqm.internal.QuerySqmImpl.doExecuteUpdate(QuerySqmImpl.java:666) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.hibernate.query.sqm.internal.QuerySqmImpl.executeUpdate(QuerySqmImpl.java:639) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.springframework.data.jpa.repository.query.JpaQueryExecution$ModifyingExecution.doExecute(JpaQueryExecution.java:266) ~[spring-data-jpa-3.3.3.jar:3.3.3]
+	at org.springframework.data.jpa.repository.query.JpaQueryExecution.execute(JpaQueryExecution.java:92) ~[spring-data-jpa-3.3.3.jar:3.3.3]
+	at org.springframework.data.jpa.repository.query.AbstractJpaQuery.doExecute(AbstractJpaQuery.java:152) ~[spring-data-jpa-3.3.3.jar:3.3.3]
+	at org.springframework.data.jpa.repository.query.AbstractJpaQuery.execute(AbstractJpaQuery.java:140) ~[spring-data-jpa-3.3.3.jar:3.3.3]
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.doInvoke(RepositoryMethodInvoker.java:170) ~[spring-data-commons-3.3.3.jar:3.3.3]
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.invoke(RepositoryMethodInvoker.java:158) ~[spring-data-commons-3.3.3.jar:3.3.3]
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.doInvoke(QueryExecutorMethodInterceptor.java:169) ~[spring-data-commons-3.3.3.jar:3.3.3]
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.invoke(QueryExecutorMethodInterceptor.java:148) ~[spring-data-commons-3.3.3.jar:3.3.3]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.12.jar:6.1.12]
+	at org.springframework.data.projection.DefaultMethodInvokingMethodInterceptor.invoke(DefaultMethodInvokingMethodInterceptor.java:70) ~[spring-data-commons-3.3.3.jar:3.3.3]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.12.jar:6.1.12]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:379) ~[spring-tx-6.1.12.jar:6.1.12]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119) ~[spring-tx-6.1.12.jar:6.1.12]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.12.jar:6.1.12]
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:138) ~[spring-tx-6.1.12.jar:6.1.12]
+	... 21 common frames omitted
+Caused by: java.sql.SQLSyntaxErrorException: Table 'data_structures.temporary_password' doesn't exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:121) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:912) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1054) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1003) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeLargeUpdate(ClientPreparedStatement.java:1312) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdate(ClientPreparedStatement.java:988) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.executeUpdate(ProxyPreparedStatement.java:61) ~[HikariCP-5.1.0.jar:na]
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.executeUpdate(HikariProxyPreparedStatement.java) ~[HikariCP-5.1.0.jar:na]
+	at org.hibernate.sql.exec.internal.StandardJdbcMutationExecutor.execute(StandardJdbcMutationExecutor.java:90) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	... 39 common frames omitted
+
+2026-03-26T22:15:06.114-05:00  WARN 25684 --- [http-nio-8080-exec-1] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 1146, SQLState: 42S02
+2026-03-26T22:15:06.114-05:00 ERROR 25684 --- [http-nio-8080-exec-1] o.h.engine.jdbc.spi.SqlExceptionHelper   : Table 'data_structures.users' doesn't exist
+2026-03-26T22:15:24.639-05:00  INFO 25684 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-03-26T22:15:24.640-05:00  INFO 25684 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Shutdown initiated...
+2026-03-26T22:15:24.647-05:00  INFO 25684 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Shutdown completed.
+2026-03-26T22:16:17.869-05:00  INFO 11744 --- [restartedMain] com.example.Application                  : Starting Application using Java 22.0.2 with PID 11744 (C:\Users\Yochanan Gardner\Downloads\app\app\target\classes started by Yochanan Gardner in C:\Users\Yochanan Gardner\Downloads\app\app)
+2026-03-26T22:16:17.871-05:00 DEBUG 11744 --- [restartedMain] com.example.Application                  : Running with Spring Boot v3.3.3, Spring v6.1.12
+2026-03-26T22:16:17.872-05:00  INFO 11744 --- [restartedMain] com.example.Application                  : No active profile set, falling back to 1 default profile: "default"
+2026-03-26T22:16:17.921-05:00  INFO 11744 --- [restartedMain] o.s.b.devtools.restart.ChangeableUrls    : The Class-Path manifest attribute in C:\Users\Yochanan Gardner\.m2\repository\io\github\cdimascio\java-dotenv\5.2.2\java-dotenv-5.2.2.jar referenced one or more files that do not exist: file:/C:/Users/Yochanan%20Gardner/.m2/repository/io/github/cdimascio/java-dotenv/5.2.2/kotlin-stdlib-1.4.0.jar,file:/C:/Users/Yochanan%20Gardner/.m2/repository/io/github/cdimascio/java-dotenv/5.2.2/kotlin-stdlib-common-1.4.0.jar,file:/C:/Users/Yochanan%20Gardner/.m2/repository/io/github/cdimascio/java-dotenv/5.2.2/annotations-13.0.jar
+2026-03-26T22:16:17.922-05:00  INFO 11744 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-03-26T22:16:17.922-05:00  INFO 11744 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-03-26T22:16:18.658-05:00  INFO 11744 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-03-26T22:16:18.813-05:00  INFO 11744 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 144 ms. Found 8 JPA repository interfaces.
+2026-03-26T22:16:19.583-05:00  INFO 11744 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-03-26T22:16:19.602-05:00  INFO 11744 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-03-26T22:16:19.603-05:00  INFO 11744 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.28]
+2026-03-26T22:16:19.676-05:00  INFO 11744 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-03-26T22:16:19.677-05:00  INFO 11744 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1754 ms
+2026-03-26T22:16:19.865-05:00  INFO 11744 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing AtmosphereFramework
+2026-03-26T22:16:20.878-05:00  INFO 11744 --- [restartedMain] c.v.f.s.VaadinServletContextInitializer  : Search for subclasses and classes with annotations took 822 ms
+2026-03-26T22:16:21.321-05:00  INFO 11744 --- [restartedMain] c.v.b.d.startup.DevModeStartupListener   : Starting dev-mode updaters in C:\Users\Yochanan Gardner\Downloads\app\app folder.
+2026-03-26T22:16:21.359-05:00  INFO 11744 --- [restartedMain] c.v.f.s.f.s.FullDependenciesScanner      : Visited 114 classes. Took 23 ms.
+2026-03-26T22:16:21.362-05:00  INFO 11744 --- [restartedMain] c.v.f.s.frontend.BundleValidationUtil    : Checking if a development mode bundle build is needed
+2026-03-26T22:16:21.560-05:00  INFO 11744 --- [restartedMain] c.v.f.s.frontend.BundleValidationUtil    : A development mode bundle build is not needed
+2026-03-26T22:16:21.585-05:00  INFO 11744 --- [ForkJoinPool.commonPool-worker-1] c.v.f.s.frontend.TaskCopyFrontendFiles   : Copying frontend resources from jar files ...
+2026-03-26T22:16:21.682-05:00  INFO 11744 --- [ForkJoinPool.commonPool-worker-1] c.v.f.s.frontend.TaskCopyFrontendFiles   : Visited 22 resources. Took 96 ms.
+2026-03-26T22:16:21.762-05:00  INFO 11744 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-03-26T22:16:21.823-05:00  INFO 11744 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.2.Final
+2026-03-26T22:16:21.856-05:00  INFO 11744 --- [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-03-26T22:16:22.132-05:00  INFO 11744 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-03-26T22:16:22.160-05:00  INFO 11744 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-03-26T22:16:22.484-05:00  INFO 11744 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@18aee3e2
+2026-03-26T22:16:22.486-05:00  INFO 11744 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-03-26T22:16:22.545-05:00  WARN 11744 --- [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-03-26T22:16:23.941-05:00  INFO 11744 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-03-26T22:16:24.655-05:00  INFO 11744 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-03-26T22:16:25.078-05:00  INFO 11744 --- [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-03-26T22:16:25.579-05:00  WARN 11744 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-03-26T22:16:25.990-05:00  INFO 11744 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2026-03-26T22:16:29.047-05:00  INFO 11744 --- [restartedMain] c.v.f.s.DefaultDeploymentConfiguration   : 
+Vaadin is running in DEVELOPMENT mode - do not use for production deployments.
+2026-03-26T22:16:29.070-05:00  INFO 11744 --- [restartedMain] c.vaadin.flow.spring.SpringInstantiator  : The number of beans implementing 'I18NProvider' is 0. Cannot use Spring beans for I18N, falling back to the default behavior
+2026-03-26T22:16:29.156-05:00  INFO 11744 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2026-03-26T22:16:29.167-05:00  INFO 11744 --- [restartedMain] com.example.Application                  : Started Application in 11.783 seconds (process running for 12.286)
+2026-03-26T22:16:29.173-05:00  INFO 11744 --- [restartedMain] c.v.b.d.DevModeHandlerManagerImpl        : Application running at http://localhost:8080/
+2026-03-26T22:19:06.438-05:00  INFO 11744 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-03-26T22:19:06.439-05:00  INFO 11744 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-03-26T22:19:06.440-05:00  INFO 11744 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2026-03-26T22:23:43.683-05:00  INFO 11744 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2026-03-26T22:23:43.710-05:00  INFO 11744 --- [Thread-5] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-03-26T22:23:43.715-05:00  INFO 11744 --- [Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-03-26T22:23:43.721-05:00  INFO 11744 --- [Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-03-26T22:23:43.866-05:00  INFO 11744 --- [restartedMain] com.example.Application                  : Starting Application using Java 22.0.2 with PID 11744 (C:\Users\Yochanan Gardner\Downloads\app\app\target\classes started by Yochanan Gardner in C:\Users\Yochanan Gardner\Downloads\app\app)
+2026-03-26T22:23:43.867-05:00 DEBUG 11744 --- [restartedMain] com.example.Application                  : Running with Spring Boot v3.3.3, Spring v6.1.12
+2026-03-26T22:23:43.867-05:00  INFO 11744 --- [restartedMain] com.example.Application                  : No active profile set, falling back to 1 default profile: "default"
+2026-03-26T22:23:44.034-05:00  INFO 11744 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-03-26T22:23:44.057-05:00  INFO 11744 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 22 ms. Found 8 JPA repository interfaces.
+2026-03-26T22:23:44.165-05:00  INFO 11744 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-03-26T22:23:44.167-05:00  INFO 11744 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-03-26T22:23:44.167-05:00  INFO 11744 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.28]
+2026-03-26T22:23:44.201-05:00  INFO 11744 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-03-26T22:23:44.201-05:00  INFO 11744 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 332 ms
+2026-03-26T22:23:44.252-05:00  INFO 11744 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing AtmosphereFramework
+2026-03-26T22:23:44.938-05:00  INFO 11744 --- [restartedMain] c.v.f.s.VaadinServletContextInitializer  : Search for subclasses and classes with annotations took 606 ms
+2026-03-26T22:23:44.946-05:00  INFO 11744 --- [restartedMain] c.v.b.d.startup.DevModeStartupListener   : Starting dev-mode updaters in C:\Users\Yochanan Gardner\Downloads\app\app folder.
+2026-03-26T22:23:44.956-05:00  INFO 11744 --- [restartedMain] c.v.f.s.f.s.FullDependenciesScanner      : Visited 114 classes. Took 8 ms.
+2026-03-26T22:23:44.956-05:00  INFO 11744 --- [restartedMain] c.v.f.s.frontend.BundleValidationUtil    : Checking if a development mode bundle build is needed
+2026-03-26T22:23:45.076-05:00  INFO 11744 --- [restartedMain] c.v.f.s.frontend.BundleValidationUtil    : A development mode bundle build is not needed
+2026-03-26T22:23:45.087-05:00  INFO 11744 --- [ForkJoinPool.commonPool-worker-6] c.v.f.s.frontend.TaskCopyFrontendFiles   : Copying frontend resources from jar files ...
+2026-03-26T22:23:45.135-05:00  INFO 11744 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-03-26T22:23:45.138-05:00  INFO 11744 --- [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-03-26T22:23:45.148-05:00  INFO 11744 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-03-26T22:23:45.150-05:00  INFO 11744 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2026-03-26T22:23:45.161-05:00  INFO 11744 --- [ForkJoinPool.commonPool-worker-6] c.v.f.s.frontend.TaskCopyFrontendFiles   : Visited 22 resources. Took 73 ms.
+2026-03-26T22:23:45.164-05:00  INFO 11744 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-2 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6913712f
+2026-03-26T22:23:45.165-05:00  INFO 11744 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+2026-03-26T22:23:45.166-05:00  WARN 11744 --- [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-03-26T22:23:45.311-05:00  INFO 11744 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-03-26T22:23:45.381-05:00  INFO 11744 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-03-26T22:23:45.531-05:00  WARN 11744 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-03-26T22:23:45.644-05:00  INFO 11744 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2026-03-26T22:23:48.217-05:00  INFO 11744 --- [restartedMain] c.vaadin.flow.spring.SpringInstantiator  : The number of beans implementing 'I18NProvider' is 0. Cannot use Spring beans for I18N, falling back to the default behavior
+2026-03-26T22:23:48.225-05:00  INFO 11744 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2026-03-26T22:23:48.229-05:00  INFO 11744 --- [restartedMain] com.example.Application                  : Started Application in 4.398 seconds (process running for 451.348)
+2026-03-26T22:23:48.231-05:00  INFO 11744 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2026-03-26T22:23:48.236-05:00  INFO 11744 --- [restartedMain] c.v.b.d.DevModeHandlerManagerImpl        : Application running at http://localhost:8080/
+2026-03-26T22:23:48.257-05:00  INFO 11744 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-03-26T22:23:48.257-05:00  INFO 11744 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-03-26T22:23:48.258-05:00  INFO 11744 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2026-03-26T22:24:26.214-05:00  INFO 11744 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2026-03-26T22:24:26.226-05:00  INFO 11744 --- [Thread-23] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-03-26T22:24:26.227-05:00  INFO 11744 --- [Thread-23] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown initiated...
+2026-03-26T22:24:26.230-05:00  INFO 11744 --- [Thread-23] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown completed.
+2026-03-26T22:24:26.363-05:00  INFO 11744 --- [restartedMain] com.example.Application                  : Starting Application using Java 22.0.2 with PID 11744 (C:\Users\Yochanan Gardner\Downloads\app\app\target\classes started by Yochanan Gardner in C:\Users\Yochanan Gardner\Downloads\app\app)
+2026-03-26T22:24:26.363-05:00 DEBUG 11744 --- [restartedMain] com.example.Application                  : Running with Spring Boot v3.3.3, Spring v6.1.12
+2026-03-26T22:24:26.363-05:00  INFO 11744 --- [restartedMain] com.example.Application                  : No active profile set, falling back to 1 default profile: "default"
+2026-03-26T22:24:26.549-05:00  INFO 11744 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-03-26T22:24:26.573-05:00  INFO 11744 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 23 ms. Found 8 JPA repository interfaces.
+2026-03-26T22:24:26.664-05:00  INFO 11744 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-03-26T22:24:26.665-05:00  INFO 11744 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-03-26T22:24:26.665-05:00  INFO 11744 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.28]
+2026-03-26T22:24:26.699-05:00  INFO 11744 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-03-26T22:24:26.699-05:00  INFO 11744 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 334 ms
+2026-03-26T22:24:26.739-05:00  INFO 11744 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing AtmosphereFramework
+2026-03-26T22:24:27.465-05:00  INFO 11744 --- [restartedMain] c.v.f.s.VaadinServletContextInitializer  : Search for subclasses and classes with annotations took 645 ms
+2026-03-26T22:24:27.479-05:00  INFO 11744 --- [restartedMain] c.v.b.d.startup.DevModeStartupListener   : Starting dev-mode updaters in C:\Users\Yochanan Gardner\Downloads\app\app folder.
+2026-03-26T22:24:27.489-05:00  INFO 11744 --- [restartedMain] c.v.f.s.f.s.FullDependenciesScanner      : Visited 114 classes. Took 9 ms.
+2026-03-26T22:24:27.489-05:00  INFO 11744 --- [restartedMain] c.v.f.s.frontend.BundleValidationUtil    : Checking if a development mode bundle build is needed
+2026-03-26T22:24:27.627-05:00  INFO 11744 --- [restartedMain] c.v.f.s.frontend.BundleValidationUtil    : A development mode bundle build is not needed
+2026-03-26T22:24:27.639-05:00  INFO 11744 --- [ForkJoinPool.commonPool-worker-8] c.v.f.s.frontend.TaskCopyFrontendFiles   : Copying frontend resources from jar files ...
+2026-03-26T22:24:27.673-05:00  INFO 11744 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-03-26T22:24:27.676-05:00  INFO 11744 --- [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-03-26T22:24:27.685-05:00  INFO 11744 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-03-26T22:24:27.686-05:00  INFO 11744 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Starting...
+2026-03-26T22:24:27.705-05:00  INFO 11744 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-3 - Added connection com.mysql.cj.jdbc.ConnectionImpl@75200488
+2026-03-26T22:24:27.705-05:00  INFO 11744 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Start completed.
+2026-03-26T22:24:27.707-05:00  WARN 11744 --- [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-03-26T22:24:27.718-05:00  INFO 11744 --- [ForkJoinPool.commonPool-worker-8] c.v.f.s.frontend.TaskCopyFrontendFiles   : Visited 22 resources. Took 79 ms.
+2026-03-26T22:24:27.920-05:00  INFO 11744 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-03-26T22:24:27.951-05:00  INFO 11744 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-03-26T22:24:28.096-05:00  WARN 11744 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-03-26T22:24:28.189-05:00  INFO 11744 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2026-03-26T22:24:30.869-05:00  INFO 11744 --- [restartedMain] c.vaadin.flow.spring.SpringInstantiator  : The number of beans implementing 'I18NProvider' is 0. Cannot use Spring beans for I18N, falling back to the default behavior
+2026-03-26T22:24:30.877-05:00  INFO 11744 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2026-03-26T22:24:30.882-05:00  INFO 11744 --- [restartedMain] com.example.Application                  : Started Application in 4.549 seconds (process running for 493.999)
+2026-03-26T22:24:30.883-05:00  INFO 11744 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2026-03-26T22:24:30.886-05:00  INFO 11744 --- [restartedMain] c.v.b.d.DevModeHandlerManagerImpl        : Application running at http://localhost:8080/
+2026-03-26T22:24:30.916-05:00  INFO 11744 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-03-26T22:24:30.917-05:00  INFO 11744 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-03-26T22:24:30.920-05:00  INFO 11744 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2026-03-26T22:26:30.975-05:00  INFO 11744 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2026-03-26T22:26:30.994-05:00  INFO 11744 --- [Thread-37] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-03-26T22:26:30.995-05:00  INFO 11744 --- [Thread-37] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Shutdown initiated...
+2026-03-26T22:26:31.001-05:00  INFO 11744 --- [Thread-37] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Shutdown completed.
+2026-03-26T22:26:31.151-05:00  INFO 11744 --- [restartedMain] com.example.Application                  : Starting Application using Java 22.0.2 with PID 11744 (C:\Users\Yochanan Gardner\Downloads\app\app\target\classes started by Yochanan Gardner in C:\Users\Yochanan Gardner\Downloads\app\app)
+2026-03-26T22:26:31.151-05:00 DEBUG 11744 --- [restartedMain] com.example.Application                  : Running with Spring Boot v3.3.3, Spring v6.1.12
+2026-03-26T22:26:31.151-05:00  INFO 11744 --- [restartedMain] com.example.Application                  : No active profile set, falling back to 1 default profile: "default"
+2026-03-26T22:26:31.336-05:00  INFO 11744 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-03-26T22:26:31.355-05:00  INFO 11744 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 19 ms. Found 8 JPA repository interfaces.
+2026-03-26T22:26:31.441-05:00  INFO 11744 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-03-26T22:26:31.441-05:00  INFO 11744 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-03-26T22:26:31.441-05:00  INFO 11744 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.28]
+2026-03-26T22:26:31.475-05:00  INFO 11744 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-03-26T22:26:31.476-05:00  INFO 11744 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 322 ms
+2026-03-26T22:26:31.512-05:00  INFO 11744 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing AtmosphereFramework
+2026-03-26T22:26:32.246-05:00  INFO 11744 --- [restartedMain] c.v.f.s.VaadinServletContextInitializer  : Search for subclasses and classes with annotations took 621 ms
+2026-03-26T22:26:32.255-05:00  INFO 11744 --- [restartedMain] c.v.b.d.startup.DevModeStartupListener   : Starting dev-mode updaters in C:\Users\Yochanan Gardner\Downloads\app\app folder.
+2026-03-26T22:26:32.266-05:00  INFO 11744 --- [restartedMain] c.v.f.s.f.s.FullDependenciesScanner      : Visited 114 classes. Took 10 ms.
+2026-03-26T22:26:32.267-05:00  INFO 11744 --- [restartedMain] c.v.f.s.frontend.BundleValidationUtil    : Checking if a development mode bundle build is needed
+2026-03-26T22:26:32.369-05:00  INFO 11744 --- [restartedMain] c.v.f.s.frontend.BundleValidationUtil    : A development mode bundle build is not needed
+2026-03-26T22:26:32.380-05:00  INFO 11744 --- [ForkJoinPool.commonPool-worker-10] c.v.f.s.frontend.TaskCopyFrontendFiles   : Copying frontend resources from jar files ...
+2026-03-26T22:26:32.435-05:00  INFO 11744 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-03-26T22:26:32.442-05:00  INFO 11744 --- [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-03-26T22:26:32.456-05:00  INFO 11744 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-03-26T22:26:32.457-05:00  INFO 11744 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Starting...
+2026-03-26T22:26:32.477-05:00  INFO 11744 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-4 - Added connection com.mysql.cj.jdbc.ConnectionImpl@3c99af3b
+2026-03-26T22:26:32.477-05:00  INFO 11744 --- [ForkJoinPool.commonPool-worker-10] c.v.f.s.frontend.TaskCopyFrontendFiles   : Visited 22 resources. Took 96 ms.
+2026-03-26T22:26:32.477-05:00  INFO 11744 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Start completed.
+2026-03-26T22:26:32.479-05:00  WARN 11744 --- [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-03-26T22:26:32.673-05:00  INFO 11744 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-03-26T22:26:32.715-05:00  INFO 11744 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-03-26T22:26:32.831-05:00  WARN 11744 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-03-26T22:26:32.938-05:00  INFO 11744 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2026-03-26T22:26:35.513-05:00  INFO 11744 --- [restartedMain] c.vaadin.flow.spring.SpringInstantiator  : The number of beans implementing 'I18NProvider' is 0. Cannot use Spring beans for I18N, falling back to the default behavior
+2026-03-26T22:26:35.522-05:00  INFO 11744 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2026-03-26T22:26:35.526-05:00  INFO 11744 --- [restartedMain] com.example.Application                  : Started Application in 4.409 seconds (process running for 618.644)
+2026-03-26T22:26:35.527-05:00  INFO 11744 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2026-03-26T22:26:35.530-05:00  INFO 11744 --- [restartedMain] c.v.b.d.DevModeHandlerManagerImpl        : Application running at http://localhost:8080/
+2026-03-26T22:26:35.549-05:00  INFO 11744 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-03-26T22:26:35.551-05:00  INFO 11744 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-03-26T22:26:35.553-05:00  INFO 11744 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2026-03-26T22:27:56.685-05:00  INFO 11744 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2026-03-26T22:27:56.698-05:00  INFO 11744 --- [Thread-50] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-03-26T22:27:56.700-05:00  INFO 11744 --- [Thread-50] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Shutdown initiated...
+2026-03-26T22:27:56.704-05:00  INFO 11744 --- [Thread-50] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Shutdown completed.
+2026-03-26T22:27:56.841-05:00  INFO 11744 --- [restartedMain] com.example.Application                  : Starting Application using Java 22.0.2 with PID 11744 (C:\Users\Yochanan Gardner\Downloads\app\app\target\classes started by Yochanan Gardner in C:\Users\Yochanan Gardner\Downloads\app\app)
+2026-03-26T22:27:56.842-05:00 DEBUG 11744 --- [restartedMain] com.example.Application                  : Running with Spring Boot v3.3.3, Spring v6.1.12
+2026-03-26T22:27:56.842-05:00  INFO 11744 --- [restartedMain] com.example.Application                  : No active profile set, falling back to 1 default profile: "default"
+2026-03-26T22:27:57.031-05:00  INFO 11744 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-03-26T22:27:57.053-05:00  INFO 11744 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 22 ms. Found 8 JPA repository interfaces.
+2026-03-26T22:27:57.147-05:00  INFO 11744 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-03-26T22:27:57.148-05:00  INFO 11744 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-03-26T22:27:57.148-05:00  INFO 11744 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.28]
+2026-03-26T22:27:57.187-05:00  INFO 11744 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-03-26T22:27:57.187-05:00  INFO 11744 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 342 ms
+2026-03-26T22:27:57.229-05:00  INFO 11744 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing AtmosphereFramework
+2026-03-26T22:27:57.939-05:00  INFO 11744 --- [restartedMain] c.v.f.s.VaadinServletContextInitializer  : Search for subclasses and classes with annotations took 632 ms
+2026-03-26T22:27:57.951-05:00  INFO 11744 --- [restartedMain] c.v.b.d.startup.DevModeStartupListener   : Starting dev-mode updaters in C:\Users\Yochanan Gardner\Downloads\app\app folder.
+2026-03-26T22:27:57.962-05:00  INFO 11744 --- [restartedMain] c.v.f.s.f.s.FullDependenciesScanner      : Visited 114 classes. Took 9 ms.
+2026-03-26T22:27:57.962-05:00  INFO 11744 --- [restartedMain] c.v.f.s.frontend.BundleValidationUtil    : Checking if a development mode bundle build is needed
+2026-03-26T22:27:58.085-05:00  INFO 11744 --- [restartedMain] c.v.f.s.frontend.BundleValidationUtil    : A development mode bundle build is not needed
+2026-03-26T22:27:58.095-05:00  INFO 11744 --- [ForkJoinPool.commonPool-worker-12] c.v.f.s.frontend.TaskCopyFrontendFiles   : Copying frontend resources from jar files ...
+2026-03-26T22:27:58.155-05:00  INFO 11744 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-03-26T22:27:58.157-05:00  INFO 11744 --- [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-03-26T22:27:58.171-05:00  INFO 11744 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-03-26T22:27:58.172-05:00  INFO 11744 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Starting...
+2026-03-26T22:27:58.195-05:00  INFO 11744 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-5 - Added connection com.mysql.cj.jdbc.ConnectionImpl@4f63340a
+2026-03-26T22:27:58.196-05:00  INFO 11744 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Start completed.
+2026-03-26T22:27:58.197-05:00  WARN 11744 --- [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-03-26T22:27:58.207-05:00  INFO 11744 --- [ForkJoinPool.commonPool-worker-12] c.v.f.s.frontend.TaskCopyFrontendFiles   : Visited 22 resources. Took 112 ms.
+2026-03-26T22:27:58.406-05:00  INFO 11744 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-03-26T22:27:58.437-05:00  INFO 11744 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-03-26T22:27:58.611-05:00  WARN 11744 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-03-26T22:27:58.729-05:00  INFO 11744 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2026-03-26T22:28:01.613-05:00  INFO 11744 --- [restartedMain] c.vaadin.flow.spring.SpringInstantiator  : The number of beans implementing 'I18NProvider' is 0. Cannot use Spring beans for I18N, falling back to the default behavior
+2026-03-26T22:28:01.626-05:00  INFO 11744 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2026-03-26T22:28:01.632-05:00  INFO 11744 --- [restartedMain] com.example.Application                  : Started Application in 4.834 seconds (process running for 704.75)
+2026-03-26T22:28:01.634-05:00  INFO 11744 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2026-03-26T22:28:01.644-05:00  INFO 11744 --- [restartedMain] c.v.b.d.DevModeHandlerManagerImpl        : Application running at http://localhost:8080/
+2026-03-26T22:28:01.677-05:00  INFO 11744 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-03-26T22:28:01.678-05:00  INFO 11744 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-03-26T22:28:01.683-05:00  INFO 11744 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 4 ms
+2026-03-26T22:30:41.913-05:00  INFO 11744 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2026-03-26T22:30:41.958-05:00  INFO 11744 --- [Thread-64] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-03-26T22:30:41.961-05:00  INFO 11744 --- [Thread-64] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Shutdown initiated...
+2026-03-26T22:30:41.975-05:00  INFO 11744 --- [Thread-64] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Shutdown completed.
+2026-03-26T22:30:42.129-05:00  INFO 11744 --- [restartedMain] com.example.Application                  : Starting Application using Java 22.0.2 with PID 11744 (C:\Users\Yochanan Gardner\Downloads\app\app\target\classes started by Yochanan Gardner in C:\Users\Yochanan Gardner\Downloads\app\app)
+2026-03-26T22:30:42.129-05:00 DEBUG 11744 --- [restartedMain] com.example.Application                  : Running with Spring Boot v3.3.3, Spring v6.1.12
+2026-03-26T22:30:42.130-05:00  INFO 11744 --- [restartedMain] com.example.Application                  : No active profile set, falling back to 1 default profile: "default"
+2026-03-26T22:30:42.327-05:00  INFO 11744 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-03-26T22:30:42.352-05:00  INFO 11744 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 24 ms. Found 8 JPA repository interfaces.
+2026-03-26T22:30:42.458-05:00  INFO 11744 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-03-26T22:30:42.459-05:00  INFO 11744 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-03-26T22:30:42.459-05:00  INFO 11744 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.28]
+2026-03-26T22:30:42.499-05:00  INFO 11744 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-03-26T22:30:42.500-05:00  INFO 11744 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 368 ms
+2026-03-26T22:30:42.550-05:00  INFO 11744 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing AtmosphereFramework
+2026-03-26T22:30:43.282-05:00  INFO 11744 --- [restartedMain] c.v.f.s.VaadinServletContextInitializer  : Search for subclasses and classes with annotations took 658 ms
+2026-03-26T22:30:43.291-05:00  INFO 11744 --- [restartedMain] c.v.b.d.startup.DevModeStartupListener   : Starting dev-mode updaters in C:\Users\Yochanan Gardner\Downloads\app\app folder.
+2026-03-26T22:30:43.305-05:00  INFO 11744 --- [restartedMain] c.v.f.s.f.s.FullDependenciesScanner      : Visited 114 classes. Took 13 ms.
+2026-03-26T22:30:43.305-05:00  INFO 11744 --- [restartedMain] c.v.f.s.frontend.BundleValidationUtil    : Checking if a development mode bundle build is needed
+2026-03-26T22:30:43.418-05:00  INFO 11744 --- [restartedMain] c.v.f.s.frontend.BundleValidationUtil    : A development mode bundle build is not needed
+2026-03-26T22:30:43.428-05:00  INFO 11744 --- [ForkJoinPool.commonPool-worker-14] c.v.f.s.frontend.TaskCopyFrontendFiles   : Copying frontend resources from jar files ...
+2026-03-26T22:30:43.486-05:00  INFO 11744 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-03-26T22:30:43.489-05:00  INFO 11744 --- [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-03-26T22:30:43.497-05:00  INFO 11744 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-03-26T22:30:43.498-05:00  INFO 11744 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-6 - Starting...
+2026-03-26T22:30:43.509-05:00  INFO 11744 --- [ForkJoinPool.commonPool-worker-14] c.v.f.s.frontend.TaskCopyFrontendFiles   : Visited 22 resources. Took 80 ms.
+2026-03-26T22:30:43.514-05:00  INFO 11744 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-6 - Added connection com.mysql.cj.jdbc.ConnectionImpl@77ece709
+2026-03-26T22:30:43.514-05:00  INFO 11744 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-6 - Start completed.
+2026-03-26T22:30:43.516-05:00  WARN 11744 --- [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-03-26T22:30:43.646-05:00  INFO 11744 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-03-26T22:30:43.691-05:00  INFO 11744 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-03-26T22:30:43.955-05:00  WARN 11744 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-03-26T22:30:44.199-05:00  INFO 11744 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2026-03-26T22:30:47.151-05:00  INFO 11744 --- [restartedMain] c.vaadin.flow.spring.SpringInstantiator  : The number of beans implementing 'I18NProvider' is 0. Cannot use Spring beans for I18N, falling back to the default behavior
+2026-03-26T22:30:47.162-05:00  INFO 11744 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2026-03-26T22:30:47.167-05:00  INFO 11744 --- [restartedMain] com.example.Application                  : Started Application in 5.082 seconds (process running for 870.285)
+2026-03-26T22:30:47.170-05:00  INFO 11744 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2026-03-26T22:30:47.179-05:00  INFO 11744 --- [restartedMain] c.v.b.d.DevModeHandlerManagerImpl        : Application running at http://localhost:8080/
+2026-03-26T22:30:47.184-05:00  INFO 11744 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-03-26T22:30:47.184-05:00  INFO 11744 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-03-26T22:30:47.187-05:00  INFO 11744 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2026-03-26T22:32:52.350-05:00  INFO 11744 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2026-03-26T22:32:52.372-05:00  INFO 11744 --- [Thread-78] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-03-26T22:32:52.374-05:00  INFO 11744 --- [Thread-78] com.zaxxer.hikari.HikariDataSource       : HikariPool-6 - Shutdown initiated...
+2026-03-26T22:32:52.385-05:00  INFO 11744 --- [Thread-78] com.zaxxer.hikari.HikariDataSource       : HikariPool-6 - Shutdown completed.
+2026-03-26T22:32:52.558-05:00  INFO 11744 --- [restartedMain] com.example.Application                  : Starting Application using Java 22.0.2 with PID 11744 (C:\Users\Yochanan Gardner\Downloads\app\app\target\classes started by Yochanan Gardner in C:\Users\Yochanan Gardner\Downloads\app\app)
+2026-03-26T22:32:52.559-05:00 DEBUG 11744 --- [restartedMain] com.example.Application                  : Running with Spring Boot v3.3.3, Spring v6.1.12
+2026-03-26T22:32:52.559-05:00  INFO 11744 --- [restartedMain] com.example.Application                  : No active profile set, falling back to 1 default profile: "default"
+2026-03-26T22:32:52.822-05:00  INFO 11744 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-03-26T22:32:52.848-05:00  INFO 11744 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 25 ms. Found 8 JPA repository interfaces.
+2026-03-26T22:32:52.946-05:00  INFO 11744 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-03-26T22:32:52.947-05:00  INFO 11744 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-03-26T22:32:52.947-05:00  INFO 11744 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.28]
+2026-03-26T22:32:52.988-05:00  INFO 11744 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-03-26T22:32:52.988-05:00  INFO 11744 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 427 ms
+2026-03-26T22:32:53.030-05:00  INFO 11744 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing AtmosphereFramework
+2026-03-26T22:32:53.865-05:00  INFO 11744 --- [restartedMain] c.v.f.s.VaadinServletContextInitializer  : Search for subclasses and classes with annotations took 734 ms
+2026-03-26T22:32:53.871-05:00  INFO 11744 --- [restartedMain] c.v.b.d.startup.DevModeStartupListener   : Starting dev-mode updaters in C:\Users\Yochanan Gardner\Downloads\app\app folder.
+2026-03-26T22:32:53.881-05:00  INFO 11744 --- [restartedMain] c.v.f.s.f.s.FullDependenciesScanner      : Visited 114 classes. Took 9 ms.
+2026-03-26T22:32:53.881-05:00  INFO 11744 --- [restartedMain] c.v.f.s.frontend.BundleValidationUtil    : Checking if a development mode bundle build is needed
+2026-03-26T22:32:53.993-05:00  INFO 11744 --- [restartedMain] c.v.f.s.frontend.BundleValidationUtil    : A development mode bundle build is not needed
+2026-03-26T22:32:54.002-05:00  INFO 11744 --- [ForkJoinPool.commonPool-worker-16] c.v.f.s.frontend.TaskCopyFrontendFiles   : Copying frontend resources from jar files ...
+2026-03-26T22:32:54.070-05:00  INFO 11744 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-03-26T22:32:54.074-05:00  INFO 11744 --- [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-03-26T22:32:54.086-05:00  INFO 11744 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-03-26T22:32:54.088-05:00  INFO 11744 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-7 - Starting...
+2026-03-26T22:32:54.105-05:00  INFO 11744 --- [ForkJoinPool.commonPool-worker-16] c.v.f.s.frontend.TaskCopyFrontendFiles   : Visited 22 resources. Took 102 ms.
+2026-03-26T22:32:54.112-05:00  INFO 11744 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-7 - Added connection com.mysql.cj.jdbc.ConnectionImpl@da099de
+2026-03-26T22:32:54.112-05:00  INFO 11744 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-7 - Start completed.
+2026-03-26T22:32:54.115-05:00  WARN 11744 --- [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-03-26T22:32:54.310-05:00  INFO 11744 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-03-26T22:32:54.349-05:00  INFO 11744 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-03-26T22:32:54.481-05:00  WARN 11744 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-03-26T22:32:54.579-05:00  INFO 11744 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2026-03-26T22:32:57.330-05:00  INFO 11744 --- [restartedMain] c.vaadin.flow.spring.SpringInstantiator  : The number of beans implementing 'I18NProvider' is 0. Cannot use Spring beans for I18N, falling back to the default behavior
+2026-03-26T22:32:57.344-05:00  INFO 11744 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2026-03-26T22:32:57.350-05:00  INFO 11744 --- [restartedMain] com.example.Application                  : Started Application in 4.827 seconds (process running for 1000.468)
+2026-03-26T22:32:57.351-05:00  INFO 11744 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2026-03-26T22:32:57.355-05:00  INFO 11744 --- [restartedMain] c.v.b.d.DevModeHandlerManagerImpl        : Application running at http://localhost:8080/
+2026-03-26T22:32:57.365-05:00  INFO 11744 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-03-26T22:32:57.365-05:00  INFO 11744 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-03-26T22:32:57.367-05:00  INFO 11744 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2026-03-26T22:33:42.387-05:00  INFO 11744 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2026-03-26T22:33:42.395-05:00  INFO 11744 --- [Thread-92] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-03-26T22:33:42.396-05:00  INFO 11744 --- [Thread-92] com.zaxxer.hikari.HikariDataSource       : HikariPool-7 - Shutdown initiated...
+2026-03-26T22:33:42.401-05:00  INFO 11744 --- [Thread-92] com.zaxxer.hikari.HikariDataSource       : HikariPool-7 - Shutdown completed.
+2026-03-26T22:33:42.515-05:00  INFO 11744 --- [restartedMain] com.example.Application                  : Starting Application using Java 22.0.2 with PID 11744 (C:\Users\Yochanan Gardner\Downloads\app\app\target\classes started by Yochanan Gardner in C:\Users\Yochanan Gardner\Downloads\app\app)
+2026-03-26T22:33:42.516-05:00 DEBUG 11744 --- [restartedMain] com.example.Application                  : Running with Spring Boot v3.3.3, Spring v6.1.12
+2026-03-26T22:33:42.516-05:00  INFO 11744 --- [restartedMain] com.example.Application                  : No active profile set, falling back to 1 default profile: "default"
+2026-03-26T22:33:42.702-05:00  INFO 11744 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-03-26T22:33:42.722-05:00  INFO 11744 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 19 ms. Found 8 JPA repository interfaces.
+2026-03-26T22:33:42.821-05:00  INFO 11744 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-03-26T22:33:42.822-05:00  INFO 11744 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-03-26T22:33:42.822-05:00  INFO 11744 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.28]
+2026-03-26T22:33:42.861-05:00  INFO 11744 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-03-26T22:33:42.861-05:00  INFO 11744 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 343 ms
+2026-03-26T22:33:42.898-05:00  INFO 11744 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing AtmosphereFramework
+2026-03-26T22:33:43.599-05:00  INFO 11744 --- [restartedMain] c.v.f.s.VaadinServletContextInitializer  : Search for subclasses and classes with annotations took 632 ms
+2026-03-26T22:33:43.605-05:00  INFO 11744 --- [restartedMain] c.v.b.d.startup.DevModeStartupListener   : Starting dev-mode updaters in C:\Users\Yochanan Gardner\Downloads\app\app folder.
+2026-03-26T22:33:43.621-05:00  INFO 11744 --- [restartedMain] c.v.f.s.f.s.FullDependenciesScanner      : Visited 114 classes. Took 14 ms.
+2026-03-26T22:33:43.621-05:00  INFO 11744 --- [restartedMain] c.v.f.s.frontend.BundleValidationUtil    : Checking if a development mode bundle build is needed
+2026-03-26T22:33:43.778-05:00  INFO 11744 --- [restartedMain] c.v.f.s.frontend.BundleValidationUtil    : A development mode bundle build is not needed
+2026-03-26T22:33:43.790-05:00  INFO 11744 --- [ForkJoinPool.commonPool-worker-18] c.v.f.s.frontend.TaskCopyFrontendFiles   : Copying frontend resources from jar files ...
+2026-03-26T22:33:43.832-05:00  INFO 11744 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-03-26T22:33:43.835-05:00  INFO 11744 --- [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-03-26T22:33:43.844-05:00  INFO 11744 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-03-26T22:33:43.845-05:00  INFO 11744 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-8 - Starting...
+2026-03-26T22:33:43.859-05:00  INFO 11744 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-8 - Added connection com.mysql.cj.jdbc.ConnectionImpl@11e51854
+2026-03-26T22:33:43.859-05:00  INFO 11744 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-8 - Start completed.
+2026-03-26T22:33:43.860-05:00  WARN 11744 --- [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-03-26T22:33:43.884-05:00  INFO 11744 --- [ForkJoinPool.commonPool-worker-18] c.v.f.s.frontend.TaskCopyFrontendFiles   : Visited 22 resources. Took 94 ms.
+2026-03-26T22:33:44.130-05:00  INFO 11744 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-03-26T22:33:44.170-05:00  INFO 11744 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-03-26T22:33:44.322-05:00  WARN 11744 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-03-26T22:33:44.422-05:00  INFO 11744 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2026-03-26T22:33:47.045-05:00  INFO 11744 --- [restartedMain] c.vaadin.flow.spring.SpringInstantiator  : The number of beans implementing 'I18NProvider' is 0. Cannot use Spring beans for I18N, falling back to the default behavior
+2026-03-26T22:33:47.055-05:00  INFO 11744 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2026-03-26T22:33:47.065-05:00  INFO 11744 --- [restartedMain] com.example.Application                  : Started Application in 4.58 seconds (process running for 1050.183)
+2026-03-26T22:33:47.070-05:00  INFO 11744 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2026-03-26T22:33:47.072-05:00  INFO 11744 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-03-26T22:33:47.072-05:00  INFO 11744 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-03-26T22:33:47.074-05:00  INFO 11744 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2026-03-26T22:33:47.074-05:00  INFO 11744 --- [restartedMain] c.v.b.d.DevModeHandlerManagerImpl        : Application running at http://localhost:8080/
+2026-03-26T22:33:57.232-05:00  INFO 11744 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2026-03-26T22:33:57.253-05:00  INFO 11744 --- [Thread-106] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-03-26T22:33:57.254-05:00  INFO 11744 --- [Thread-106] com.zaxxer.hikari.HikariDataSource       : HikariPool-8 - Shutdown initiated...
+2026-03-26T22:33:57.261-05:00  INFO 11744 --- [Thread-106] com.zaxxer.hikari.HikariDataSource       : HikariPool-8 - Shutdown completed.
+2026-03-26T22:33:57.432-05:00  INFO 11744 --- [restartedMain] com.example.Application                  : Starting Application using Java 22.0.2 with PID 11744 (C:\Users\Yochanan Gardner\Downloads\app\app\target\classes started by Yochanan Gardner in C:\Users\Yochanan Gardner\Downloads\app\app)
+2026-03-26T22:33:57.432-05:00 DEBUG 11744 --- [restartedMain] com.example.Application                  : Running with Spring Boot v3.3.3, Spring v6.1.12
+2026-03-26T22:33:57.432-05:00  INFO 11744 --- [restartedMain] com.example.Application                  : No active profile set, falling back to 1 default profile: "default"
+2026-03-26T22:33:57.626-05:00  INFO 11744 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-03-26T22:33:57.649-05:00  INFO 11744 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 22 ms. Found 8 JPA repository interfaces.
+2026-03-26T22:33:57.742-05:00  INFO 11744 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-03-26T22:33:57.743-05:00  INFO 11744 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-03-26T22:33:57.743-05:00  INFO 11744 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.28]
+2026-03-26T22:33:57.780-05:00  INFO 11744 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-03-26T22:33:57.780-05:00  INFO 11744 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 346 ms
+2026-03-26T22:33:57.820-05:00  INFO 11744 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing AtmosphereFramework
+2026-03-26T22:33:58.587-05:00  INFO 11744 --- [restartedMain] c.v.f.s.VaadinServletContextInitializer  : Search for subclasses and classes with annotations took 692 ms
+2026-03-26T22:33:58.601-05:00  INFO 11744 --- [restartedMain] c.v.b.d.startup.DevModeStartupListener   : Starting dev-mode updaters in C:\Users\Yochanan Gardner\Downloads\app\app folder.
+2026-03-26T22:33:58.612-05:00  INFO 11744 --- [restartedMain] c.v.f.s.f.s.FullDependenciesScanner      : Visited 114 classes. Took 9 ms.
+2026-03-26T22:33:58.613-05:00  INFO 11744 --- [restartedMain] c.v.f.s.frontend.BundleValidationUtil    : Checking if a development mode bundle build is needed
+2026-03-26T22:33:58.743-05:00  INFO 11744 --- [restartedMain] c.v.f.s.frontend.BundleValidationUtil    : A development mode bundle build is not needed
+2026-03-26T22:33:58.753-05:00  INFO 11744 --- [ForkJoinPool.commonPool-worker-20] c.v.f.s.frontend.TaskCopyFrontendFiles   : Copying frontend resources from jar files ...
+2026-03-26T22:33:58.794-05:00  INFO 11744 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-03-26T22:33:58.796-05:00  INFO 11744 --- [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-03-26T22:33:58.805-05:00  INFO 11744 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-03-26T22:33:58.806-05:00  INFO 11744 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-9 - Starting...
+2026-03-26T22:33:58.816-05:00  INFO 11744 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-9 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5f997a38
+2026-03-26T22:33:58.817-05:00  INFO 11744 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-9 - Start completed.
+2026-03-26T22:33:58.818-05:00  WARN 11744 --- [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-03-26T22:33:58.829-05:00  INFO 11744 --- [ForkJoinPool.commonPool-worker-20] c.v.f.s.frontend.TaskCopyFrontendFiles   : Visited 22 resources. Took 75 ms.
+2026-03-26T22:33:59.028-05:00  INFO 11744 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-03-26T22:33:59.056-05:00  INFO 11744 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-03-26T22:33:59.275-05:00  WARN 11744 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-03-26T22:33:59.382-05:00  INFO 11744 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2026-03-26T22:34:02.062-05:00  INFO 11744 --- [restartedMain] c.vaadin.flow.spring.SpringInstantiator  : The number of beans implementing 'I18NProvider' is 0. Cannot use Spring beans for I18N, falling back to the default behavior
+2026-03-26T22:34:02.073-05:00  INFO 11744 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2026-03-26T22:34:02.079-05:00  INFO 11744 --- [restartedMain] com.example.Application                  : Started Application in 4.683 seconds (process running for 1065.197)
+2026-03-26T22:34:02.081-05:00  INFO 11744 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2026-03-26T22:34:02.088-05:00  INFO 11744 --- [restartedMain] c.v.b.d.DevModeHandlerManagerImpl        : Application running at http://localhost:8080/
+2026-03-26T22:34:02.094-05:00  INFO 11744 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-03-26T22:34:02.095-05:00  INFO 11744 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-03-26T22:34:02.097-05:00  INFO 11744 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2026-03-26T22:34:56.559-05:00  INFO 11744 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2026-03-26T22:34:56.569-05:00  INFO 11744 --- [Thread-119] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-03-26T22:34:56.571-05:00  INFO 11744 --- [Thread-119] com.zaxxer.hikari.HikariDataSource       : HikariPool-9 - Shutdown initiated...
+2026-03-26T22:34:56.577-05:00  INFO 11744 --- [Thread-119] com.zaxxer.hikari.HikariDataSource       : HikariPool-9 - Shutdown completed.
+2026-03-26T22:34:56.723-05:00  INFO 11744 --- [restartedMain] com.example.Application                  : Starting Application using Java 22.0.2 with PID 11744 (C:\Users\Yochanan Gardner\Downloads\app\app\target\classes started by Yochanan Gardner in C:\Users\Yochanan Gardner\Downloads\app\app)
+2026-03-26T22:34:56.724-05:00 DEBUG 11744 --- [restartedMain] com.example.Application                  : Running with Spring Boot v3.3.3, Spring v6.1.12
+2026-03-26T22:34:56.724-05:00  INFO 11744 --- [restartedMain] com.example.Application                  : No active profile set, falling back to 1 default profile: "default"
+2026-03-26T22:34:56.929-05:00  INFO 11744 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-03-26T22:34:56.949-05:00  INFO 11744 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 19 ms. Found 8 JPA repository interfaces.
+2026-03-26T22:34:57.046-05:00  INFO 11744 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-03-26T22:34:57.047-05:00  INFO 11744 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-03-26T22:34:57.047-05:00  INFO 11744 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.28]
+2026-03-26T22:34:57.086-05:00  INFO 11744 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-03-26T22:34:57.087-05:00  INFO 11744 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 361 ms
+2026-03-26T22:34:57.131-05:00  INFO 11744 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing AtmosphereFramework
+2026-03-26T22:34:57.902-05:00  INFO 11744 --- [restartedMain] c.v.f.s.VaadinServletContextInitializer  : Search for subclasses and classes with annotations took 665 ms
+2026-03-26T22:34:57.910-05:00  INFO 11744 --- [restartedMain] c.v.b.d.startup.DevModeStartupListener   : Starting dev-mode updaters in C:\Users\Yochanan Gardner\Downloads\app\app folder.
+2026-03-26T22:34:57.920-05:00  INFO 11744 --- [restartedMain] c.v.f.s.f.s.FullDependenciesScanner      : Visited 114 classes. Took 9 ms.
+2026-03-26T22:34:57.920-05:00  INFO 11744 --- [restartedMain] c.v.f.s.frontend.BundleValidationUtil    : Checking if a development mode bundle build is needed
+2026-03-26T22:34:58.028-05:00  INFO 11744 --- [restartedMain] c.v.f.s.frontend.BundleValidationUtil    : A development mode bundle build is not needed
+2026-03-26T22:34:58.038-05:00  INFO 11744 --- [ForkJoinPool.commonPool-worker-23] c.v.f.s.frontend.TaskCopyFrontendFiles   : Copying frontend resources from jar files ...
+2026-03-26T22:34:58.080-05:00  INFO 11744 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-03-26T22:34:58.083-05:00  INFO 11744 --- [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-03-26T22:34:58.094-05:00  INFO 11744 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-03-26T22:34:58.095-05:00  INFO 11744 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-10 - Starting...
+2026-03-26T22:34:58.108-05:00  INFO 11744 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-10 - Added connection com.mysql.cj.jdbc.ConnectionImpl@58b3785c
+2026-03-26T22:34:58.108-05:00  INFO 11744 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-10 - Start completed.
+2026-03-26T22:34:58.109-05:00  WARN 11744 --- [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-03-26T22:34:58.123-05:00  INFO 11744 --- [ForkJoinPool.commonPool-worker-23] c.v.f.s.frontend.TaskCopyFrontendFiles   : Visited 22 resources. Took 84 ms.
+2026-03-26T22:34:58.222-05:00  INFO 11744 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-03-26T22:34:58.251-05:00  INFO 11744 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-03-26T22:34:58.350-05:00  WARN 11744 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-03-26T22:34:58.451-05:00  INFO 11744 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2026-03-26T22:35:01.175-05:00  INFO 11744 --- [restartedMain] c.vaadin.flow.spring.SpringInstantiator  : The number of beans implementing 'I18NProvider' is 0. Cannot use Spring beans for I18N, falling back to the default behavior
+2026-03-26T22:35:01.184-05:00  INFO 11744 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2026-03-26T22:35:01.187-05:00  INFO 11744 --- [restartedMain] com.example.Application                  : Started Application in 4.524 seconds (process running for 1124.305)
+2026-03-26T22:35:01.189-05:00  INFO 11744 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2026-03-26T22:35:01.194-05:00  INFO 11744 --- [restartedMain] c.v.b.d.DevModeHandlerManagerImpl        : Application running at http://localhost:8080/
+2026-03-26T22:35:01.200-05:00  INFO 11744 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-03-26T22:35:01.201-05:00  INFO 11744 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-03-26T22:35:01.202-05:00  INFO 11744 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
