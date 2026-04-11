@@ -21,7 +21,6 @@ public class Account {
     @Column(name = "Status", nullable = false)
     private TypeAcctStatus accountStatus;
 
-    // ✅ SINGLE COLUMN PHONE
     @Column(name = "contact_info")
     private String contactInfo;
 
@@ -34,7 +33,6 @@ public class Account {
     @Column(nullable = false)
     private LocalDate updatedAt;
 
-    // ✅ Default constructor
     public Account(){
         this.actId = AccountUtils.accountIdGenerator(11);
         this.currency = TypeCurrency.JMD;
@@ -44,13 +42,11 @@ public class Account {
         this.updatedAt = LocalDate.now();
     }
 
-    // ✅ Constructor using Telephone → convert to String
     public Account(Telephone phone){
         this();
         this.contactInfo = formatPhone(phone);
     }
 
-    // ✅ Utility method to format phone
     private String formatPhone(Telephone phone){
         if(phone == null) return null;
 
@@ -60,7 +56,6 @@ public class Account {
                phone.getSubscriberLine();
     }
 
-    // ✅ Getters
     public String getActId() { return actId; }
     public TypeAccount getAccountType() { return accountType; }
     public TypeAcctStatus getAccountStatus() { return accountStatus; }
@@ -69,12 +64,10 @@ public class Account {
     public LocalDate getCreatedAt() { return createdAt; }
     public LocalDate getUpdatedAt() { return updatedAt; }
 
-    // ✅ Setter
     public void setContactInfo(String contactInfo){
         this.contactInfo = contactInfo;
     }
 
-    // ✅ Business logic
     public boolean isActive() {
         return accountStatus == TypeAcctStatus.ACTIVE;
     }

@@ -977,3 +977,170 @@ Vaadin is running in DEVELOPMENT mode - do not use for production deployments.
 2026-04-11T13:46:34.880-05:00  INFO 16952 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
 2026-04-11T13:46:35.101-05:00  INFO 16952 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
 2026-04-11T13:46:35.112-05:00  INFO 16952 --- [restartedMain] c.v.b.d.DevModeHandlerManagerImpl        : Application running at http://localhost:8080/
+2026-04-11T13:56:50.873-05:00  INFO 16952 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (1 addition, 0 deletions, 0 modifications)
+2026-04-11T13:56:50.906-05:00  INFO 16952 --- [Thread-46] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-11T13:56:50.908-05:00  INFO 16952 --- [Thread-46] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Shutdown initiated...
+2026-04-11T13:56:50.921-05:00  INFO 16952 --- [Thread-46] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Shutdown completed.
+2026-04-11T13:56:51.026-05:00  INFO 16952 --- [restartedMain] com.example.Application                  : Starting Application using Java 22.0.2 with PID 16952 (C:\Users\Yochanan Gardner\Downloads\app\app\target\classes started by Yochanan Gardner in C:\Users\Yochanan Gardner\Downloads\app\app)
+2026-04-11T13:56:51.026-05:00 DEBUG 16952 --- [restartedMain] com.example.Application                  : Running with Spring Boot v3.3.3, Spring v6.1.12
+2026-04-11T13:56:51.026-05:00  INFO 16952 --- [restartedMain] com.example.Application                  : No active profile set, falling back to 1 default profile: "default"
+2026-04-11T13:56:51.174-05:00  INFO 16952 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-11T13:56:51.193-05:00  INFO 16952 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 19 ms. Found 8 JPA repository interfaces.
+2026-04-11T13:56:51.281-05:00  INFO 16952 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-04-11T13:56:51.281-05:00  INFO 16952 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-04-11T13:56:51.281-05:00  INFO 16952 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.28]
+2026-04-11T13:56:51.314-05:00  INFO 16952 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-04-11T13:56:51.315-05:00  INFO 16952 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 286 ms
+2026-04-11T13:56:51.352-05:00  INFO 16952 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing AtmosphereFramework
+2026-04-11T13:56:52.054-05:00  INFO 16952 --- [restartedMain] c.v.f.s.VaadinServletContextInitializer  : Search for subclasses and classes with annotations took 629 ms
+2026-04-11T13:56:52.059-05:00  INFO 16952 --- [restartedMain] c.v.b.d.startup.DevModeStartupListener   : Starting dev-mode updaters in C:\Users\Yochanan Gardner\Downloads\app\app folder.
+2026-04-11T13:56:52.070-05:00  INFO 16952 --- [restartedMain] c.v.f.s.f.s.FullDependenciesScanner      : Visited 118 classes. Took 9 ms.
+2026-04-11T13:56:52.070-05:00  INFO 16952 --- [restartedMain] c.v.f.s.frontend.BundleValidationUtil    : Checking if a development mode bundle build is needed
+2026-04-11T13:56:52.176-05:00  INFO 16952 --- [restartedMain] c.v.f.s.frontend.BundleValidationUtil    : A development mode bundle build is not needed
+2026-04-11T13:56:52.186-05:00  INFO 16952 --- [ForkJoinPool.commonPool-worker-7] c.v.f.s.frontend.TaskCopyFrontendFiles   : Copying frontend resources from jar files ...
+2026-04-11T13:56:52.237-05:00  INFO 16952 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-04-11T13:56:52.240-05:00  INFO 16952 --- [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-04-11T13:56:52.246-05:00  INFO 16952 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-11T13:56:52.248-05:00  INFO 16952 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Starting...
+2026-04-11T13:56:52.257-05:00  INFO 16952 --- [ForkJoinPool.commonPool-worker-7] c.v.f.s.frontend.TaskCopyFrontendFiles   : Visited 22 resources. Took 71 ms.
+2026-04-11T13:56:52.261-05:00  INFO 16952 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-5 - Added connection com.mysql.cj.jdbc.ConnectionImpl@38e1d7ec
+2026-04-11T13:56:52.261-05:00  INFO 16952 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Start completed.
+2026-04-11T13:56:52.262-05:00  WARN 16952 --- [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-04-11T13:56:52.353-05:00  INFO 16952 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-11T13:56:52.394-05:00  INFO 16952 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-11T13:56:52.527-05:00  WARN 16952 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-04-11T13:56:52.606-05:00  INFO 16952 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2026-04-11T13:56:55.331-05:00  INFO 16952 --- [restartedMain] c.vaadin.flow.spring.SpringInstantiator  : The number of beans implementing 'I18NProvider' is 0. Cannot use Spring beans for I18N, falling back to the default behavior
+2026-04-11T13:56:55.344-05:00  INFO 16952 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2026-04-11T13:56:55.347-05:00  INFO 16952 --- [restartedMain] com.example.Application                  : Started Application in 4.349 seconds (process running for 930.388)
+2026-04-11T13:56:55.368-05:00  INFO 16952 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-04-11T13:56:55.369-05:00  INFO 16952 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-04-11T13:56:55.370-05:00  INFO 16952 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2026-04-11T13:56:55.517-05:00  INFO 16952 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2026-04-11T13:56:55.521-05:00  INFO 16952 --- [restartedMain] c.v.b.d.DevModeHandlerManagerImpl        : Application running at http://localhost:8080/
+2026-04-11T13:57:52.645-05:00  INFO 16952 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2026-04-11T13:57:52.668-05:00  INFO 16952 --- [Thread-60] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-11T13:57:52.670-05:00  INFO 16952 --- [Thread-60] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Shutdown initiated...
+2026-04-11T13:57:52.681-05:00  INFO 16952 --- [Thread-60] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Shutdown completed.
+2026-04-11T13:57:52.793-05:00  INFO 16952 --- [restartedMain] com.example.Application                  : Starting Application using Java 22.0.2 with PID 16952 (C:\Users\Yochanan Gardner\Downloads\app\app\target\classes started by Yochanan Gardner in C:\Users\Yochanan Gardner\Downloads\app\app)
+2026-04-11T13:57:52.794-05:00 DEBUG 16952 --- [restartedMain] com.example.Application                  : Running with Spring Boot v3.3.3, Spring v6.1.12
+2026-04-11T13:57:52.794-05:00  INFO 16952 --- [restartedMain] com.example.Application                  : No active profile set, falling back to 1 default profile: "default"
+2026-04-11T13:57:52.960-05:00  INFO 16952 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-11T13:57:52.991-05:00  INFO 16952 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 30 ms. Found 8 JPA repository interfaces.
+2026-04-11T13:57:53.086-05:00  INFO 16952 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-04-11T13:57:53.087-05:00  INFO 16952 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-04-11T13:57:53.087-05:00  INFO 16952 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.28]
+2026-04-11T13:57:53.128-05:00  INFO 16952 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-04-11T13:57:53.128-05:00  INFO 16952 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 333 ms
+2026-04-11T13:57:53.179-05:00  INFO 16952 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing AtmosphereFramework
+2026-04-11T13:57:54.100-05:00  INFO 16952 --- [restartedMain] c.v.f.s.VaadinServletContextInitializer  : Search for subclasses and classes with annotations took 819 ms
+2026-04-11T13:57:54.109-05:00  INFO 16952 --- [restartedMain] c.v.b.d.startup.DevModeStartupListener   : Starting dev-mode updaters in C:\Users\Yochanan Gardner\Downloads\app\app folder.
+2026-04-11T13:57:54.122-05:00  INFO 16952 --- [restartedMain] c.v.f.s.f.s.FullDependenciesScanner      : Visited 118 classes. Took 11 ms.
+2026-04-11T13:57:54.122-05:00  INFO 16952 --- [restartedMain] c.v.f.s.frontend.BundleValidationUtil    : Checking if a development mode bundle build is needed
+2026-04-11T13:57:54.314-05:00  INFO 16952 --- [restartedMain] c.v.f.s.frontend.BundleValidationUtil    : A development mode bundle build is not needed
+2026-04-11T13:57:54.335-05:00  INFO 16952 --- [ForkJoinPool.commonPool-worker-15] c.v.f.s.frontend.TaskCopyFrontendFiles   : Copying frontend resources from jar files ...
+2026-04-11T13:57:54.413-05:00  INFO 16952 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-04-11T13:57:54.417-05:00  INFO 16952 --- [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-04-11T13:57:54.425-05:00  INFO 16952 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-11T13:57:54.426-05:00  INFO 16952 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-6 - Starting...
+2026-04-11T13:57:54.456-05:00  INFO 16952 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-6 - Added connection com.mysql.cj.jdbc.ConnectionImpl@225c698d
+2026-04-11T13:57:54.457-05:00  INFO 16952 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-6 - Start completed.
+2026-04-11T13:57:54.460-05:00  WARN 16952 --- [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-04-11T13:57:54.481-05:00  INFO 16952 --- [ForkJoinPool.commonPool-worker-15] c.v.f.s.frontend.TaskCopyFrontendFiles   : Visited 22 resources. Took 145 ms.
+2026-04-11T13:57:54.609-05:00  INFO 16952 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-11T13:57:54.676-05:00  INFO 16952 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-11T13:57:54.825-05:00  WARN 16952 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-04-11T13:57:54.920-05:00  INFO 16952 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2026-04-11T13:57:57.910-05:00  INFO 16952 --- [restartedMain] c.vaadin.flow.spring.SpringInstantiator  : The number of beans implementing 'I18NProvider' is 0. Cannot use Spring beans for I18N, falling back to the default behavior
+2026-04-11T13:57:57.920-05:00  INFO 16952 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2026-04-11T13:57:57.924-05:00  INFO 16952 --- [restartedMain] com.example.Application                  : Started Application in 5.153 seconds (process running for 992.966)
+2026-04-11T13:57:57.950-05:00  INFO 16952 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-04-11T13:57:57.951-05:00  INFO 16952 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-04-11T13:57:57.954-05:00  INFO 16952 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2026-04-11T13:57:58.196-05:00  INFO 16952 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2026-04-11T13:57:58.200-05:00  INFO 16952 --- [restartedMain] c.v.b.d.DevModeHandlerManagerImpl        : Application running at http://localhost:8080/
+2026-04-11T13:58:20.498-05:00  INFO 16952 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2026-04-11T13:58:20.513-05:00  INFO 16952 --- [Thread-74] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-11T13:58:20.514-05:00  INFO 16952 --- [Thread-74] com.zaxxer.hikari.HikariDataSource       : HikariPool-6 - Shutdown initiated...
+2026-04-11T13:58:20.520-05:00  INFO 16952 --- [Thread-74] com.zaxxer.hikari.HikariDataSource       : HikariPool-6 - Shutdown completed.
+2026-04-11T13:58:20.715-05:00  INFO 16952 --- [restartedMain] com.example.Application                  : Starting Application using Java 22.0.2 with PID 16952 (C:\Users\Yochanan Gardner\Downloads\app\app\target\classes started by Yochanan Gardner in C:\Users\Yochanan Gardner\Downloads\app\app)
+2026-04-11T13:58:20.716-05:00 DEBUG 16952 --- [restartedMain] com.example.Application                  : Running with Spring Boot v3.3.3, Spring v6.1.12
+2026-04-11T13:58:20.716-05:00  INFO 16952 --- [restartedMain] com.example.Application                  : No active profile set, falling back to 1 default profile: "default"
+2026-04-11T13:58:20.920-05:00  INFO 16952 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-11T13:58:20.943-05:00  INFO 16952 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 23 ms. Found 8 JPA repository interfaces.
+2026-04-11T13:58:21.041-05:00  INFO 16952 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-04-11T13:58:21.042-05:00  INFO 16952 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-04-11T13:58:21.042-05:00  INFO 16952 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.28]
+2026-04-11T13:58:21.079-05:00  INFO 16952 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-04-11T13:58:21.079-05:00  INFO 16952 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 360 ms
+2026-04-11T13:58:21.122-05:00  INFO 16952 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing AtmosphereFramework
+2026-04-11T13:58:21.954-05:00  INFO 16952 --- [restartedMain] c.v.f.s.VaadinServletContextInitializer  : Search for subclasses and classes with annotations took 733 ms
+2026-04-11T13:58:21.962-05:00  INFO 16952 --- [restartedMain] c.v.b.d.startup.DevModeStartupListener   : Starting dev-mode updaters in C:\Users\Yochanan Gardner\Downloads\app\app folder.
+2026-04-11T13:58:21.973-05:00  INFO 16952 --- [restartedMain] c.v.f.s.f.s.FullDependenciesScanner      : Visited 118 classes. Took 9 ms.
+2026-04-11T13:58:21.973-05:00  INFO 16952 --- [restartedMain] c.v.f.s.frontend.BundleValidationUtil    : Checking if a development mode bundle build is needed
+2026-04-11T13:58:22.108-05:00  INFO 16952 --- [restartedMain] c.v.f.s.frontend.BundleValidationUtil    : A development mode bundle build is not needed
+2026-04-11T13:58:22.116-05:00  INFO 16952 --- [ForkJoinPool.commonPool-worker-17] c.v.f.s.frontend.TaskCopyFrontendFiles   : Copying frontend resources from jar files ...
+2026-04-11T13:58:22.150-05:00  INFO 16952 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-04-11T13:58:22.153-05:00  INFO 16952 --- [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-04-11T13:58:22.163-05:00  INFO 16952 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-11T13:58:22.164-05:00  INFO 16952 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-7 - Starting...
+2026-04-11T13:58:22.182-05:00  INFO 16952 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-7 - Added connection com.mysql.cj.jdbc.ConnectionImpl@3d6a350b
+2026-04-11T13:58:22.182-05:00  INFO 16952 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-7 - Start completed.
+2026-04-11T13:58:22.183-05:00  WARN 16952 --- [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-04-11T13:58:22.188-05:00  INFO 16952 --- [ForkJoinPool.commonPool-worker-17] c.v.f.s.frontend.TaskCopyFrontendFiles   : Visited 22 resources. Took 72 ms.
+2026-04-11T13:58:22.346-05:00  INFO 16952 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-11T13:58:22.403-05:00  INFO 16952 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-11T13:58:22.692-05:00  WARN 16952 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-04-11T13:58:22.802-05:00  INFO 16952 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2026-04-11T13:58:25.692-05:00  INFO 16952 --- [restartedMain] c.vaadin.flow.spring.SpringInstantiator  : The number of beans implementing 'I18NProvider' is 0. Cannot use Spring beans for I18N, falling back to the default behavior
+2026-04-11T13:58:25.702-05:00  INFO 16952 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2026-04-11T13:58:25.708-05:00  INFO 16952 --- [restartedMain] com.example.Application                  : Started Application in 5.036 seconds (process running for 1020.75)
+2026-04-11T13:58:25.727-05:00  INFO 16952 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-04-11T13:58:25.728-05:00  INFO 16952 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-04-11T13:58:25.730-05:00  INFO 16952 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2026-04-11T13:58:25.892-05:00  INFO 16952 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2026-04-11T13:58:25.895-05:00  INFO 16952 --- [restartedMain] c.v.b.d.DevModeHandlerManagerImpl        : Application running at http://localhost:8080/
+2026-04-11T13:58:44.128-05:00  INFO 16952 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2026-04-11T13:58:44.143-05:00  INFO 16952 --- [Thread-87] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-11T13:58:44.144-05:00  INFO 16952 --- [Thread-87] com.zaxxer.hikari.HikariDataSource       : HikariPool-7 - Shutdown initiated...
+2026-04-11T13:58:44.150-05:00  INFO 16952 --- [Thread-87] com.zaxxer.hikari.HikariDataSource       : HikariPool-7 - Shutdown completed.
+2026-04-11T13:58:44.251-05:00  INFO 16952 --- [restartedMain] com.example.Application                  : Starting Application using Java 22.0.2 with PID 16952 (C:\Users\Yochanan Gardner\Downloads\app\app\target\classes started by Yochanan Gardner in C:\Users\Yochanan Gardner\Downloads\app\app)
+2026-04-11T13:58:44.251-05:00 DEBUG 16952 --- [restartedMain] com.example.Application                  : Running with Spring Boot v3.3.3, Spring v6.1.12
+2026-04-11T13:58:44.251-05:00  INFO 16952 --- [restartedMain] com.example.Application                  : No active profile set, falling back to 1 default profile: "default"
+2026-04-11T13:58:44.473-05:00  INFO 16952 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-11T13:58:44.493-05:00  INFO 16952 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 20 ms. Found 8 JPA repository interfaces.
+2026-04-11T13:58:44.593-05:00  INFO 16952 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-04-11T13:58:44.593-05:00  INFO 16952 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-04-11T13:58:44.594-05:00  INFO 16952 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.28]
+2026-04-11T13:58:44.635-05:00  INFO 16952 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-04-11T13:58:44.635-05:00  INFO 16952 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 382 ms
+2026-04-11T13:58:44.758-05:00  INFO 16952 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing AtmosphereFramework
+2026-04-11T13:58:45.486-05:00  INFO 16952 --- [restartedMain] c.v.f.s.VaadinServletContextInitializer  : Search for subclasses and classes with annotations took 639 ms
+2026-04-11T13:58:45.491-05:00  INFO 16952 --- [restartedMain] c.v.b.d.startup.DevModeStartupListener   : Starting dev-mode updaters in C:\Users\Yochanan Gardner\Downloads\app\app folder.
+2026-04-11T13:58:45.499-05:00  INFO 16952 --- [restartedMain] c.v.f.s.f.s.FullDependenciesScanner      : Visited 118 classes. Took 7 ms.
+2026-04-11T13:58:45.499-05:00  INFO 16952 --- [restartedMain] c.v.f.s.frontend.BundleValidationUtil    : Checking if a development mode bundle build is needed
+2026-04-11T13:58:45.600-05:00  INFO 16952 --- [restartedMain] c.v.f.s.frontend.BundleValidationUtil    : A development mode bundle build is not needed
+2026-04-11T13:58:45.610-05:00  INFO 16952 --- [ForkJoinPool.commonPool-worker-19] c.v.f.s.frontend.TaskCopyFrontendFiles   : Copying frontend resources from jar files ...
+2026-04-11T13:58:45.647-05:00  INFO 16952 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-04-11T13:58:45.651-05:00  INFO 16952 --- [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-04-11T13:58:45.659-05:00  INFO 16952 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-11T13:58:45.660-05:00  INFO 16952 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-8 - Starting...
+2026-04-11T13:58:45.672-05:00  INFO 16952 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-8 - Added connection com.mysql.cj.jdbc.ConnectionImpl@2d1940b4
+2026-04-11T13:58:45.673-05:00  INFO 16952 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-8 - Start completed.
+2026-04-11T13:58:45.674-05:00  WARN 16952 --- [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-04-11T13:58:45.684-05:00  INFO 16952 --- [ForkJoinPool.commonPool-worker-19] c.v.f.s.frontend.TaskCopyFrontendFiles   : Visited 22 resources. Took 74 ms.
+2026-04-11T13:58:45.809-05:00  INFO 16952 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-11T13:58:45.863-05:00  INFO 16952 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-11T13:58:46.049-05:00  WARN 16952 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-04-11T13:58:46.141-05:00  INFO 16952 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2026-04-11T13:58:48.917-05:00  INFO 16952 --- [restartedMain] c.vaadin.flow.spring.SpringInstantiator  : The number of beans implementing 'I18NProvider' is 0. Cannot use Spring beans for I18N, falling back to the default behavior
+2026-04-11T13:58:48.926-05:00  INFO 16952 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2026-04-11T13:58:48.929-05:00  INFO 16952 --- [restartedMain] com.example.Application                  : Started Application in 4.709 seconds (process running for 1043.971)
+2026-04-11T13:58:48.951-05:00  INFO 16952 --- [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-04-11T13:58:48.951-05:00  INFO 16952 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-04-11T13:58:48.952-05:00  INFO 16952 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2026-04-11T13:58:49.054-05:00  INFO 16952 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2026-04-11T13:58:49.061-05:00  INFO 16952 --- [restartedMain] c.v.b.d.DevModeHandlerManagerImpl        : Application running at http://localhost:8080/
+2026-04-11T14:20:39.358-05:00  INFO 16952 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-11T14:20:39.359-05:00  INFO 16952 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-8 - Shutdown initiated...
+2026-04-11T14:20:39.362-05:00  INFO 16952 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-8 - Shutdown completed.

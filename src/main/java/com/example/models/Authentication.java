@@ -152,65 +152,7 @@ public class Authentication {
 
     public void setUpdatedAt(LocalDate updatedAt) {
         this.updatedAt = updatedAt;
-    }
-
-    /* public void setUser(User user) {
-        this.userId = userId;
-        this.updatedAt = LocalDate.now();
-    }
-
-    public void setAccount(Account account) {
-        this.account = account;
-        this.updatedAt = LocalDate.now();
-    }
-
-    // Withers
-    public Authentication withId(Long id) {
-        this.id = id;
-        return this;
-    }
-
-    public Authentication withEmail(String email) {
-        this.email = email;
-        this.updatedAt = LocalDate.now();
-        return this;
-    }
-
-    public Authentication withPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
-        this.updatedAt = LocalDate.now();
-        return this;
-    }
-
-    public Authentication withActive(boolean isActive) {
-        this.isActive = isActive;
-        this.updatedAt = LocalDate.now();
-        return this;
-    }
-
-    public Authentication withCreatedAt(LocalDate createdAt) {
-        this.createdAt = createdAt;
-        return this;
-    }
-
-    public Authentication withUpdatedAt(LocalDate updatedAt) {
-        this.updatedAt = updatedAt;
-        return this;
-    }
-
-    public Authentication withUser(User user) {
-        this.user = user;
-        this.updatedAt = LocalDate.now();
-        return this;
-    }
-
-    public Authentication withAccount(Account account) {
-        this.account = account;
-        this.updatedAt = LocalDate.now();
-        return this;
-    }
- */
-    
+    }    
     
     @Override
     public boolean equals(Object o) {
