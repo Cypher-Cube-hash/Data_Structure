@@ -6,54 +6,50 @@ import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Input;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.UI;
+import com.example.repositories.AdminRepository;
 import com.example.repositories.AuthenticationRepository;
 import com.example.repositories.TemporaryPasswordRepository;
 import com.example.models.TemporaryPassword;
+import com.example.models.Admin;
 
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import com.example.models.Authentication;
 import com.example.utils.PassWordHasher;
 
 @Component
 public class SignInForm extends Div {
 
-    
-    
-    // Store references to the input fields
     private Input emailInput;
     private Input passwordInput;
     
-    // Repositories (you'll need to inject these via constructor)
+
+    private final AdminRepository adminRepository;
     private final AuthenticationRepository authRepository;
     private final TemporaryPasswordRepository tempPass;
 
-    public SignInForm(AuthenticationRepository authRepository, TemporaryPasswordRepository tempPass) {
+    public SignInForm(AdminRepository adminRepository, AuthenticationRepository authRepository, TemporaryPasswordRepository tempPass) {
+        this.adminRepository = adminRepository;
         this.authRepository = authRepository;
         this.tempPass = tempPass;
         
         addClassName("form-container");
         
-        // Welcome message
         Div welcomeDiv = new Div();
         welcomeDiv.addClassName("welcome-message");
         welcomeDiv.setText("Welcome Back!");
 
-        // Email field - store reference
         Div emailGroup = buildInputGroup("Email", "Enter your email", "text", true);
-        
-        // Password field - store reference  
+         
         Div passwordGroup = buildInputGroup("Password", "Enter your password", "password", true);
 
-        // Forgot password
         Div forgotPassword = new Div();
         forgotPassword.addClassName("forgot-password");
         forgotPassword.setText("Forgot password?");
         forgotPassword.addClickListener(e -> handleForgotPassword());
 
-        // Sign In button
         Button signInButton = new Button("Sign In");
         signInButton.addClassName("action-button");
         signInButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
@@ -76,7 +72,6 @@ public class SignInForm extends Div {
         input.addClassName("form-input");
         if (required) input.setRequiredIndicatorVisible(true);
         
-        // Store reference based on label
         if (label.equals("Email")) {
             this.emailInput = input;
         } else if (label.equals("Password")) {
@@ -104,17 +99,12 @@ public class SignInForm extends Div {
             TemporaryPassword temp_pass = null;
             if(tempEntity.isPresent()){temp_pass = tempEntity.get();}
 
-            
-
             Optional<Authentication> tempAuth = authRepository.findByEmail(email);
             Authentication temp_entity = null;
+        
             if(tempAuth.isPresent()){temp_entity = tempAuth.get();}
 
-            //The first section of the if statement checks wether ot not the entered pass and the temp matches
-            //if so it pushes the cus to create a new one
-
-            //The else section is the second option that would check another table password and matches the values and if o
-            //pushes them to another page. 
+           
             if (temp_pass != null && !temp_pass.isExpired() && temp_pass.getPass().equals(password)) {
                 getUI().ifPresent(ui -> ui.navigate("create-password"));
             } else {
@@ -122,17 +112,17 @@ public class SignInForm extends Div {
                     Notification.show("Invalid email or password.");
                     return;
                 }
+                String userId = temp_entity.getUser();
 
-                // ✅ Pass raw password directly — do NOT pre-hash it
-                if (PassWordHasher.verifyPassword(password, temp_entity.getPasswordHash())) {
-                    getUI().ifPresent(ui -> ui.navigate("product-page"));
-                } else {
-                    Notification.show("Invalid email or password.");
-                }
+                if (userId != null) {
+                    Optional<Admin> adminOpt = adminRepository.findByUser_UserId(userId);
+                    if (adminOpt.isPresent()) {
+                        getUI().ifPresent(ui -> ui.navigate("admin"));
+                    } else {
+                        getUI().ifPresent(ui -> ui.navigate("product-page"));
+                    }
+                }       
             }
-            
-
-
         } catch (Exception e) {
             Notification.show("Error: " + e.getMessage());
         }
@@ -141,6 +131,12 @@ public class SignInForm extends Div {
         
     }
     
+
+    
+
+
+
+
     private void handleForgotPassword() {
       
     }

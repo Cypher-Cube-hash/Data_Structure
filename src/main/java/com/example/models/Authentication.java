@@ -60,6 +60,16 @@ public class Authentication {
         this.updatedAt = LocalDate.now();
     }
 
+    //Has to create this just for admin
+    public Authentication(String email, String passwordHash, boolean isActive, String user) {
+        this.email = email;
+        this.passwordHash = passwordHash;
+        this.isActive = isActive;
+        this.userId = user;
+        this.createdAt = LocalDate.now();
+        this.updatedAt = LocalDate.now();
+    }
+
     public Authentication(Long id, String email, String passwordHash, boolean isActive, 
                           String user, String account, LocalDate createdAt, LocalDate updatedAt) {
         this.id = id;

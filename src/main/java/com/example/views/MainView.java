@@ -9,6 +9,7 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.example.services.RegistrationServices;
+import com.example.repositories.AdminRepository;
 import com.example.repositories.AuthenticationRepository;
 import com.example.repositories.TemporaryPasswordRepository;
 
@@ -20,13 +21,17 @@ public class MainView extends VerticalLayout {
     private Div registerTab;
     private Div rowTwoDiv;
     private final RegistrationServices registrationServices;
+    private final AdminRepository adminRepository; 
     private final AuthenticationRepository authRepository;
     private final TemporaryPasswordRepository tempPassRepository;
     
 
-    public MainView(RegistrationServices registrationServices, AuthenticationRepository authRepository,
-                    TemporaryPasswordRepository tempPassRepository) {
+    public MainView(RegistrationServices registrationServices,
+        AdminRepository adminRepository, 
+        AuthenticationRepository authRepository,
+        TemporaryPasswordRepository tempPassRepository) {
         this.registrationServices = registrationServices; 
+        this.adminRepository = adminRepository;
         this.authRepository = authRepository;
         this.tempPassRepository = tempPassRepository;
         addClassName("homePage");
@@ -95,7 +100,7 @@ public class MainView extends VerticalLayout {
         signInTab.addClassName("active-tab");
         registerTab.removeClassName("active-tab");
         rowTwoDiv.removeAll();
-        rowTwoDiv.add(new SignInForm(authRepository, tempPassRepository));  
+        rowTwoDiv.add(new SignInForm(adminRepository, authRepository, tempPassRepository));  
     }
 
     private void showRegister() {

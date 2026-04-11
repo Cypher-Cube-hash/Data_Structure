@@ -6,6 +6,7 @@ import java.util.Objects;
 import org.springframework.cglib.core.Local;
 
 import com.example.enums.TypeGender;
+import com.example.utils.AdminUtils;
 
 import java.time.LocalDate;
 
@@ -37,6 +38,7 @@ public class Admin {
     }
 
     public Admin(User user, TypeGender gender){
+        this.adminId = AdminUtils.adminIdGenerator(10);
         this.user = user;
         this.gender = gender;
         this.createdAt = LocalDate.now();
