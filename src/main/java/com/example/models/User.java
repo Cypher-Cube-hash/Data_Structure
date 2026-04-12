@@ -23,7 +23,7 @@ public class User {
 
 
     @Column(name="address")
-    private String address;
+    private Address address;
 
     @Column(nullable = false)
     private LocalDate createdAt;
@@ -33,11 +33,12 @@ public class User {
 
 
     public User(){
+        this.userId = UserUtils.userIdGenerator(10);
         this.createdAt = LocalDate.now();
         this.updatedAt = LocalDate.now();
     }
 
-    public User(String first, String last, String email, String address){
+    public User(String first, String last, String email, Address address){
         this.userId = UserUtils.userIdGenerator(10);
         this.firstName = first;
         this.lastName = last;
@@ -48,26 +49,24 @@ public class User {
     }
 
     // ✅ Full constructor
-    public User(String userId, String first, String last, String email, String address,
+    public User(String userId, String first, String last, String email, Address address,
                 LocalDate createdAt, LocalDate updatedAt) {
-        this.userId = userId;
+        this.userId = UserUtils.userIdGenerator(10);
         this.firstName = first;
         this.lastName = last;
         this.email = email;
         this.address = address;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
+        this.createdAt = LocalDate.now();
+        this.updatedAt = LocalDate.now();
     }
 
     // ✅ Copy constructor
     public User(User user) {
-        this.userId = user.userId;
+        this();
         this.firstName = user.firstName;
         this.lastName = user.lastName;
         this.email = user.email;
         this.address = user.address;
-        this.createdAt = user.createdAt;
-        this.updatedAt = user.updatedAt;
     }
 
     // ✅ Getters
@@ -76,7 +75,7 @@ public class User {
     public String getLastName() { return lastName; }
     public String getFullName() { return firstName + " " + lastName; }
     public String getEmail() { return email; }
-    public String getAddress() { return address; }
+    public Address getAddress() { return address; }
     public LocalDate getCreatedAt() { return createdAt; }
     public LocalDate getUpdatedAt() { return updatedAt; }
 
@@ -84,7 +83,7 @@ public class User {
     public void setFirstName(String firstName) { this.firstName = firstName; }
     public void setLastName(String lastName) { this.lastName = lastName; }
     public void setEmail(String email) { this.email = email; }
-    public void setAddress(String address) { this.address = address; }
+    public void setAddress(Address address) { this.address = address; }
     public void setUpdatedAt(LocalDate updatedAt) { this.updatedAt = updatedAt; }
 
     // ✅ Wither

@@ -20,7 +20,7 @@ properly */
 public class Product {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    // @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int productId;
 
     @Column(unique = true, nullable = false)

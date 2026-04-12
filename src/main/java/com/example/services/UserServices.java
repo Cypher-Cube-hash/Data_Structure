@@ -2,15 +2,17 @@ package com.example.services;
 
 import com.example.models.User;
 import com.example.models.Address;
-import com.example.repositories.UserRepository;
+// import com.example.repositories.UserRepository;
+import com.example.repositories.interfaces.IUserRepository;
+
 import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
 public class UserServices {
-    private final UserRepository repo;
+    private final IUserRepository repo;
 
-    public UserServices(UserRepository repo){
+    public UserServices(IUserRepository repo){
         this.repo = repo;
     }
 
@@ -24,14 +26,22 @@ public class UserServices {
             throw new IllegalArgumentException("Email already exists");
         }
 
-        String fullAddress = address.getLine1() + ", " +
-                         address.getLine2() + ", " +
-                         address.getCity() + ", " +
-                         address.getState() + ", " +
-                         address.getCountry();
+        Address fullAddress = new Address(
+            address.getLine1(),
+            address.getLine2(),
+            address.getCity(),
+            address.getState(),
+            address.getCountry()
+        );
 
-    User user = new User(first, last, email, fullAddress);
-    return repo.save(user);
+        User user = new User(first, last, email, fullAddress);
+        repo.save(user);
+        return user;
+    }
+
+    public User registerUser(User user){
+        repo.save(user);
+        return user;
     }
 
 

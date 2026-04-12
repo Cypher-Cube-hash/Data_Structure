@@ -52,11 +52,13 @@ public class RegistrationServices {
 
         String otp = OTPUtil.generateOTP();
 
-        String fullAddress = address.getLine1() + ", " +
-                     address.getLine2() + ", " +
-                     address.getCity() + ", " +
-                     address.getState() + ", " +
-                     address.getCountry();
+        Address fullAddress = new Address(
+            address.getLine1(),
+            address.getLine2(),
+            address.getCity(),
+            address.getState(),
+            address.getCountry()
+        );
 
         User newUser = new User(firstName, lastName, email, fullAddress);
         //This is for the user Creation.

@@ -3,7 +3,7 @@ package com.example.enums;
 public enum TypeProduct {
         FOOD,
         CLOTHING,
-        ELECTRONIC,
+        ELECTRONICS,
         AUTOMOTIVE,
         HOME,
         SPORTS,
