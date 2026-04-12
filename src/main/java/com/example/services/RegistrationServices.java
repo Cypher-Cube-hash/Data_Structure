@@ -30,9 +30,6 @@ public class RegistrationServices {
     private final AccountRepository account;
     private final TemporaryPasswordRepository tempPassword;
 
-
-
-
     public RegistrationServices(RegistrationRepository repo, UserRepository user, AccountRepository account, TemporaryPasswordRepository tempPassword){
         this.repo = repo;
         this.user = user;
@@ -50,7 +47,6 @@ public class RegistrationServices {
         return customList;
     }
 
-   
     //This function is for adding registered Users
     @Transactional
     public Registration addRegisteredUser(String firstName, String lastName, String email, Address address, Telephone telephone){
