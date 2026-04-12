@@ -9,6 +9,8 @@ import com.example.models.Telephone;
 import com.example.models.TemporaryPassword;
 import com.example.models.User;
 import com.example.models.Registration;
+import com.example.datastructures.registration.RegistrationLinkedList;
+import com.example.datastructures.registration.RegistrationList;
 import com.example.repositories.UserRepository;
 import com.example.utils.Emailer;
 import com.example.repositories.AccountRepository;
@@ -18,7 +20,6 @@ import com.example.services.TemporaryPasswordService;
 import com.example.datastructures.registration.RegistrationLinkedList;
 
 
-import java.util.List;
 import com.example.utils.Emailer;
 import com.example.utils.OTPUtil;
 
@@ -39,8 +40,14 @@ public class RegistrationServices {
         this.tempPassword = tempPassword;
     }
 
-    public RegistrationLinkedList<Registration> getAllUsers(){
-        return repo.findAll();
+    public RegistrationList getAllUsers() {
+
+        RegistrationList customList = new RegistrationList();
+
+        for (Registration reg : repo.findAll()) {
+            customList.add(reg);
+        }
+        return customList;
     }
 
    

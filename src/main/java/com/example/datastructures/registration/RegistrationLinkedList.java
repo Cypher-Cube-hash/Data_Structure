@@ -1,6 +1,8 @@
 package com.example.datastructures.registration;
 
 import com.example.models.Registration;
+import com.example.datastructures.registration.RegistrationList;
+
 
 public class RegistrationLinkedList {
 
