@@ -8,12 +8,14 @@ import com.example.models.Account;
 import com.example.models.Telephone;
 import com.example.models.TemporaryPassword;
 import com.example.models.User;
+import com.example.models.Registration;
 import com.example.repositories.UserRepository;
 import com.example.utils.Emailer;
 import com.example.repositories.AccountRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.example.services.TemporaryPasswordService;
+import com.example.datastructures.registration.RegistrationLinkedList;
 
 
 import java.util.List;
@@ -37,7 +39,7 @@ public class RegistrationServices {
         this.tempPassword = tempPassword;
     }
 
-    public List<Registration> getAllUsers(){
+    public RegistrationLinkedList<Registration> getAllUsers(){
         return repo.findAll();
     }
 
@@ -59,12 +61,9 @@ public class RegistrationServices {
                      address.getCountry();
 
         User newUser = new User(firstName, lastName, email, fullAddress);
-        //This is for the user Creation.
         user.save(newUser);
-        //This is for the Account Creation.
         Account newAccount = new Account(telephone);
         account.save(newAccount);
-        //This is for the general creation of the registered user
         Registration registration = new Registration(newUser, newAccount, telephone);
         repo.save(registration);
 

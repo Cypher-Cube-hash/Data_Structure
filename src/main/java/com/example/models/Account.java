@@ -56,13 +56,27 @@ public class Account {
                phone.getSubscriberLine();
     }
 
-    public String getActId() { return actId; }
-    public TypeAccount getAccountType() { return accountType; }
-    public TypeAcctStatus getAccountStatus() { return accountStatus; }
-    public String getContactInfo() { return contactInfo; }
-    public TypeCurrency getCurrency() { return currency; }
-    public LocalDate getCreatedAt() { return createdAt; }
-    public LocalDate getUpdatedAt() { return updatedAt; }
+    public String getActId(){
+        return actId;
+    }
+    public TypeAccount getAccountType(){
+        return accountType;
+    }
+    public TypeAcctStatus getAccountStatus(){
+        return accountStatus;
+    }
+    public String getContactInfo(){
+        return contactInfo;
+    }
+    public TypeCurrency getCurrency(){
+        return currency;
+    }
+    public LocalDate getCreatedAt(){
+        return createdAt;
+    }
+    public LocalDate getUpdatedAt(){
+        return updatedAt;
+    }
 
     public void setContactInfo(String contactInfo){
         this.contactInfo = contactInfo;

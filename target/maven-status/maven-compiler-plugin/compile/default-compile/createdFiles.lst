@@ -43,6 +43,7 @@ com\example\models\Customer.class
 com\example\repositories\ProductRepository.class
 com\example\models\Admin.class
 com\example\utils\TelephoneConverter.class
+com\example\datastructures\cart\CartSession$1.class
 com\example\models\User.class
 com\example\utils\UserUtils.class
 com\example\views\components\header\HeaderOptionsView.class

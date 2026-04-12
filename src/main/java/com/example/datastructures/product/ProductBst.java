@@ -115,7 +115,7 @@ public class ProductBst {
         result.add(node.product);
         inOrderRec(node.right, result);
     }
-
+    
     public boolean isEmpty() {
         return root == null;
     }

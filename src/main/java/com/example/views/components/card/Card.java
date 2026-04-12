@@ -1,65 +1,157 @@
 package com.example.views.components.card;
 
+import com.example.datastructures.cart.CartSession;
+import com.example.models.Product;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.server.StreamResource;
+
+import java.io.ByteArrayInputStream;
 
 public class Card extends VerticalLayout {
 
-    public Card() {
-        // Main Container Styling
+    /**
+     * @param product      the product to display
+     * @param cartSession  the session-scoped cart (LinkedList + undo stack)
+     * @param onAddToCart  callback so the parent page can refresh the cart badge
+     */
+
+    
+    public Card(Product product, CartSession cartSession, Runnable onAddToCart) {
         addClassName("product-card");
         setPadding(false);
         setSpacing(false);
-        setWidth("350px");
+        setWidth("220px");
 
-        // Top Image Section
+        // ── Image ─────────────────────────────────────────────────────────
         Div imageContainer = new Div();
         imageContainer.addClassName("image-container");
-        Image appleImage = new Image("images/apple.png", "Green Apple");
-        imageContainer.add(appleImage);
 
-        // Content Section
-        VerticalLayout detailsContent = new VerticalLayout();
-        detailsContent.addClassName("details-content");
+        if (product.getProductImage() != null && product.getProductImage().length > 0) {
+            StreamResource resource = new StreamResource(
+                product.getSkuNumber() + ".jpg",
+                () -> new ByteArrayInputStream(product.getProductImage())
+            );
+            Image img = new Image(resource, product.getProductName());
+            img.setWidth("100%");
+            img.getStyle().set("object-fit", "cover").set("height", "140px");
+            imageContainer.add(img);
+        } else {
+            Div placeholder = new Div();
+            placeholder.getStyle()
+                .set("width", "100%")
+                .set("height", "140px")
+                .set("background", "linear-gradient(135deg,#1a2e1f,#0f1f14)")
+                .set("display", "flex")
+                .set("align-items", "center")
+                .set("justify-content", "center")
+                .set("color", "rgba(255,255,255,0.2)")
+                .set("font-size", "12px");
+            placeholder.setText("No image");
+            imageContainer.add(placeholder);
+        }
 
-        // Header: Name and Cart Icon
-        HorizontalLayout header = new HorizontalLayout();
-        header.setWidthFull();
-        header.setJustifyContentMode(JustifyContentMode.BETWEEN);
-        
-        Span title = new Span("Apple");
+        // ── Details ───────────────────────────────────────────────────────
+        VerticalLayout details = new VerticalLayout();
+        details.addClassName("details-content");
+        details.setPadding(false);
+        details.setSpacing(false);
+        details.getStyle().set("gap", "6px");
+
+        // Name + Cart icon
+        HorizontalLayout nameRow = new HorizontalLayout();
+        nameRow.setWidthFull();
+        nameRow.setJustifyContentMode(JustifyContentMode.BETWEEN);
+        nameRow.setAlignItems(Alignment.CENTER);
+
+        Span title = new Span(product.getProductName());
         title.addClassName("product-title");
-        
+        title.getStyle().set("font-size", "0.95rem");
+
+        // ── Cart icon: adds to CartLinkedList + pushes to undo stack ──────
         Icon cartIcon = VaadinIcon.CART_O.create();
         cartIcon.addClassName("cart-icon");
-        
-        header.add(title, cartIcon);
+        cartIcon.getStyle().set("cursor", "pointer");
+        cartIcon.addClickListener(e -> {
+            cartSession.addToCart(product);   // LinkedList.add() + undoStack.push()
+            onAddToCart.run();                // refresh badge in header
+            showToast("\"" + product.getProductName() + "\" added. Undo available.", false);
+        });
 
-        // Stock Info
-        Span stock = new Span("In Stock: 25");
+        nameRow.add(title, cartIcon);
+
+        // Type badge
+        Span typeBadge = new Span(product.getProductType().name());
+        typeBadge.getStyle()
+            .set("font-size", "10px")
+            .set("background", "rgba(16,185,129,0.12)")
+            .set("color", "#10b981")
+            .set("border-radius", "4px")
+            .set("padding", "2px 7px")
+            .set("font-weight", "600")
+            .set("text-transform", "uppercase")
+            .set("letter-spacing", "0.04em");
+
+        // Stock
+        boolean inStock = product.getProductQuantity() > 0;
+        Span stock = new Span(inStock
+            ? "In Stock: " + product.getProductQuantity()
+            : "Out of Stock");
         stock.addClassName("stock-info");
+        stock.getStyle()
+            .set("font-size", "0.82rem")
+            .set("color", inStock ? "#10b981" : "#ef4444");
 
-        // Footer: Price and Buy Button
-        HorizontalLayout footer = new HorizontalLayout();
-        footer.setWidthFull();
-        footer.setJustifyContentMode(JustifyContentMode.BETWEEN);
-        footer.setAlignItems(Alignment.CENTER);
+        // ── Price display (NEW) ────────────────────────────────────────────
+        Span priceDisplay = new Span(String.format("$%.2f", product.getProductPrice()));
+        priceDisplay.getStyle()
+            .set("font-size", "1.1rem")
+            .set("font-weight", "600")
+            .set("color", "#10b981")
+            .set("margin-top", "4px");
 
-        Span price = new Span("$5.00");
-        price.addClassName("price-tag");
+        details.add(nameRow, typeBadge, stock, priceDisplay);
 
-        Button buyButton = new Button("BUY");
+        // Optional description
+        if (product.getProductDesc() != null && !product.getProductDesc().isBlank()) {
+            Span desc = new Span(product.getProductDesc());
+            desc.getStyle()
+                .set("font-size", "11px")
+                .set("color", "#94a3b8")
+                .set("white-space", "nowrap")
+                .set("overflow", "hidden")
+                .set("text-overflow", "ellipsis")
+                .set("display", "block");
+            details.add(desc);
+        }
+
+        // Buy button (also adds to cart)
+        Button buyButton = new Button("ADD TO CART");
         buyButton.addClassName("buy-button");
+        buyButton.setWidthFull();
+        buyButton.setEnabled(inStock);
+        buyButton.addClickListener(e -> {
+            cartSession.addToCart(product);
+            onAddToCart.run();
+            showToast("\"" + product.getProductName() + "\" added to cart.", false);
+        });
 
-        footer.add(price, buyButton);
+        details.add(buyButton);
+        add(imageContainer, details);
+    }
 
-        detailsContent.add(header, stock, footer);
-        add(imageContainer, detailsContent);
+    private void showToast(String message, boolean isError) {
+        Notification n = Notification.show(message, 2500, Notification.Position.BOTTOM_CENTER);
+        n.addThemeVariants(isError
+            ? NotificationVariant.LUMO_ERROR
+            : NotificationVariant.LUMO_SUCCESS);
     }
 }

@@ -96,11 +96,6 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <optional>true</optional>
-        </dependency>
 
 
         <!-- Dotenv -->
@@ -116,6 +111,12 @@
             <artifactId>simple-java-mail</artifactId>
             <version>8.10.1</version>
         </dependency>
+
+
+        <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-devtools</artifactId>
+    </dependency>
 
         
         

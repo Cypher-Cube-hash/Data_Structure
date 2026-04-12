@@ -12,7 +12,7 @@ public class UserNode {
     }
 
     //Accessors
-    public User getuser(){
+    public User getUser(){
         return this.user_entity;
     }
     public UserNode getUserNext(){

@@ -6,7 +6,6 @@ public class ProductList {
     private Product[] product_values;
     private int size;
 
-
     public ProductList() {
         product_values = new Product[10];
         size = 0;

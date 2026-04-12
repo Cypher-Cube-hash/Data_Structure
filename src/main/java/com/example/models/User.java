@@ -68,7 +68,6 @@ public class User {
         this.updatedAt = user.updatedAt;
     }
 
-
     public String getUserId() { return userId; }
     public String getFirstName() { return firstName; }
     public String getLastName() { return lastName; }
@@ -78,14 +77,12 @@ public class User {
     public LocalDate getCreatedAt() { return createdAt; }
     public LocalDate getUpdatedAt() { return updatedAt; }
 
-    
     public void setFirstName(String firstName) { this.firstName = firstName; }
     public void setLastName(String lastName) { this.lastName = lastName; }
     public void setEmail(String email) { this.email = email; }
     public void setAddress(String address) { this.address = address; }
     public void setUpdatedAt(LocalDate updatedAt) { this.updatedAt = updatedAt; }
 
-    
     public User withFirstName(String first){
         return new User(
             this.userId,

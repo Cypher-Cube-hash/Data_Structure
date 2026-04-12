@@ -25,6 +25,4 @@ public class ProductNode {
     public void setProductNext(ProductNode next) { 
         this.productNext = next; 
     }
-
-    
 }

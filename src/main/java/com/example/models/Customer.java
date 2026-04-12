@@ -104,10 +104,6 @@ public class Customer {
         return user != null ? user.getUserId() : null;
     }
 
-    /* public Address getUserAddress() {
-        return user != null ? user.getAddress() : null;
-    } */
-
     // ============ SETTERS ============
     
     public void setCustomerId(String customerId) {
@@ -163,8 +159,6 @@ public class Customer {
             LocalDate.now() 
         );
     }
-
-    
     public Customer withUpdatedAt(LocalDate newUpdatedAt) {
         return new Customer(
             this.customerId,

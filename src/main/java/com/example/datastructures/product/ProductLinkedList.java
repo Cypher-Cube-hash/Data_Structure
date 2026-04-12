@@ -1,7 +1,5 @@
 package com.example.datastructures.product;
 
-import java.util.ArrayList;
-
 import com.example.models.Product;
 public class ProductLinkedList {
     private ProductNode head;

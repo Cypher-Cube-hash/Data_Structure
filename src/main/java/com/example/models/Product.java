@@ -33,6 +33,9 @@ public class Product {
     @Column(name = "product_image", columnDefinition = "LONGBLOB")
     private byte[] productImage;
 
+    @Column(name = "product_price", nullable = false)
+    private float productPrice;
+
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private TypeProduct productType;
@@ -56,12 +59,13 @@ public class Product {
 
 
 
-    public Product(String productName, TypeProduct productType, int productQuantity, String productDesc, byte[] imageByte) {
+    public Product(String productName, TypeProduct productType, int productQuantity, String productDesc, byte[] imageByte, float price) {
         this.skuNumber = ProductUtils.skuNumberGenerator(productName);
         this.productName = productName;
         this.productImage = imageByte;
         this.productType = productType;
         this.productQuantity = productQuantity;
+        this.productPrice = price;
         this.productDesc = productDesc;
         this.createdAt = LocalDate.now();
         this.updatedAt = LocalDate.now();
@@ -72,6 +76,7 @@ public class Product {
         this.skuNumber = product.skuNumber;
         this.productName = product.productName;
         this.productImage = product.productImage;
+        this.productPrice = product.productPrice;
         this.productType = product.productType;
         this.productQuantity = product.productQuantity;
         this.productDesc = product.productDesc;
@@ -85,6 +90,7 @@ public class Product {
     public String getSkuNumber() { return skuNumber; }
     public String getProductName() { return productName; }
     public byte[] getProductImage() { return productImage; }
+    public float getProductPrice(){return this.productPrice;}
     public TypeProduct getProductType() { return productType; }
     public int getProductQuantity() { return productQuantity; }
     public String getProductDesc() { return productDesc; }
@@ -95,6 +101,7 @@ public class Product {
     public void setProductName(String productName) { this.productName = productName; }
     public void setProductType(TypeProduct productType) { this.productType = productType; }
     public void setProductImage(byte[] productImage) { this.productImage = productImage; }
+    public void setProductPrice(float price){ this.productPrice = price;}
     public void setProductQuantity(int productQuantity) { this.productQuantity = productQuantity; }
     public void setProductDesc(String productDesc) { this.productDesc = productDesc; }
     public void setUpdatedAt(LocalDate updatedAt) { this.updatedAt = updatedAt; }
@@ -143,10 +150,6 @@ public class Product {
         newProduct.updatedAt = updatedAt;
         return newProduct;
     }
-
-
-
-
 
     @Override
     public String toString() {

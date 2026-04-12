@@ -34,8 +34,6 @@ public class TemporaryPassword {
         this.createdAt = LocalDate.now();
         this.updatedAt = LocalDate.now();
     }
-
-
     public int getId() {
         return id;
     }

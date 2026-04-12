@@ -68,11 +68,6 @@ public class Registration {
         this.createAt = registry.createAt;
         this.updatedAt = registry.updatedAt;
     }
-
-
-
-
-
     public String getRegistrationId() {
         return registrationId;
     }

@@ -1,9 +1,6 @@
 package com.example.models;
 
 import jakarta.persistence.*;
-import java.util.Objects;
-
-import org.springframework.cglib.core.Local;
 
 import com.example.enums.TypeGender;
 import com.example.utils.AdminUtils;
@@ -52,20 +49,40 @@ public class Admin {
         this.updatedAt = admin.updatedAt;
     }
 
-    public String getAdminId() { return adminId; }
-    public void setAdminId(String adminId) { this.adminId = adminId; }
+    public String getAdminId(){
+        return adminId;
+    }
+    public void setAdminId(String adminId){
+        this.adminId = adminId;
+    }
     
-    public User getUser() { return user; }
-    public void setUser(User user) { this.user = user; }
+    public User getUser(){
+        return user;
+    }
+    public void setUser(User user){
+        this.user = user;
+    }
     
-    public TypeGender getGender() { return gender; }
-    public void setGender(TypeGender gender) { this.gender = gender; }
+    public TypeGender getGender(){
+        return gender;
+    }
+    public void setGender(TypeGender gender){
+        this.gender = gender;
+    }
     
-    public LocalDate getCreatedAt() { return createdAt; }
-    public void setCreatedAt(LocalDate createdAt) { this.createdAt = createdAt; }
+    public LocalDate getCreatedAt(){
+        return createdAt;
+    }
+    public void setCreatedAt(LocalDate createdAt){
+        this.createdAt = createdAt;
+    }
     
-    public LocalDate getUpdatedAt() { return updatedAt; }
-    public void setUpdatedAt(LocalDate updatedAt) { this.updatedAt = updatedAt; }
+    public LocalDate getUpdatedAt(){
+        return updatedAt;
+    }
+    public void setUpdatedAt(LocalDate updatedAt){
+        this.updatedAt = updatedAt;
+    }
     
 
 

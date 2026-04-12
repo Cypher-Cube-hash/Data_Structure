@@ -51,53 +51,16 @@ public class Telephone {
         this.countryCode = countryCode;
     }
     public void setAreaCode(String areaCode){
-        /* if(areaCode == null){
-            throw new IllegalArgumentException(
-                    new ErrorMessage(ErrorMessage.ErrCode.NULL_VALUE);
-            );
-        }
-        if(areaCode.length() != 3){
-            throw new IllegalArgumentException(
-                    new ErrorMessage(ErrorMessage.ErrCode.INVALID_LENGTH);
-            );
-        } */
         this.areaCode = areaCode;
     }
     public void setExchangeCode(String exchangeCode){
-        /* if(exchangeCode == null){
-            throw new IllegalArgumentException(
-                    new ErrorMessage(ErrorMessage.ErrCode.NULL_VALUE);
-            );
-        }
-        if(exchangeCode.length() != 3){
-            throw new IllegalArgumentException(
-                    new ErrorMessage(ErrorMessage.ErrCode.INVALID_LENGTH);
-            );
-        } */
         this.exchangeCode = exchangeCode;
     }
     public void setSubscriberLine(String subscriberLine){
-        /* if(exchangeCode == null){
-            throw new IllegalArgumentException(
-                    new ErrorMessage(ErrorMessage.ErrCode.NULL_VALUE).toString();
-            );
-        }
-        if(exchangeCode.length() != 4){
-            throw new IllegalArgumentException(
-                    new ErrorMessage(ErrorMessage.ErrCode.INVALID_LENGTH).toString();
-            );
-        } */
         this.subscriberLine = subscriberLine;
     }
 
     public String getNumber(){
         return String.format("%s %s-%s-%s", getCountryCode(), getAreaCode(), getExchangeCode(), getSubscriberLine());
     }
-
-
-
-
-
-
-
 }

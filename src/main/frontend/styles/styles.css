@@ -41,24 +41,6 @@
     filter: blur(90px);
     animation: lavaMove 30s ease-in-out infinite alternate;
 }
-/* AI asisted us here in acheiving the animation effect on the front page */
-@keyframes lavaMove {
-    0% {
-        transform: translate(-10%, -10%) scale(1);
-    }
-    25% {
-        transform: translate(10%, -5%) scale(1.2);
-    }
-    50% {
-        transform: translate(0%, 10%) scale(1.1);
-    }
-    75% {
-        transform: translate(-5%, 5%) scale(1.25);
-    }
-    100% {
-        transform: translate(10%, -10%) scale(1.15);
-    }
-}
 
 .innerDivMainPage {
     position: absolute;
@@ -836,15 +818,27 @@
 
 
 
-.productPage{
+/* .productPage{
     position: relative;
     height: 100svh;
     width: 100%;
     display: flex;
     flex-wrap: wrap;
     align-content: flex-start;
-}
+} */
 
+.productPage {
+    position: relative;
+    height: 100svh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background: #000000;
+    padding: 0.5rem;
+    gap: 0.5rem;
+    overflow: hidden;
+    padding: 0.3rem;
+}
 
 
 
@@ -1038,43 +1032,39 @@
     justify-content: space-between;
 }
 
-/* HEADER */
+/* ---------- HEADER START ---------- */
 .header {
     height: 10%;
     width: 100%;
     padding: 0 1.2rem;
-
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-bottom: 1px solid black;
-}
+    background-color: #ffffff;
+    border-radius: 10px;
 
-/* LOGO */
+}
 .header_icon_container {
     display: flex;
     align-items: center;
     gap: 0.5rem;
 }
-
 .header_icon_container img {
     width: 28px;
     height: 28px;
 }
-
 .header_icon_container h4 {
     font-weight: 500;
     font-size: 1rem;
 }
-
-/* SEARCH */
 .header_search_container {
     width: 43%;
     padding: 0.4rem;
     border-radius: 12px;
 }
+/* ---------- HEADER END ---------- */
 
-/* SEARCH BOX */
+/* ------------SEARCH BOX START --------------------*/
 .search_box {
     background: rgba(255, 0, 0, 0.2);
     border-radius: 8px;
@@ -1104,42 +1094,7 @@
 #searchInputBox{
     color: #000000;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/* ------------SEARCH BOX END --------------------*/
 
 
 
@@ -1224,12 +1179,15 @@ button:active {
     font-size: 0.75rem;
 }
 
+
+
+
 /* RIGHT SECTION */
 .header_option_section {
     width: 25%;
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    justify-content: flex-end;
     gap: 0.6rem;
 
     padding: 0.4rem;
@@ -1290,16 +1248,20 @@ button:active {
 }
 
 
+
+
+
+
 /* card section */
 
 
 
 .product-card {
-    background-color: #000000;
+    background-color: #ffffff;
     border-radius: 10px;
     overflow: hidden;
     color: white;
-    flex: 0 0 200px;
+    flex: 0 0 300px;
     padding: 12px;
     box-shadow: 0 10px 20px rgba(0,0,0,0.3);
 }
@@ -1311,6 +1273,7 @@ button:active {
     justify-content: center;
     align-items: center;
     padding: 2px;
+    
 }
 
 .image-container img {
@@ -1325,16 +1288,17 @@ button:active {
 .product-title {
     font-size: 1.5rem;
     font-weight: 500;
+    color: #000000;
 }
 
 .cart-icon {
-    color: white;
+    color: rgb(0, 0, 0);
     width: 24px;
     height: 24px;
 }
 
 .stock-info {
-    color: #bbbbbb;
+    color: #000000;
     font-size: 1.1rem;
     margin-top: -10px;
 }
@@ -1342,11 +1306,12 @@ button:active {
 .price-tag {
     font-size: 1.6rem;
     font-weight: 400;
+    color: #000000;
 }
 
 .buy-button {
     background-color: #55FF22 !important; /* Neon Green */
-    color: white !important;
+    color: rgb(0, 0, 0) !important;
     font-weight: bold !important;
     border-radius: 12px !important;
     padding: 25px 45px !important;
@@ -1360,12 +1325,10 @@ button:active {
     transform: scale(0.95);
 }
 
-
 .productDisplay{
     position: relative;
     height: 90%;
     width: 100%;
-    background-color: #a13e3e;
     padding: 0.34rem;
 }
 
@@ -1373,34 +1336,232 @@ button:active {
 
 
 
-/* Admin Dashboard section */
-.adminDashboard{
+
+
+
+
+
+
+.admin-dashboard {
     position: relative;
     height: 100svh;
     width: 100%;
-    background-color: #c0392b;
+    display: flex;
+    background-color: black;
+    padding: 0.2rem;
+    gap: 0.5rem;
+    overflow: hidden;
+}
+
+.admin-sidebar {
+    position: relative;
+    width: 220px;
+    min-height: 100%;
+    border-radius: 10px;
+    background: #0f1f14;
+    overflow: hidden;
+    padding: 1.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex-shrink: 0;
+    z-index: 0;
+}
+
+.admin-sidebar::before {
+    content: "";
+    position: absolute;
+    inset: -50%;
+    background:
+        radial-gradient(circle at 20% 30%, #2ecc71 0%, transparent 40%),
+        radial-gradient(circle at 80% 40%, #27ae60 0%, transparent 45%),
+        radial-gradient(circle at 60% 80%, #1abc9c 0%, transparent 40%),
+        radial-gradient(circle at 30% 70%, #16a085 0%, transparent 45%),
+        radial-gradient(circle at 90% 90%, #0f9d58 0%, transparent 50%);
+    filter: blur(90px);
+    animation: lavaMove 30s ease-in-out infinite alternate;
+    z-index: -1;
+}
+
+.admin-sidebar-title {
+    font-size: 11px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    padding: 0 8px;
+    margin-bottom: 16px;
+    position: relative;
+    z-index: 1;
+}
+
+.admin-nav-item {
+    position: relative;
+    z-index: 1;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    color: rgb(255, 255, 255);
+    transition: all 0.2s ease;
+}
+
+.admin-nav-item.active {
+    background: rgba(0, 0, 0, 0.45);
+    color: #ffffff;
+    font-weight: 500;
+    border: 1px solid rgba(46, 204, 113, 0.3);
+}
+
+.admin-nav-item:hover:not(.active) {
+    background: rgba(0, 0, 0, 0.25);
+    color: #ffffff;
+}
+
+.admin-nav-logout {
+    margin-top: auto;
+    color: rgba(255, 100, 100, 0.8) !important;
+}
+
+.admin-nav-logout:hover {
+    background: rgba(255, 80, 80, 0.15) !important;
+    color: #ff6464 !important;
+}
+
+
+
+.admin-content {
+    flex: 1;
+    background: #000000;
+    border-radius: 10px;
+    border: 1px solid rgba(46, 204, 113, 0.15);
+    padding: 2rem;
+    overflow-y: auto;
+    color: #ffffff;
+}
+
+.admin-section {
+    width: 100%;
+}
+
+.admin-section-header {
+    margin-bottom: 1.5rem;
+}
+
+.admin-section-title {
+    font-size: 20px;
+    font-weight: 500;
+    color: #ffffff;
+    margin: 0 0 4px;
+}
+
+.admin-section-subtitle {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.45);
+    margin: 0;
+}
+
+
+
+.admin-metrics-row {
+    gap: 12px;
+    margin-bottom: 1.5rem;
+    width: 100%;
+}
+
+.admin-metric-card {
+    flex: 1;
+    background: #0d0d0d;
+    border-radius: 10px;
+    border: 1px solid rgba(46, 204, 113, 0.2);
+    padding: 1rem 1.25rem;
+}
+
+.metric-label {
+    font-size: 11px;
+    color: rgb(255, 255, 255);
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    margin-bottom: 6px;
+}
+
+.metric-value {
+    font-size: 24px;
+    font-weight: 500;
+    color: #ffffff;
+}
+
+
+.admin-grid {
+    --lumo-base-color: #0d0d0d;
+    --lumo-body-text-color: #ffffff;
+    --lumo-secondary-text-color: rgba(255,255,255,0.5);
+    --lumo-contrast-5pct: rgba(255,255,255,0.04);
+    --lumo-contrast-10pct: rgba(255,255,255,0.08);
+    --lumo-contrast-20pct: rgba(255,255,255,0.12);
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(46, 204, 113, 0.15);
+}
+
+.admin-add-btn {
+    white-space: nowrap;
+    color: #ffffff !important;
+    font-weight: 600 !important;
+    border: none !important;
+    border-radius: 8px !important;
+}
+
+
+.badge-success {
+    background: rgba(46, 204, 113, 0.15);
+    color: #ffffff;
+    font-size: 11px;
+    padding: 3px 9px;
+    border-radius: 4px;
+    font-weight: 500;
+    border: 1px solid rgba(46, 204, 113, 0.3);
+}
+
+.badge-warning {
+    background: rgba(255, 165, 0, 0.12);
+    color: #f39c12;
+    font-size: 11px;
+    padding: 3px 9px;
+    border-radius: 4px;
+    font-weight: 500;
+    border: 1px solid rgba(255, 165, 0, 0.25);
+}
+
+.admin-queue-note {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.5);
+    background: #0d0d0d;
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    border-left: 3px solid #2ecc71;
+    margin-top: 1rem;
 }
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/* AI asisted us here in acheiving the animation effect on the front page */
+@keyframes lavaMove {
+    0% {
+        transform: translate(-10%, -10%) scale(1);
+    }
+    25% {
+        transform: translate(10%, -5%) scale(1.2);
+    }
+    50% {
+        transform: translate(0%, 10%) scale(1.1);
+    }
+    75% {
+        transform: translate(-5%, 5%) scale(1.25);
+    }
+    100% {
+        transform: translate(10%, -10%) scale(1.15);
+    }
+}
