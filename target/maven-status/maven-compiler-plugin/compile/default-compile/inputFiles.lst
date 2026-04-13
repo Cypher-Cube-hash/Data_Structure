@@ -18,6 +18,7 @@ C:\Users\Yochanan Gardner\Downloads\app\app\src\main\java\com\example\datastruct
 C:\Users\Yochanan Gardner\Downloads\app\app\src\main\java\com\example\datastructures\temporaryPassword\TemporaryPasswordList.java
 C:\Users\Yochanan Gardner\Downloads\app\app\src\main\java\com\example\datastructures\temporaryPassword\TemporaryPasswordNode.java
 C:\Users\Yochanan Gardner\Downloads\app\app\src\main\java\com\example\datastructures\user\UserLinkedList.java
+C:\Users\Yochanan Gardner\Downloads\app\app\src\main\java\com\example\datastructures\user\UserList.java
 C:\Users\Yochanan Gardner\Downloads\app\app\src\main\java\com\example\datastructures\user\UserNode.java
 C:\Users\Yochanan Gardner\Downloads\app\app\src\main\java\com\example\enums\TypeAccount.java
 C:\Users\Yochanan Gardner\Downloads\app\app\src\main\java\com\example\enums\TypeAcctStatus.java
@@ -74,7 +75,6 @@ C:\Users\Yochanan Gardner\Downloads\app\app\src\main\java\com\example\views\comp
 C:\Users\Yochanan Gardner\Downloads\app\app\src\main\java\com\example\views\components\inputs\SearchBarView.java
 C:\Users\Yochanan Gardner\Downloads\app\app\src\main\java\com\example\views\components\layouts\HeaderView.java
 C:\Users\Yochanan Gardner\Downloads\app\app\src\main\java\com\example\views\components\profile\CustomerProfileDrawerView.java
-C:\Users\Yochanan Gardner\Downloads\app\app\src\main\java\com\example\views\components\profile\ProfileDrawerView.java
 C:\Users\Yochanan Gardner\Downloads\app\app\src\main\java\com\example\views\CreatePasswordView.java
 C:\Users\Yochanan Gardner\Downloads\app\app\src\main\java\com\example\views\MainView.java
 C:\Users\Yochanan Gardner\Downloads\app\app\src\main\java\com\example\views\ProductPageView.java

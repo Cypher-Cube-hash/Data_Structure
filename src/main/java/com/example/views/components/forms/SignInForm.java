@@ -8,15 +8,26 @@ import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.UI;
 import com.example.repositories.AdminRepository;
 import com.example.repositories.AuthenticationRepository;
+import com.example.repositories.CustomerRepository;
 import com.example.repositories.TemporaryPasswordRepository;
+import com.example.services.CustomerServices;
+import com.example.services.UserServices;
 import com.example.models.TemporaryPassword;
+import com.example.enums.TypeGender;
 import com.example.models.Admin;
+import com.example.repositories.CustomerRepository;
+import com.example.services.CustomerServices;
+import com.example.services.UserServices;
+import com.example.models.Customer;
+import com.example.models.User;
+import com.example.enums.TypeGender;
 
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.example.models.Authentication;
+import com.example.models.Customer;
 import com.example.utils.PassWordHasher;
 
 @Component
@@ -29,12 +40,20 @@ public class SignInForm extends Div {
     private final AdminRepository adminRepository;
     private final AuthenticationRepository authRepository;
     private final TemporaryPasswordRepository tempPass;
+    private final CustomerRepository customerRepository;
+    private final CustomerServices customerServices;
+    private final UserServices userServices;
 
-    public SignInForm(AdminRepository adminRepository, AuthenticationRepository authRepository, TemporaryPasswordRepository tempPass) {
+    public SignInForm(AdminRepository adminRepository, AuthenticationRepository authRepository,
+                  TemporaryPasswordRepository tempPass, CustomerRepository customerRepository,
+                  CustomerServices customerServices, UserServices userServices) {
         this.adminRepository = adminRepository;
         this.authRepository = authRepository;
         this.tempPass = tempPass;
-        
+        this.customerRepository = customerRepository;
+        this.customerServices = customerServices;
+        this.userServices = userServices;
+            
         addClassName("form-container");
         
         Div welcomeDiv = new Div();
@@ -119,7 +138,14 @@ public class SignInForm extends Div {
                     if (adminOpt.isPresent()) {
                         getUI().ifPresent(ui -> ui.navigate("admin"));
                     } else {
-                        getUI().ifPresent(ui -> ui.navigate("product-page"));
+                        // Create customer record if it doesn't exist yet
+                        if (!customerRepository.findByUser_UserId(userId).isPresent()) {
+                            User user = userServices.findById(userId);
+                            if (user != null) {
+                                customerRepository.save(new Customer(user, TypeGender.NULL));
+                            }
+                        }
+                        getUI().ifPresent(ui -> ui.navigate("product-page/" + userId));
                     }
                 }       
             }

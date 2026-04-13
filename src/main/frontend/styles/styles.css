@@ -1376,3 +1376,8 @@ button:active {
         transform: translate(10%, -10%) scale(1.15);
     }
 }
+
+
+.edit-dialog{
+    z-index: 10000;
+}

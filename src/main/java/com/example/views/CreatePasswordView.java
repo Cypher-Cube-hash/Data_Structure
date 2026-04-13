@@ -10,6 +10,7 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
+import com.example.repositories.CustomerRepository;
 
 @Route("create-password")
 @PageTitle("Create Password - BrandEx")
@@ -18,11 +19,13 @@ public class CreatePasswordView extends VerticalLayout {
 
     private final AuthenticationServices authenticationServices;
     private final UserServices userServices;
+    private final CustomerRepository customerRepository;
 
     public CreatePasswordView(AuthenticationServices authenticationServices, 
-                              UserServices userServices) {
+                              UserServices userServices, CustomerRepository customerRepository) {
         this.authenticationServices = authenticationServices;
         this.userServices = userServices;
+        this.customerRepository = customerRepository;
         
         addClassName("create-password-view");
         setSizeFull();
@@ -68,7 +71,7 @@ public class CreatePasswordView extends VerticalLayout {
         Div innerBoxTwo = new Div();
         innerBoxTwo.addClassName("inner_div_box_two");
         
-        CreatePasswordForm passwordForm = new CreatePasswordForm(authenticationServices, userServices);
+        CreatePasswordForm passwordForm = new CreatePasswordForm(authenticationServices, userServices, customerRepository);
         
         innerBoxTwo.add(passwordForm);
         boxTwo.add(innerBoxTwo);

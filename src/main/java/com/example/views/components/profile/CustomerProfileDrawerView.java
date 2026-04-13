@@ -1,5 +1,7 @@
 package com.example.views.components.profile;
 
+import com.example.datastructures.user.UserLinkedList;
+import com.example.datastructures.user.UserNode;
 import com.example.enums.TypeGender;
 import com.example.models.Customer;
 import com.example.models.User;
@@ -18,6 +20,8 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.component.textfield.TextField;
+import com.example.datastructures.user.UserLinkedList;
+import com.example.datastructures.user.UserNode;
 
 import java.time.format.DateTimeFormatter;
 
@@ -198,6 +202,7 @@ public class CustomerProfileDrawerView extends Div {
 
     private void openEditDialog() {
         Dialog dialog = new Dialog();
+        dialog.addClassName("edit-dialog");
         dialog.setHeaderTitle("Edit Profile");
         dialog.setWidth("420px");
 
@@ -230,9 +235,19 @@ public class CustomerProfileDrawerView extends Div {
                 return;
             }
 
-            User user = customer.getUser();
-            user.setFirstName(firstNameField.getValue().trim());
-            user.setLastName(lastNameField.getValue().trim());
+            UserLinkedList userList = new UserLinkedList();
+            userList.add(customer.getUser());
+
+            UserNode current = userList.getHead();
+
+            while (current != null) {
+                User u = current.getUser();
+
+                u.setFirstName(firstNameField.getValue().trim());
+                u.setLastName(lastNameField.getValue().trim());
+
+                current = current.getUserNext();
+            }
 
             customer.setGender(genderField.getValue());
             customer.setUpdatedAt(java.time.LocalDate.now());

@@ -1,5 +1,6 @@
 package com.example.views.components.forms;
 
+import com.example.repositories.CustomerRepository;
 import com.example.services.AuthenticationServices;
 import com.example.services.UserServices;
 import com.vaadin.flow.component.UI;
@@ -14,11 +15,17 @@ import com.vaadin.flow.component.textfield.EmailField;
 import com.vaadin.flow.component.textfield.PasswordField;
 import com.example.services.AuthenticationServices;
 import com.example.utils.PassWordHasher;
+import com.example.repositories.CustomerRepository;
+import com.example.models.Customer;
+import com.example.models.User;
+import com.example.enums.TypeGender;
 
 public class CreatePasswordForm extends Div {
 
     private final AuthenticationServices authenticationServices;
     private final UserServices userServices;
+
+    private final CustomerRepository customerRepository;
     
     private EmailField emailField;
     private PasswordField passwordField;
@@ -27,9 +34,10 @@ public class CreatePasswordForm extends Div {
     private Button backButton;
 
     public CreatePasswordForm(AuthenticationServices authenticationServices, 
-                              UserServices userServices) {
+                              UserServices userServices, CustomerRepository customerRepository) {
         this.authenticationServices = authenticationServices;
         this.userServices = userServices;
+        this.customerRepository = customerRepository;
         addClassName("form-container");
 
         Div welcomeMessage = new Div();
@@ -222,13 +230,10 @@ public class CreatePasswordForm extends Div {
         }catch(Exception e){
             Notification.show("Error: " + e);
         }
-
-
-
-
-
-        
     }
+
+
+    
 
     private boolean isValidPassword(String password) {
         if (password.length() < 8) return false;

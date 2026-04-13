@@ -12,6 +12,9 @@ import com.example.services.RegistrationServices;
 import com.example.repositories.AdminRepository;
 import com.example.repositories.AuthenticationRepository;
 import com.example.repositories.TemporaryPasswordRepository;
+import com.example.repositories.CustomerRepository;
+import com.example.services.CustomerServices;
+import com.example.services.UserServices;
 
 @Route("")
 @PageTitle("Brand-Ex")
@@ -24,16 +27,25 @@ public class MainView extends VerticalLayout {
     private final AdminRepository adminRepository; 
     private final AuthenticationRepository authRepository;
     private final TemporaryPasswordRepository tempPassRepository;
+    private final CustomerRepository customerRepository;
+    private final CustomerServices customerServices;
+    private final UserServices userServices;
     
 
     public MainView(RegistrationServices registrationServices,
         AdminRepository adminRepository, 
         AuthenticationRepository authRepository,
-        TemporaryPasswordRepository tempPassRepository) {
+        TemporaryPasswordRepository tempPassRepository,
+        CustomerRepository customerRepository,
+        CustomerServices customerServices,
+        UserServices userServices) {
         this.registrationServices = registrationServices; 
         this.adminRepository = adminRepository;
         this.authRepository = authRepository;
         this.tempPassRepository = tempPassRepository;
+        this.customerRepository = customerRepository;
+    this.customerServices = customerServices;
+    this.userServices = userServices;
         addClassName("homePage");
 
         Div boxOne = new Div();
@@ -92,7 +104,7 @@ public class MainView extends VerticalLayout {
         signInTab.addClassName("active-tab");
         registerTab.removeClassName("active-tab");
         rowTwoDiv.removeAll();
-        rowTwoDiv.add(new SignInForm(adminRepository, authRepository, tempPassRepository));  
+        rowTwoDiv.add(new SignInForm(adminRepository, authRepository, tempPassRepository, customerRepository, customerServices, userServices));  
     }
 
     private void showRegister() {

@@ -34,5 +34,13 @@ public class UserServices {
     return repo.save(user);
     }
 
+    public User findByEmail(String email) {
+        return repo.findByEmail(email).orElse(null);
+    }
+
+    public User findById(String userId) {
+        return repo.findById(userId).orElse(null);
+    }
+
 
 }

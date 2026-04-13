@@ -1,6 +1,7 @@
 package com.example.datastructures.user;
 
 import com.example.models.User;
+import com.example.datastructures.user.UserList;
 
 public class UserLinkedList {
     private UserNode head;
@@ -50,6 +51,24 @@ public class UserLinkedList {
         current.setUserNext(newUser);
         size++;
     }
+
+
+    public UserList toList() {
+        UserList result = new UserList();
+        UserNode current = head;
+
+        while (current != null) {
+            result.add(current.getUser());
+            current = current.getUserNext();
+        }
+
+        return result;
+    }
+
+    public UserNode getHead() {
+        return head;
+    }
+
 
     public int getSize(){
         return this.size;
