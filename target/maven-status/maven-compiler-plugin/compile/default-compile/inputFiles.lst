@@ -9,6 +9,8 @@ C:\Users\Yochanan Gardner\Downloads\app\app\src\main\java\com\example\datastruct
 C:\Users\Yochanan Gardner\Downloads\app\app\src\main\java\com\example\datastructures\product\ProductLinkedList.java
 C:\Users\Yochanan Gardner\Downloads\app\app\src\main\java\com\example\datastructures\product\ProductList.java
 C:\Users\Yochanan Gardner\Downloads\app\app\src\main\java\com\example\datastructures\product\ProductNode.java
+C:\Users\Yochanan Gardner\Downloads\app\app\src\main\java\com\example\datastructures\que\Node.java
+C:\Users\Yochanan Gardner\Downloads\app\app\src\main\java\com\example\datastructures\que\Orderque.java
 C:\Users\Yochanan Gardner\Downloads\app\app\src\main\java\com\example\datastructures\registration\RegistrationLinkedList.java
 C:\Users\Yochanan Gardner\Downloads\app\app\src\main\java\com\example\datastructures\registration\RegistrationList.java
 C:\Users\Yochanan Gardner\Downloads\app\app\src\main\java\com\example\datastructures\registration\RegistrationNode.java
@@ -72,6 +74,7 @@ C:\Users\Yochanan Gardner\Downloads\app\app\src\main\java\com\example\views\comp
 C:\Users\Yochanan Gardner\Downloads\app\app\src\main\java\com\example\views\components\inputs\SearchBarView.java
 C:\Users\Yochanan Gardner\Downloads\app\app\src\main\java\com\example\views\components\layouts\HeaderView.java
 C:\Users\Yochanan Gardner\Downloads\app\app\src\main\java\com\example\views\components\profile\CustomerProfileDrawerView.java
+C:\Users\Yochanan Gardner\Downloads\app\app\src\main\java\com\example\views\components\profile\ProfileDrawerView.java
 C:\Users\Yochanan Gardner\Downloads\app\app\src\main\java\com\example\views\CreatePasswordView.java
 C:\Users\Yochanan Gardner\Downloads\app\app\src\main\java\com\example\views\MainView.java
 C:\Users\Yochanan Gardner\Downloads\app\app\src\main\java\com\example\views\ProductPageView.java
