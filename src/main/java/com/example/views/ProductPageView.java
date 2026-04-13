@@ -24,28 +24,23 @@ import com.vaadin.flow.server.VaadinSession;
 public class ProductPageView extends Section {
 
     private final ProductServices productServices;
-    private final CartSession     cartSession;
+    private final CartSession cartSession;
+    private final HeaderView productHeader;
+    private final Div productDisplay;
+    private final CartDrawerView cartDrawer;
 
-    private final HeaderView      productHeader;
-    private final Div             productDisplay;
-    private final CartDrawerView  cartDrawer;
-
-    // Live badge on the cart icon in the header
     private final Span cartBadge;
 
     public ProductPageView(ProductServices productServices) {
     this.productServices = productServices;
-    this.cartSession     = getOrCreateCartSession();
+    this.cartSession = getOrCreateCartSession();
 
         addClassName("productPage");
-        // Needed so the fixed-position cart drawer renders inside the page
         getStyle().set("position", "relative");
 
-        // ── Header ────────────────────────────────────────────────────────
         productHeader = new HeaderView();
         add(productHeader);
 
-        // ── Cart badge on the header cart icon ───────────────────────────
         cartBadge = new Span("0");
         cartBadge.getStyle()
             .set("position", "absolute")
@@ -66,7 +61,6 @@ public class ProductPageView extends Section {
         cartIconWrapper.getStyle().set("position", "relative");
         cartIconWrapper.add(cartBadge);
 
-        // ── Cart drawer — toggles on cart icon click ──────────────────────
         cartDrawer = new CartDrawerView(cartSession, this::refreshCartBadge);
         add(cartDrawer);
 
@@ -75,19 +69,15 @@ public class ProductPageView extends Section {
             if (cartDrawer.isVisible()) cartDrawer.refresh();
         });
 
-        // ── Search: uses BST via ProductServices.searchByName() ──────────
         productHeader.getSearchBar().getSearchButton().addClickListener(e -> {
             String query = productHeader.getSearchBar().getSearchQuery().trim();
             if (query.isEmpty()) {
-                // Show all — from the LinkedList
                 renderProducts(productServices.getAllProducts());
             } else {
-                // BST search — O(log n) by name substring
                 renderProducts(productServices.searchByName(query));
             }
         });
 
-        // ── Product grid ─────────────────────────────────────────────────
         productDisplay = new Div();
         productDisplay.addClassName("productDisplay");
         productDisplay.getStyle()
@@ -100,17 +90,8 @@ public class ProductPageView extends Section {
 
         add(productDisplay);
 
-        // Initial render — all products from the linked list
         renderProducts(productServices.getAllProducts());
     }
-
-    // ── Render ────────────────────────────────────────────────────────────
-
-    /**
-     * Rebuilds the card grid from the given ProductList.
-     * Each Card receives the CartSession so its cart icon can push to the
-     * CartLinkedList and the undo stack without any java.util dependency.
-     */
     private void renderProducts(ProductList products) {
         productDisplay.removeAll();
 
@@ -129,8 +110,6 @@ public class ProductPageView extends Section {
             productDisplay.add(new Card(p, cartSession, this::refreshCartBadge));
         }
     }
-
-    // ── Badge ─────────────────────────────────────────────────────────────
 
     private void refreshCartBadge() {
         int count = cartSession.cartSize();

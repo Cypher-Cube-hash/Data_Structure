@@ -82,8 +82,6 @@ public class RegisterForm extends Div {
             registerButton
         );
     }
-
-    // ─── Name Row ────────────────────────────────────────
     private Div buildNameContainer() {
         Div container = new Div();
         container.addClassName("name-container");
@@ -120,7 +118,6 @@ public class RegisterForm extends Div {
         return container;
     }
 
-    // ─── City & State Row ────────────────────────────────
     private Div buildCityStateContainer() {
         Div container = new Div();
         container.addClassName("city-state-container");
@@ -157,7 +154,6 @@ public class RegisterForm extends Div {
         return container;
     }
 
-    // ─── Country Dropdown ────────────────────────────────
     private Div buildCountryGroup() {
         Div group = new Div();
         group.addClassName("input-group");
@@ -180,7 +176,7 @@ public class RegisterForm extends Div {
         return group;
     }
 
-    // ─── Reusable input group ────────────────────────────
+
     private Div buildInputGroup(String label, String placeholder, String type, boolean required) {
         Div group = new Div();
         group.addClassName("input-group");
@@ -211,7 +207,6 @@ public class RegisterForm extends Div {
                 .orElseThrow(() -> new RuntimeException("Input not found"));
     }
 
-    // ─── Telephone Row ────────────────────────────────────
     private Div buildTelephoneContainer() {
         Div container = new Div();
         container.addClassName("telephone-container");

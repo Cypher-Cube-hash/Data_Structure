@@ -16,33 +16,28 @@ public class HeaderOptionsView extends HorizontalLayout {
 
     public HeaderOptionsView() {
 
-        // MAIN CONTAINER
         addClassName("header_option_section");
         setAlignItems(Alignment.CENTER);
         setSpacing(true);
 
-        // CART ICON BUTTON
         cartButton = createIconButton(
-            "icon/cart.svg",   // <-- use your local SVG here
+            "icon/cart.svg",
             "cart"
         );
 
         // USER ICON BUTTON
         userButton = createIconButton(
-            "icon/profile.svg",   // <-- use your local SVG here
+            "icon/profile.svg",
             "user"
         );
 
-        // LOGOUT BUTTON
         logoutButton = new Button("Logout");
         Div logoutContainer = new Div(logoutButton);
         logoutContainer.addClassName("log_out_container");
 
-        // ADD ALL
         add(cartButton, userButton, logoutContainer);
     }
 
-    // 🔧 Reusable icon button creator
     private Div createIconButton(String src, String alt) {
         Div wrapper = new Div();
         wrapper.addClassName("icon_btn");

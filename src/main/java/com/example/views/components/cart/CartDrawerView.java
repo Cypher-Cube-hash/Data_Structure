@@ -12,27 +12,11 @@ import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 
-/**
- * A slide-in cart drawer that renders the CartLinkedList.
- *
- * Features:
- *  – Lists every item in the linked list (traverses from head to tail)
- *  – Quantity +/- buttons that call CartSession.updateQuantity()
- *  – Remove (×) button per item that calls CartSession.removeFromCart()
- *  – Undo / Redo buttons at the bottom
- *  – Live total calculation (traverses the list and multiplies price × quantity)
- *
- * The Runnable `onCartChanged` callback lets the parent page refresh the
- * cart badge count in the header without tight coupling.
- *
- * NO java.util classes used — only custom CartLinkedList data structure.
- */
 public class CartDrawerView extends Div {
 
     private final CartSession cartSession;
     private final Runnable    onCartChanged;
 
-    // Containers we refresh on every change
     private final Div  itemsContainer;
     private final Span totalLabel;
     private final Button undoBtn;
@@ -42,7 +26,6 @@ public class CartDrawerView extends Div {
         this.cartSession   = cartSession;
         this.onCartChanged = onCartChanged;
 
-        // ── Drawer shell ──────────────────────────────────────────────────
         getStyle()
             .set("position", "fixed")
             .set("top", "0")
@@ -57,7 +40,6 @@ public class CartDrawerView extends Div {
             .set("box-shadow", "-8px 0 32px rgba(0,0,0,0.6)")
             .set("overflow", "hidden");
 
-        // ── Header row ────────────────────────────────────────────────────
         HorizontalLayout header = new HorizontalLayout();
         header.setWidthFull();
         header.setAlignItems(HorizontalLayout.Alignment.CENTER);
@@ -85,7 +67,6 @@ public class CartDrawerView extends Div {
 
         header.add(title, closeBtn);
 
-        // ── Items area (scrollable) ───────────────────────────────────────
         itemsContainer = new Div();
         itemsContainer.getStyle()
             .set("flex", "1")
@@ -95,7 +76,6 @@ public class CartDrawerView extends Div {
             .set("flex-direction", "column")
             .set("gap", "0.75rem");
 
-        // ── Footer ────────────────────────────────────────────────────────
         Div footer = new Div();
         footer.getStyle()
             .set("padding", "1rem 1.5rem")
@@ -105,7 +85,6 @@ public class CartDrawerView extends Div {
             .set("gap", "0.75rem")
             .set("flex-shrink", "0");
 
-        // Total row
         HorizontalLayout totalRow = new HorizontalLayout();
         totalRow.setWidthFull();
         totalRow.setJustifyContentMode(HorizontalLayout.JustifyContentMode.BETWEEN);
@@ -122,7 +101,6 @@ public class CartDrawerView extends Div {
 
         totalRow.add(totalLabelStatic, totalLabel);
 
-        // Undo / Redo row
         HorizontalLayout undoRedoRow = new HorizontalLayout();
         undoRedoRow.setWidthFull();
         undoRedoRow.setSpacing(true);
@@ -189,47 +167,18 @@ public class CartDrawerView extends Div {
 
         add(header, itemsContainer, footer);
 
-        setVisible(false); // hidden until the cart icon is clicked
+        setVisible(false); 
         refresh();
     }
-
-    // ── Checkout Handler ───────────────────────────────────────────────────
-    /**
-     * When checkout is clicked:
-     *  1. Calculate total from cart
-     *  2. Create Order object with cart items
-     *  3. Add Order to OrderQueue (custom FIFO queue)
-     *  4. Clear cart
-     *  5. Show confirmation
-     *
-     * This would integrate with an OrderQueue and OrderService in production.
-     */
     private void handleCheckout() {
-        // Calculate total
         double total = calculateCartTotal();
 
-        // TODO: In production, integrate with:
-        // - OrderService to create Order entity
-        // - OrderQueue (custom FIFO queue structure) to add order
-        // - OrderRepository to persist to database
-
-        // For now, show confirmation
         showToast("Order placed! Total: $" + String.format("%.2f", total), false);
         
-        // Clear cart after successful checkout
         cartSession.getCartList().clear();
         refresh();
         setVisible(false);
     }
-
-    // ── Refresh ───────────────────────────────────────────────────────────
-
-    /**
-     * Rebuilds the item list by traversing the CartLinkedList from head to tail,
-     * updates the total, and syncs undo/redo button states.
-     *
-     * Uses ONLY custom CartLinkedList — no java.util.ArrayList or List.
-     */
     public void refresh() {
         itemsContainer.removeAll();
 
@@ -248,7 +197,6 @@ public class CartDrawerView extends Div {
             return;
         }
 
-        // Traverse the linked list manually — no java.util
         CartNode current = cartSession.getCartList().getHead();
         while (current != null) {
             CartItem item = current.getCartItem();
@@ -256,7 +204,6 @@ public class CartDrawerView extends Div {
             current = current.getNext();
         }
 
-        // Calculate and display total
         double runningTotal = calculateCartTotal();
         totalLabel.setText("$" + String.format("%.2f", runningTotal));
 
@@ -265,11 +212,6 @@ public class CartDrawerView extends Div {
         onCartChanged.run();
     }
 
-    // ── Total Calculation ──────────────────────────────────────────────────
-    /**
-     * Traverses the entire CartLinkedList and sums (price × quantity) for all items.
-     * Uses no java.util classes — only CartLinkedList traversal.
-     */
     private double calculateCartTotal() {
         double total = 0.0;
         CartNode current = cartSession.getCartList().getHead();
@@ -283,8 +225,6 @@ public class CartDrawerView extends Div {
 
         return total;
     }
-
-    // ── Cart row builder ──────────────────────────────────────────────────
 
     private Div buildCartRow(CartItem item) {
         Div row = new Div();
@@ -329,7 +269,6 @@ public class CartDrawerView extends Div {
 
         nameRow.add(name, removeBtn);
 
-        // Type badge
         Span type = new Span(item.getProduct().getProductType().name());
         type.getStyle()
             .set("font-size", "10px")
@@ -340,7 +279,6 @@ public class CartDrawerView extends Div {
             .set("font-weight", "600")
             .set("text-transform", "uppercase");
 
-        // Price and subtotal row (NEW)
         HorizontalLayout priceRow = new HorizontalLayout();
         priceRow.setAlignItems(HorizontalLayout.Alignment.CENTER);
         priceRow.setSpacing(true);

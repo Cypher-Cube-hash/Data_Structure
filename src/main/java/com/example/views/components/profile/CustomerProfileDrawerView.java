@@ -21,35 +21,16 @@ import com.vaadin.flow.component.textfield.TextField;
 
 import java.time.format.DateTimeFormatter;
 
-/**
- * Slide-in drawer for customer profile management.
- *
- * Features:
- *  – Profile Tab: View and edit basic info (name, email, gender)
- *  – Order History Tab: View all past orders
- *  – Manage Orders Tab: Track and cancel orders
- *
- * Integrates with:
- *  - Customer model
- *  - CustomerServices
- *  - OrderService (when available)
- *
- * Uses NO java.util.* classes — ready for custom data structures.
- */
 public class CustomerProfileDrawerView extends Div {
 
     private final Customer customer;
     private final CustomerServices customerServices;
-    // TODO: Inject OrderService when available
-    // private final OrderService orderService;
-
-    // Tabs
+    
     private Tab profileTab;
     private Tab orderHistoryTab;
     private Tab manageOrdersTab;
     private Tabs tabContainer;
 
-    // Content containers
     private VerticalLayout profileContent;
     private VerticalLayout orderHistoryContent;
     private VerticalLayout manageOrdersContent;
@@ -59,11 +40,10 @@ public class CustomerProfileDrawerView extends Div {
         this.customer = customer;
         this.customerServices = customerServices;
 
-        // ── Drawer shell ──────────────────────────────────────────────────
         getStyle()
             .set("position", "fixed")
             .set("top", "0")
-            .set("right", "360px") // Offset from cart drawer
+            .set("right", "360px")
             .set("width", "360px")
             .set("height", "100svh")
             .set("background", "#0d1117")
@@ -75,7 +55,6 @@ public class CustomerProfileDrawerView extends Div {
             .set("box-shadow", "-8px 0 32px rgba(0,0,0,0.6)")
             .set("overflow", "hidden");
 
-        // ── Header ────────────────────────────────────────────────────────
         HorizontalLayout header = new HorizontalLayout();
         header.setWidthFull();
         header.setAlignItems(HorizontalLayout.Alignment.CENTER);
@@ -103,7 +82,6 @@ public class CustomerProfileDrawerView extends Div {
 
         header.add(title, closeBtn);
 
-        // ── Tab navigation ────────────────────────────────────────────────
         profileTab = new Tab("Profile");
         orderHistoryTab = new Tab("Order History");
         manageOrdersTab = new Tab("Manage Orders");
@@ -113,23 +91,19 @@ public class CustomerProfileDrawerView extends Div {
             .set("border-bottom", "1px solid rgba(255,255,255,0.08)")
             .set("flex-shrink", "0");
 
-        // ── Content area ──────────────────────────────────────────────────
         tabContentDiv = new Div();
         tabContentDiv.getStyle()
             .set("flex", "1")
             .set("overflow-y", "auto")
             .set("padding", "1.5rem");
 
-        // Build tab contents
         profileContent = buildProfileTab();
         orderHistoryContent = buildOrderHistoryTab();
         manageOrdersContent = buildManageOrdersTab();
 
-        // Show profile tab by default
         tabContentDiv.removeAll();
         tabContentDiv.add(profileContent);
 
-        // Handle tab switching
         tabContainer.addSelectedChangeListener(e -> {
             tabContentDiv.removeAll();
             if (e.getSelectedTab() == profileTab) {
@@ -147,14 +121,12 @@ public class CustomerProfileDrawerView extends Div {
         setVisible(false);
     }
 
-    // ── Profile Tab ────────────────────────────────────────────────────────
 
     private VerticalLayout buildProfileTab() {
         VerticalLayout layout = new VerticalLayout();
         layout.setPadding(false);
         layout.setSpacing(true);
 
-        // User info section
         Div infoSection = new Div();
         infoSection.getStyle()
             .set("background", "rgba(255,255,255,0.04)")
@@ -171,7 +143,6 @@ public class CustomerProfileDrawerView extends Div {
             .set("text-transform", "uppercase")
             .set("letter-spacing", "0.04em");
 
-        // Display fields
         Div infoRows = new Div();
         infoRows.getStyle().set("display", "flex").set("flex-direction", "column").set("gap", "0.75rem");
 
@@ -185,7 +156,6 @@ public class CustomerProfileDrawerView extends Div {
 
         infoSection.add(sectionTitle, infoRows);
 
-        // Edit button
         Button editBtn = new Button("Edit Profile");
         editBtn.setWidthFull();
         editBtn.getStyle()
@@ -231,23 +201,19 @@ public class CustomerProfileDrawerView extends Div {
         dialog.setHeaderTitle("Edit Profile");
         dialog.setWidth("420px");
 
-        // First Name
         TextField firstNameField = new TextField("First Name");
         firstNameField.setValue(customer.getUserFirstName() != null ? customer.getUserFirstName() : "");
         firstNameField.setWidthFull();
 
-        // Last Name
         TextField lastNameField = new TextField("Last Name");
         lastNameField.setValue(customer.getUserLastName() != null ? customer.getUserLastName() : "");
         lastNameField.setWidthFull();
 
-        // Email (read-only for now, could be editable with verification)
         TextField emailField = new TextField("Email");
         emailField.setValue(customer.getUserEmail() != null ? customer.getUserEmail() : "");
         emailField.setReadOnly(true);
         emailField.setWidthFull();
 
-        // Gender
         ComboBox<TypeGender> genderField = new ComboBox<>("Gender");
         genderField.setItems(TypeGender.values());
         genderField.setValue(customer.getGender());
@@ -258,29 +224,24 @@ public class CustomerProfileDrawerView extends Div {
         form.setSpacing(true);
         dialog.add(form);
 
-        // Save button
         Button save = new Button("Save Changes", e -> {
             if (firstNameField.isEmpty() || lastNameField.isEmpty()) {
                 showNotification("First name and last name are required.", true);
                 return;
             }
 
-            // Update User
             User user = customer.getUser();
             user.setFirstName(firstNameField.getValue().trim());
             user.setLastName(lastNameField.getValue().trim());
 
-            // Update Customer
             customer.setGender(genderField.getValue());
             customer.setUpdatedAt(java.time.LocalDate.now());
 
-            // Save via service
             try {
                 customerServices.updateCustomer(customer);
                 showNotification("Profile updated successfully.", false);
                 dialog.close();
                 
-                // Refresh profile display
                 profileContent.removeAll();
                 profileContent.add(buildProfileTab());
                 
@@ -297,8 +258,6 @@ public class CustomerProfileDrawerView extends Div {
         dialog.open();
     }
 
-    // ── Order History Tab ──────────────────────────────────────────────────
-
     private VerticalLayout buildOrderHistoryTab() {
         VerticalLayout layout = new VerticalLayout();
         layout.setPadding(false);
@@ -313,15 +272,6 @@ public class CustomerProfileDrawerView extends Div {
 
         layout.add(emptyMessage);
 
-        // TODO: Integrate with OrderService
-        // OrderService.getOrdersByCustomerId(customer.getCustomerId())
-        // Build order cards/table with:
-        //  - Order ID
-        //  - Order Date
-        //  - Total Amount
-        //  - Status (badge)
-        //  - View Details button
-
         return layout;
     }
 
@@ -329,8 +279,6 @@ public class CustomerProfileDrawerView extends Div {
         orderHistoryContent.removeAll();
         orderHistoryContent.add(buildOrderHistoryTab());
     }
-
-    // ── Manage Orders Tab ──────────────────────────────────────────────────
 
     private VerticalLayout buildManageOrdersTab() {
         VerticalLayout layout = new VerticalLayout();
@@ -346,16 +294,6 @@ public class CustomerProfileDrawerView extends Div {
 
         layout.add(emptyMessage);
 
-        // TODO: Integrate with OrderService
-        // Fetch orders with status IN (PENDING, PROCESSING, SHIPPED)
-        // Build order cards with:
-        //  - Order ID
-        //  - Current Status (with progress indicator)
-        //  - Items list
-        //  - Tracking info (if shipped)
-        //  - Cancel button (if PENDING)
-        //  - Track shipment link (if SHIPPED)
-
         return layout;
     }
 
@@ -363,8 +301,6 @@ public class CustomerProfileDrawerView extends Div {
         manageOrdersContent.removeAll();
         manageOrdersContent.add(buildManageOrdersTab());
     }
-
-    // ── Notifications ─────────────────────────────────────────────────────
 
     private void showNotification(String message, boolean isError) {
         Notification n = Notification.show(message, 3000, Notification.Position.BOTTOM_END);

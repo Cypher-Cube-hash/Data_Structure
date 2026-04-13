@@ -46,7 +46,6 @@ public class AdminProductView extends VerticalLayout {
         refreshGrid();
     }
 
-    // ── Section header + Add button ────────────────────────────────────────
     private HorizontalLayout buildHeader() {
         HorizontalLayout header = new HorizontalLayout();
         header.setWidthFull();
@@ -74,13 +73,11 @@ public class AdminProductView extends VerticalLayout {
         return header;
     }
 
-    // ── Metric cards row ───────────────────────────────────────────────────
     private HorizontalLayout buildMetrics() {
         HorizontalLayout row = new HorizontalLayout();
         row.addClassName("admin-metrics-row");
         row.setWidthFull();
 
-        // Pull counts directly from the in-memory linked list via the service
         ProductList all = productServices.getAllProducts();
         int total = all.size();
         int inStock = 0;
@@ -106,7 +103,6 @@ public class AdminProductView extends VerticalLayout {
         return card;
     }
 
-    // ── Data grid ──────────────────────────────────────────────────────────
     private Grid<Product> buildGrid() {
         productGrid = new Grid<>(Product.class, false);
         productGrid.addClassName("admin-grid");
@@ -151,42 +147,35 @@ public class AdminProductView extends VerticalLayout {
         return productGrid;
     }
 
-    // ── Add / Edit dialog ──────────────────────────────────────────────────
     private void openProductDialog(Product existing) {
         Dialog dialog = new Dialog();
         dialog.setHeaderTitle(existing == null ? "Add Product" : "Edit Product");
         dialog.setWidth("460px");
 
-        // Product Name
         TextField nameField = new TextField("Product Name *");
         nameField.setWidthFull();
         nameField.setPlaceholder("e.g. Wireless Headphones");
 
-        // Product Type
         ComboBox<TypeProduct> typeField = new ComboBox<>("Product Type *");
         typeField.setItems(TypeProduct.values());
         typeField.setWidthFull();
 
-        // Price (NEW FIELD)
         NumberField priceField = new NumberField("Product Price * ($)");
         priceField.setMin(0);
         priceField.setStep(0.01);
         priceField.setWidthFull();
         priceField.setPlaceholder("e.g. 29.99");
 
-        // Quantity
         IntegerField qtyField = new IntegerField("Quantity *");
         qtyField.setMin(0);
         qtyField.setValue(0);
         qtyField.setWidthFull();
 
-        // Description (max 25 chars to match @Column(length=25))
         TextField descField = new TextField("Description (max 25 chars)");
         descField.setWidthFull();
         descField.setMaxLength(25);
         descField.setPlaceholder("Short description...");
 
-        // Image upload — stored as byte[] in Product
         Div imageSection = new Div();
         imageSection.getStyle().set("width", "100%");
 
@@ -204,7 +193,6 @@ public class AdminProductView extends VerticalLayout {
         upload.setMaxFiles(1);
         upload.setWidthFull();
 
-        // Holds the uploaded bytes so we can use them on save
         byte[][] uploadedImage = { null };
 
         upload.addSucceededListener(event -> {
@@ -217,7 +205,6 @@ public class AdminProductView extends VerticalLayout {
 
         imageSection.add(imageLabel, upload);
 
-        // Pre-fill when editing
         if (existing != null) {
             nameField.setValue(existing.getProductName());
             typeField.setValue(existing.getProductType());
@@ -234,10 +221,8 @@ public class AdminProductView extends VerticalLayout {
         form.setSpacing(true);
         dialog.add(form);
 
-        // Save
         Button save = new Button(existing == null ? "Add Product" : "Save Changes", e -> {
 
-            // Validation
             if (nameField.isEmpty() || typeField.isEmpty()) {
                 showNotification("Name and Type are required.", true);
                 return;
@@ -262,14 +247,12 @@ public class AdminProductView extends VerticalLayout {
             String desc  = descField.getValue().trim();
 
             if (existing == null) {
-                // ── ADD via ProductServices → persists to DB + inserts into LinkedList + BST
                 byte[] imageBytes = uploadedImage[0];
                 Product newProduct = new Product(name, type, qty, desc.isEmpty() ? null : desc, imageBytes, price);
                 productServices.addProduct(newProduct);
                 showNotification("Product \"" + name + "\" added.", false);
 
             } else {
-                // ── EDIT: update fields, re-save via repository
                 existing.setProductName(name);
                 existing.setProductType(type);
                 existing.setProductPrice(price);
@@ -278,7 +261,6 @@ public class AdminProductView extends VerticalLayout {
                 if (uploadedImage[0] != null) {
                     existing.setProductImage(uploadedImage[0]);
                 }
-                // Use addProduct which calls productRepository.save() and keeps BST in sync
                 productServices.addProduct(existing);
                 showNotification("Product \"" + name + "\" updated.", false);
             }
@@ -295,7 +277,6 @@ public class AdminProductView extends VerticalLayout {
         dialog.open();
     }
 
-    // ── Grid refresh — pulls from the in-memory LinkedList via ProductServices ──
     private void refreshGrid() {
         ProductList productList = productServices.getAllProducts();
         List<Product> items = new ArrayList<>();

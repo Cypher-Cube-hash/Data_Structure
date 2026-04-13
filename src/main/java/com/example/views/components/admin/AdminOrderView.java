@@ -48,8 +48,6 @@ public class AdminOrderView extends VerticalLayout {
         HorizontalLayout row = new HorizontalLayout();
         row.addClassName("admin-metrics-row");
         row.setWidthFull();
-
-        // These will be driven by OrderQueue once implemented
         row.add(
             metricCard("Pending orders", "0"),
             metricCard("Processed today", "0"),

@@ -3,9 +3,13 @@ package com.example.services;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import com.example.repositories.TemporaryPasswordRepository;
-import com.example.models.TemporaryPassword;
 
-import java.util.List;
+import jakarta.transaction.Transactional;
+
+import com.example.models.TemporaryPassword;
+import com.example.datastructures.temporaryPassword.TemporaryPasswordLinkedList;
+import com.example.datastructures.temporaryPassword.TemporaryPasswordList;
+
 
 @Service
 public class TemporaryPasswordService {
@@ -16,8 +20,8 @@ public class TemporaryPasswordService {
         this.temp = temp;
     }
     
-    public List<TemporaryPassword> getAllPasswords(){
-        return temp.findAll();
+    public TemporaryPasswordList getPasswordsFromLinkedList(TemporaryPasswordLinkedList linkedList) {
+        return linkedList.toList(); 
     }
 
     @Scheduled(fixedRate = 60000) 

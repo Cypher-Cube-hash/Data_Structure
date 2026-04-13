@@ -32,12 +32,10 @@ public class CreatePasswordForm extends Div {
         this.userServices = userServices;
         addClassName("form-container");
 
-        // Welcome message
         Div welcomeMessage = new Div();
         welcomeMessage.addClassName("welcome-message");
         welcomeMessage.setText("Create New Password");
 
-        // Instruction text
         Div instructionText = new Div();
         instructionText.addClassName("instruction-text");
         instructionText.setText("Please create a secure password for your account");
@@ -47,19 +45,14 @@ public class CreatePasswordForm extends Div {
             .set("margin-bottom", "2rem")
             .set("font-size", "14px");
 
-        // Email field group
         Div emailGroup = buildEmailGroup();
         
-        // Password field group
         Div passwordGroup = buildPasswordGroup();
         
-        // Confirm password field group
         Div confirmPasswordGroup = buildConfirmPasswordGroup();
         
-        // Password requirements section
         Div requirementsDiv = buildPasswordRequirements();
         
-        // Buttons
         Div buttonContainer = buildButtons();
 
         add(
@@ -73,7 +66,6 @@ public class CreatePasswordForm extends Div {
         );
     }
 
-    // ─── Email Group ────────────────────────────────────────
     private Div buildEmailGroup() {
         Div group = new Div();
         group.addClassName("input-group");
@@ -92,7 +84,6 @@ public class CreatePasswordForm extends Div {
         return group;
     }
 
-    // ─── Password Group ────────────────────────────────────
     private Div buildPasswordGroup() {
         Div group = new Div();
         group.addClassName("input-group");
@@ -111,7 +102,6 @@ public class CreatePasswordForm extends Div {
         return group;
     }
 
-    // ─── Confirm Password Group ────────────────────────────
     private Div buildConfirmPasswordGroup() {
         Div group = new Div();
         group.addClassName("input-group");
@@ -130,7 +120,6 @@ public class CreatePasswordForm extends Div {
         return group;
     }
 
-    // ─── Password Requirements Section ─────────────────────
     private Div buildPasswordRequirements() {
         Div container = new Div();
         container.addClassName("password-requirements");
@@ -177,19 +166,16 @@ public class CreatePasswordForm extends Div {
         return container;
     }
 
-    // ─── Buttons Container ─────────────────────────────────
     private Div buildButtons() {
         Div container = new Div();
         container.getStyle().set("margin-top", "1rem");
 
-        // Create Password Button
         createPasswordButton = new Button("CREATE PASSWORD");
         createPasswordButton.addClassName("action-button");
         createPasswordButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         createPasswordButton.setWidthFull();
         createPasswordButton.addClickListener(e -> handleCreatePassword());
 
-        // Back Button
         backButton = new Button("← BACK TO SIGN IN");
         backButton.addClassName("back-button");
         backButton.getStyle()
@@ -212,10 +198,6 @@ public class CreatePasswordForm extends Div {
         return container;
     }
 
-
-
-
-    // ─── Handle Password Creation ──────────────────────────
     private void handleCreatePassword() {
         if(emailField.isEmpty() || passwordField.isEmpty() || confirmPasswordField.isEmpty()){
             Notification.show("Form submission blocked: missing required fields");
@@ -248,7 +230,6 @@ public class CreatePasswordForm extends Div {
         
     }
 
-    // ─── Password Validation Helper ───────────────────────
     private boolean isValidPassword(String password) {
         if (password.length() < 8) return false;
         if (!password.matches(".*[A-Z].*")) return false;
@@ -256,12 +237,4 @@ public class CreatePasswordForm extends Div {
         if (!password.matches(".*\\d.*")) return false;
         return true;
     }
-
-    /* // ─── Notification Helper ───────────────────────────────
-    private void showNotification(String message, NotificationVariant variant) {
-        Notification notification = new Notification(message, 3000);
-        notification.addThemeVariants(variant);
-        notification.setPosition(Notification.Position.TOP_CENTER);
-        notification.open();
-    } */
 }

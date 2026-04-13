@@ -29,14 +29,11 @@ public class CreatePasswordView extends VerticalLayout {
         setSpacing(false);
         setPadding(false);
         
-        // Main container with same grid layout as homePage
         Div mainContainer = new Div();
         mainContainer.addClassName("homePage");
         
-        // Left side - Branding
         Div boxOne = createBrandingBox();
         
-        // Right side - Password Form (using the component)
         Div boxTwo = createPasswordFormBox();
         
         mainContainer.add(boxOne, boxTwo);
@@ -71,7 +68,6 @@ public class CreatePasswordView extends VerticalLayout {
         Div innerBoxTwo = new Div();
         innerBoxTwo.addClassName("inner_div_box_two");
         
-        // Use the CreatePasswordForm component
         CreatePasswordForm passwordForm = new CreatePasswordForm(authenticationServices, userServices);
         
         innerBoxTwo.add(passwordForm);

@@ -36,8 +36,6 @@ public class MainView extends VerticalLayout {
         this.tempPassRepository = tempPassRepository;
         addClassName("homePage");
 
-
-        // ─── Box One (left) ──────────────────────────────
         Div boxOne = new Div();
         boxOne.addClassName("boxOne");
 
@@ -55,17 +53,14 @@ public class MainView extends VerticalLayout {
         innerDiv.add(heading, paraOne);
         boxOne.add(innerDiv);
 
-        // ─── Box Two (right) ─────────────────────────────
         Div boxTwo = new Div();
         boxTwo.addClassName("boxTwo");
 
         Div innerBoxTwo = new Div();
         innerBoxTwo.addClassName("inner_div_box_two");
 
-        // Tabs
         Div tabs = buildTabs();
 
-        // Form container — starts with Sign In
         rowTwoDiv = new Div();
         rowTwoDiv.addClassName("form-container");
         showSignIn();
@@ -75,8 +70,6 @@ public class MainView extends VerticalLayout {
 
         add(boxOne, boxTwo);
     }
-
-    // ─── Tab Builder ─────────────────────────────────────
     private Div buildTabs() {
         Div tabsContainer = new Div();
         tabsContainer.addClassName("tabs-container");
@@ -95,7 +88,6 @@ public class MainView extends VerticalLayout {
         return tabsContainer;
     }
 
-    // ─── Tab Switchers ────────────────────────────────────
     private void showSignIn() {
         signInTab.addClassName("active-tab");
         registerTab.removeClassName("active-tab");

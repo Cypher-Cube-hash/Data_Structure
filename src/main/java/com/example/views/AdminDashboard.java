@@ -74,7 +74,6 @@ public class AdminDashboard extends HorizontalLayout {
     private void showProducts() {
         setActive(navProducts);
         contentArea.removeAll();
-        // Pass ProductServices — AdminProductView uses the LinkedList + BST
         contentArea.add(new AdminProductView(productServices));
     }
 

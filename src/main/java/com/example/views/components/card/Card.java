@@ -18,20 +18,12 @@ import java.io.ByteArrayInputStream;
 
 public class Card extends VerticalLayout {
 
-    /**
-     * @param product      the product to display
-     * @param cartSession  the session-scoped cart (LinkedList + undo stack)
-     * @param onAddToCart  callback so the parent page can refresh the cart badge
-     */
-
-    
     public Card(Product product, CartSession cartSession, Runnable onAddToCart) {
         addClassName("product-card");
         setPadding(false);
         setSpacing(false);
         setWidth("220px");
 
-        // ── Image ─────────────────────────────────────────────────────────
         Div imageContainer = new Div();
         imageContainer.addClassName("image-container");
 
@@ -59,14 +51,12 @@ public class Card extends VerticalLayout {
             imageContainer.add(placeholder);
         }
 
-        // ── Details ───────────────────────────────────────────────────────
         VerticalLayout details = new VerticalLayout();
         details.addClassName("details-content");
         details.setPadding(false);
         details.setSpacing(false);
         details.getStyle().set("gap", "6px");
 
-        // Name + Cart icon
         HorizontalLayout nameRow = new HorizontalLayout();
         nameRow.setWidthFull();
         nameRow.setJustifyContentMode(JustifyContentMode.BETWEEN);
@@ -76,19 +66,17 @@ public class Card extends VerticalLayout {
         title.addClassName("product-title");
         title.getStyle().set("font-size", "0.95rem");
 
-        // ── Cart icon: adds to CartLinkedList + pushes to undo stack ──────
         Icon cartIcon = VaadinIcon.CART_O.create();
         cartIcon.addClassName("cart-icon");
         cartIcon.getStyle().set("cursor", "pointer");
         cartIcon.addClickListener(e -> {
-            cartSession.addToCart(product);   // LinkedList.add() + undoStack.push()
-            onAddToCart.run();                // refresh badge in header
+            cartSession.addToCart(product);
+            onAddToCart.run();     
             showToast("\"" + product.getProductName() + "\" added. Undo available.", false);
         });
 
         nameRow.add(title, cartIcon);
 
-        // Type badge
         Span typeBadge = new Span(product.getProductType().name());
         typeBadge.getStyle()
             .set("font-size", "10px")
@@ -100,7 +88,6 @@ public class Card extends VerticalLayout {
             .set("text-transform", "uppercase")
             .set("letter-spacing", "0.04em");
 
-        // Stock
         boolean inStock = product.getProductQuantity() > 0;
         Span stock = new Span(inStock
             ? "In Stock: " + product.getProductQuantity()
@@ -110,7 +97,6 @@ public class Card extends VerticalLayout {
             .set("font-size", "0.82rem")
             .set("color", inStock ? "#10b981" : "#ef4444");
 
-        // ── Price display (NEW) ────────────────────────────────────────────
         Span priceDisplay = new Span(String.format("$%.2f", product.getProductPrice()));
         priceDisplay.getStyle()
             .set("font-size", "1.1rem")
@@ -120,7 +106,6 @@ public class Card extends VerticalLayout {
 
         details.add(nameRow, typeBadge, stock, priceDisplay);
 
-        // Optional description
         if (product.getProductDesc() != null && !product.getProductDesc().isBlank()) {
             Span desc = new Span(product.getProductDesc());
             desc.getStyle()
@@ -133,7 +118,6 @@ public class Card extends VerticalLayout {
             details.add(desc);
         }
 
-        // Buy button (also adds to cart)
         Button buyButton = new Button("ADD TO CART");
         buyButton.addClassName("buy-button");
         buyButton.setWidthFull();
