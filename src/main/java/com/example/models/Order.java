@@ -16,6 +16,7 @@ public class Order {
     @Id
     private String orderId;
     private String userId;
+    private String userEmail;
     @Transient
     private OrderLinkedList items;
     private double total;
@@ -34,9 +35,10 @@ public class Order {
     }
     
 
-    public Order(String userId, OrderLinkedList items, double total) {
+    public Order(String userId, String userEmail, OrderLinkedList items, double total) {
         this.orderId = IDGenerator.idGenerator(10);
         this.userId = userId;
+        this.userEmail = userEmail;
         this.items = items;
         this.total = total;
         this.tax = 0;
@@ -51,6 +53,10 @@ public class Order {
 
     public String getUserId(){
         return this.userId;
+    }
+
+    public String getUserEmail(){
+        return userEmail;
     }
 
     public OrderLinkedList getItems() {
@@ -85,5 +91,8 @@ public class Order {
         this.userId = userId;
     }
 
+    public void setUserEmail(String userEmail){
+        this.userEmail = userEmail;
+    }
     
 }

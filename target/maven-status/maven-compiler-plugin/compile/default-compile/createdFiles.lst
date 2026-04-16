@@ -85,7 +85,6 @@ com\example\views\components\header\HeaderOptionsView.class
 com\example\models\Account.class
 com\example\views\components\card\Card.class
 com\example\models\TemporaryPassword.class
-com\example\views\components\cart\CartDrawerView.class
 com\example\datastructures\cart\CartSession.class
 com\example\enums\TypeAccount.class
 com\example\views\components\profile\CustomerProfileDrawerView.class

@@ -9,7 +9,7 @@ import org.simplejavamail.mailer.MailerBuilder;
 public class Emailer {
     private Emailer(){}
 
-    public static boolean sendEmail(String personsEmail, String otp){
+    public static boolean sendEmail(String personsEmail, String message, String subject){
         try{
             Dotenv dotenv = Dotenv.configure().load();
 
@@ -20,8 +20,8 @@ public class Emailer {
             Email email = EmailBuilder.startingBlank()
                     .from(companyEmail)
                     .to(personsEmail)
-                    .withSubject("Your OTP Code")
-                    .withPlainText("Your OTP is: " + otp)
+                    .withSubject(subject)
+                    .withPlainText(message)
                     .buildEmail();
 
             MailerBuilder.withSMTPServer("smtp.gmail.com", 587, companyEmail, emailKey)

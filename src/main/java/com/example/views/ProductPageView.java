@@ -67,6 +67,8 @@ public class ProductPageView extends Section implements BeforeEnterObserver {
         Customer customer = null;
         if (userId != null) {
             customer = customerRepository.findByUser_UserId(userId).orElse(null);
+            String userEmail = customer.getUserEmail();
+            cartSession.setUserEmail(userEmail);
         }
 
         buildUI(customer);

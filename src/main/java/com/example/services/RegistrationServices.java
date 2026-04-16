@@ -56,6 +56,8 @@ public class RegistrationServices {
         }
 
         String otp = OTPUtil.generateOTP();
+        String subject = "Your OTP Code";
+        String message = "Your OTP is : " + otp;
 
         String fullAddress = address.getLine1() + ", " +
                      address.getLine2() + ", " +
@@ -75,7 +77,7 @@ public class RegistrationServices {
         tempPassword.save(temp);
 
         System.out.println("About to send email to: " + email);
-        Emailer.sendEmail(email, otp);
+        Emailer.sendEmail(email, message, subject);
         System.out.println("Email sent successfully");
             
         return registration;

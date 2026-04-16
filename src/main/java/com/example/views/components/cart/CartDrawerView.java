@@ -184,7 +184,8 @@ public class CartDrawerView extends Div {
         orderServices.checkout(
             cartSession, 
             total,
-            cartSession.getUserId()
+            cartSession.getUserId(),
+            cartSession.getUserEmail()
         );
 
         cartSession.getCartList().clear();

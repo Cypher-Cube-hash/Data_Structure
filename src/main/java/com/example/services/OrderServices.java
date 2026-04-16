@@ -13,6 +13,7 @@ import com.example.datastructures.que.Orderque;
 import com.example.enums.TypeProduct;
 import com.example.models.Order;
 import com.example.repositories.OrderRepository;
+import com.example.utils.Emailer;
 
 import org.checkerframework.checker.units.qual.t;
 // import io.swagger.v3.oas.models.links.Link;
@@ -37,7 +38,7 @@ public class OrderServices {
         this.orderList = new OrderList();
     }
 
-    public void checkout(CartSession cartSession, double total, String userId) {
+    public void checkout(CartSession cartSession, double total, String userId, String userEmail) {
         CartLinkedList cart = cartSession.getCartList();
 
         OrderLinkedList itemsForOrder = new OrderLinkedList();
@@ -51,7 +52,7 @@ public class OrderServices {
             current = current.getNext();
         }
 
-        Order order = new Order(userId, itemsForOrder, total);
+        Order order = new Order(userId, userEmail, itemsForOrder, total);
 
         System.out.println("Order created with ID: " + order.getOrderId() + " and total: $" + String.format("%.2f", total));
         orderQueue.enqueue(order);
@@ -103,9 +104,19 @@ public class OrderServices {
 
         if(order != null){
             orderProcessedQueue.enqueue(order);
+            sendProcessedOrderEmail(order);
         }
 
         return order;
+    }
+
+    public void sendProcessedOrderEmail(Order order){
+        String orderId = order.getOrderId();
+        String userEmail = order.getUserEmail();
+        String message = "Your order " + orderId + " has been processed.";
+        String subject = "Order Processed";
+
+        Emailer.sendEmail(userEmail, message, subject);
     }
 
     // public boolean deleteOrder(String id) {

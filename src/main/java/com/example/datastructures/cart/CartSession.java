@@ -11,10 +11,12 @@ public class CartSession {
     private final CartStack<CartAction> undoStack;
     private final CartStack<CartAction> redoStack;
     private String userId;
+    private String userEmail;
     private final ProductBst cartBst;
 
     public CartSession(){
         this.userId = "";
+        this.userEmail = "";
         cartList = new CartLinkedList();
         undoStack = new CartStack<>();
         redoStack = new CartStack<>();
@@ -25,8 +27,16 @@ public class CartSession {
         return userId;
     }
 
+    public String getUserEmail(){
+        return userEmail;
+    }
+
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public void setUserEmail(String userEmail){
+        this.userEmail = userEmail;
     }
 
     public void addToCart(Product product) {

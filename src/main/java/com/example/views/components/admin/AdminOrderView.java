@@ -167,6 +167,8 @@ public class AdminOrderView extends VerticalLayout {
 
         Notification.show("Processed order: " + processed.getOrderId());
 
+        
+
         refreshGrid();
     }
 
