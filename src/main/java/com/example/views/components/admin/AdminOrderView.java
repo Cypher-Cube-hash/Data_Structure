@@ -1,22 +1,40 @@
 package com.example.views.components.admin;
 
+import com.example.services.OrderServices;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.example.datastructures.order.OrderList;
+import com.example.datastructures.product.ProductList;
+import com.example.models.Order;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
+import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.data.provider.DataProvider;
+
+/*
+AI was used to help with the layout and structure of this page.
+*/
 
 public class AdminOrderView extends VerticalLayout {
+    public final OrderServices orderServices;
+    public Grid<Order> orderGrid;
 
-    public AdminOrderView() {
+    public AdminOrderView(OrderServices orderServices) {
+        this.orderServices = orderServices;
         addClassName("admin-section");
         setPadding(false);
         setSpacing(false);
 
         add(buildHeader());
         add(buildMetrics());
+        add(buildGrid());
         add(buildQueueNote());
     }
 
@@ -48,8 +66,12 @@ public class AdminOrderView extends VerticalLayout {
         HorizontalLayout row = new HorizontalLayout();
         row.addClassName("admin-metrics-row");
         row.setWidthFull();
+
+        OrderList allOrders = orderServices.getAllOrders();
+        int total = allOrders.size();
+
         row.add(
-            metricCard("Pending orders", "0"),
+            metricCard("Pending orders", String.valueOf(total)),
             metricCard("Processed today", "0"),
             metricCard("Next in queue", "—")
         );
@@ -65,6 +87,64 @@ public class AdminOrderView extends VerticalLayout {
         return card;
     }
 
+    private Grid<Order> buildGrid() {
+        orderGrid = new Grid<>(Order.class, false);
+        orderGrid.addClassName("admin-grid");
+        orderGrid.setWidthFull();
+
+        orderGrid.setItems(convertToList(orderServices.getAllOrders()));
+
+        // OrderList orderList = orderServices.getAllOrders();
+        // List<Order> items = new ArrayList<>();
+
+        // for (int i = 0; i < orderList.size(); i++) {
+        //     items.add(orderList.getIndex(i));
+        // }
+        // orderGrid.setItems(items);
+
+        orderGrid.addColumn(Order::getOrderId)
+            .setHeader("Order ID").setFlexGrow(2);
+
+        orderGrid.addColumn(Order::getUserId)
+            .setHeader("User ID").setFlexGrow(2);
+
+        orderGrid.addColumn(Order::getTotal)
+            .setHeader("Total").setFlexGrow(2);
+
+        orderGrid.addColumn(Order::getOrderDate)
+            .setHeader("Order Date").setFlexGrow(1);
+
+        orderGrid.addColumn(order -> {
+            System.out.println("Items: " + order.getItems());
+            if (order.getItems() == null) {
+                return "No Orders";
+            }
+            return order.getItems().size();
+        }).setHeader("Items").setFlexGrow(1);
+
+        // orderGrid.addComponentColumn(o -> {
+        //     HorizontalLayout actions = new HorizontalLayout();
+
+        //     Button edit = new Button("Edit");
+        //     edit.addThemeVariants(ButtonVariant.LUMO_SMALL, ButtonVariant.LUMO_TERTIARY);
+        //     // edit.addClickListener(e -> openProductDialog(o));
+
+        //     Button delete = new Button("Delete");
+        //     delete.addThemeVariants(ButtonVariant.LUMO_SMALL, ButtonVariant.LUMO_ERROR,
+        //                             ButtonVariant.LUMO_TERTIARY);
+        //     delete.addClickListener(e -> {
+        //         // orderServices.deleteOrder(o.getOrderId());
+        //         refreshGrid();
+        //         // showNotification("Order \"" + o.getOrderId() + "\" deleted.", false);
+        //     });
+
+        //     actions.add(edit, delete);
+        //     return actions;
+        // }).setHeader("Actions").setFlexGrow(1);
+
+        return orderGrid;
+    }
+
     private Div buildQueueNote() {
         Div note = new Div();
         note.addClassName("admin-queue-note");
@@ -78,6 +158,44 @@ public class AdminOrderView extends VerticalLayout {
     }
 
     private void processNextOrder() {
-        
+        Order processed = orderServices.processNextOrder();
+
+        if (processed == null) {
+            Notification.show("No orders in queue");
+            return;
+        }
+
+        Notification.show("Processed order: " + processed.getOrderId());
+
+        refreshGrid();
+    }
+
+    // private void refreshGrid() {
+    //     OrderList orderList = orderServices.getAllOrders();
+    //     List<Order> items = new ArrayList<>();
+    //     for (int i = 0; i < orderList.size(); i++) {
+    //         items.add(orderList.getIndex(i));
+    //     }
+    //     orderGrid.setItems(items);
+    // }
+
+    /*
+    AI was used to improve the function above
+    */
+
+        // ================= REFRESH =================
+    private void refreshGrid() {
+        orderGrid.setItems(convertToList(orderServices.getAllOrders()));
+    }
+
+    // ================= HELPER =================
+    private List<Order> convertToList(OrderList orderList) {
+        List<Order> list = new ArrayList<>();
+
+        for (int i = 0; i < orderList.size(); i++) {
+            list.add(orderList.getIndex(i));
+        }
+
+        return list;
     }
 }

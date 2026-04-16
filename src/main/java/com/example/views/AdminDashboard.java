@@ -1,6 +1,7 @@
 package com.example.views;
 
 import com.example.services.ProductServices;
+import com.example.services.OrderServices;
 import com.example.views.components.admin.AdminOrderView;
 import com.example.views.components.admin.AdminProductView;
 import com.vaadin.flow.component.dependency.CssImport;
@@ -21,9 +22,11 @@ public class AdminDashboard extends HorizontalLayout {
     private Div contentArea;
 
     private final ProductServices productServices;
+    private final OrderServices orderServices;
 
-    public AdminDashboard(ProductServices productServices) {
+    public AdminDashboard(ProductServices productServices, OrderServices orderServices) {
         this.productServices = productServices;
+        this.orderServices = orderServices;
 
         setSizeFull();
         setSpacing(false);
@@ -80,7 +83,7 @@ public class AdminDashboard extends HorizontalLayout {
     private void showOrders() {
         setActive(navOrders);
         contentArea.removeAll();
-        contentArea.add(new AdminOrderView());
+        contentArea.add(new AdminOrderView(orderServices));
     }
 
     private void setActive(Div selected) {

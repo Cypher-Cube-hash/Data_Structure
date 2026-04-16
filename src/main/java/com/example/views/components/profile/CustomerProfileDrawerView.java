@@ -1,11 +1,15 @@
 package com.example.views.components.profile;
 
+import com.example.datastructures.order.OrderList;
+import com.example.datastructures.order.OrderNode;
 import com.example.datastructures.user.UserLinkedList;
 import com.example.datastructures.user.UserNode;
 import com.example.enums.TypeGender;
 import com.example.models.Customer;
+import com.example.models.Order;
 import com.example.models.User;
 import com.example.services.CustomerServices;
+import com.example.services.OrderServices;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.combobox.ComboBox;
@@ -29,6 +33,7 @@ public class CustomerProfileDrawerView extends Div {
 
     private final Customer customer;
     private final CustomerServices customerServices;
+    public final OrderServices orderServices;
     
     private Tab profileTab;
     private Tab orderHistoryTab;
@@ -40,9 +45,10 @@ public class CustomerProfileDrawerView extends Div {
     private VerticalLayout manageOrdersContent;
     private Div tabContentDiv;
 
-    public CustomerProfileDrawerView(Customer customer, CustomerServices customerServices) {
+    public CustomerProfileDrawerView(Customer customer, CustomerServices customerServices, OrderServices orderServices) {
         this.customer = customer;
         this.customerServices = customerServices;
+        this.orderServices = orderServices;
 
         getStyle()
             .set("position", "fixed")
@@ -143,7 +149,7 @@ public class CustomerProfileDrawerView extends Div {
         sectionTitle.getStyle()
             .set("font-size", "13px")
             .set("font-weight", "600")
-            .set("color", "#94a3b8")
+            .set("color", "#ffffff")
             .set("text-transform", "uppercase")
             .set("letter-spacing", "0.04em");
 
@@ -185,7 +191,7 @@ public class CustomerProfileDrawerView extends Div {
 
         Span labelSpan = new Span(label);
         labelSpan.getStyle()
-            .set("color", "#94a3b8")
+            .set("color", "#ffffff")
             .set("font-size", "13px")
             .set("font-weight", "500");
 
@@ -273,19 +279,87 @@ public class CustomerProfileDrawerView extends Div {
         dialog.open();
     }
 
-    private VerticalLayout buildOrderHistoryTab() {
+    // private VerticalLayout buildOrderHistoryTab() {
+    //     VerticalLayout layout = new VerticalLayout();
+    //     layout.setPadding(false);
+    //     layout.setSpacing(true);
+
+    //     Span emptyMessage = new Span("No orders yet. Start shopping!");
+    //     emptyMessage.getStyle()
+    //         .set("color", "rgba(255,255,255,0.3)")
+    //         .set("font-size", "13px")
+    //         .set("text-align", "center")
+    //         .set("padding", "2rem 0");
+
+    //     layout.add(emptyMessage);
+
+    //     return layout;
+    // }
+
+        private VerticalLayout buildOrderHistoryTab() {
+
         VerticalLayout layout = new VerticalLayout();
         layout.setPadding(false);
         layout.setSpacing(true);
 
-        Span emptyMessage = new Span("No orders yet. Start shopping!");
-        emptyMessage.getStyle()
-            .set("color", "rgba(255,255,255,0.3)")
-            .set("font-size", "13px")
-            .set("text-align", "center")
-            .set("padding", "2rem 0");
+        String currentUserId = customer.getUserId(); // ✅ get logged-in user
 
-        layout.add(emptyMessage);
+        OrderList userOrders = orderServices.getProcessedOrdersByUser(currentUserId);
+
+        // ✅ If no orders → show empty message
+        if (userOrders.size() == 0) {
+            Span emptyMessage = new Span("No orders yet. Start shopping!");
+            emptyMessage.getStyle()
+                .set("color", "rgb(255, 255, 255)")
+                .set("font-size", "13px")
+                .set("text-align", "center")
+                .set("padding", "2rem 0");
+
+            layout.add(emptyMessage);
+            return layout;
+        }
+
+        // ✅ Otherwise display orders
+        for (int i = 0; i < userOrders.size(); i++) {
+            Order order = userOrders.getIndex(i);
+
+            Div card = new Div();
+            card.getStyle()
+                .set("border", "1px solid #ccc")
+                .set("color", "rgb(255, 255, 255)")
+                .set("padding", "10px")
+                .set("border-radius", "8px")
+                .set("margin-bottom", "10px");
+
+            // Order info
+            Span id = new Span("Order ID: " + order.getOrderId());
+            Span total = new Span("Total: $" + order.getTotal());
+            Span date = new Span("Date: " + order.getOrderDate());
+
+            VerticalLayout info = new VerticalLayout(id, total, date);
+            info.setSpacing(false);
+            info.setPadding(false);
+
+            // Items
+            VerticalLayout itemsLayout = new VerticalLayout();
+            itemsLayout.setSpacing(false);
+            itemsLayout.setPadding(false);
+
+            if (order.getItems() != null) {
+                OrderNode current = order.getItems().getHead();
+
+                while (current != null) {
+                    itemsLayout.add(new Span(
+                        current.getCartItem().getProduct().getProductName()
+                        + " x" + current.getCartItem().getQuantity()
+                    ));
+                    current = current.getNext();
+                }
+            }
+
+            card.add(info, itemsLayout);
+            layout.add(card);
+        }
 
         return layout;
     }
@@ -296,21 +370,89 @@ public class CustomerProfileDrawerView extends Div {
     }
 
     private VerticalLayout buildManageOrdersTab() {
+
         VerticalLayout layout = new VerticalLayout();
         layout.setPadding(false);
         layout.setSpacing(true);
 
-        Span emptyMessage = new Span("No active orders to manage.");
-        emptyMessage.getStyle()
-            .set("color", "rgba(255,255,255,0.3)")
-            .set("font-size", "13px")
-            .set("text-align", "center")
-            .set("padding", "2rem 0");
+        String currentUserId = customer.getUserId(); // ✅ get logged-in user
 
-        layout.add(emptyMessage);
+        OrderList userOrders = orderServices.getOrdersByUser(currentUserId);
+
+        // ✅ If no orders → show empty message
+        if (userOrders.size() == 0) {
+            Span emptyMessage = new Span("No orders yet. Start shopping!");
+            emptyMessage.getStyle()
+                .set("color", "rgb(255, 255, 255)")
+                .set("font-size", "13px")
+                .set("text-align", "center")
+                .set("padding", "2rem 0");
+
+            layout.add(emptyMessage);
+            return layout;
+        }
+
+        // ✅ Otherwise display orders
+        for (int i = 0; i < userOrders.size(); i++) {
+            Order order = userOrders.getIndex(i);
+
+            Div card = new Div();
+            card.getStyle()
+                .set("border", "1px solid #ccc")
+                .set("color", "rgb(255, 255, 255)")
+                .set("padding", "10px")
+                .set("border-radius", "8px")
+                .set("margin-bottom", "10px");
+
+            // Order info
+            Span id = new Span("Order ID: " + order.getOrderId());
+            Span total = new Span("Total: $" + order.getTotal());
+            Span date = new Span("Date: " + order.getOrderDate());
+
+            VerticalLayout info = new VerticalLayout(id, total, date);
+            info.setSpacing(false);
+            info.setPadding(false);
+
+            // Items
+            VerticalLayout itemsLayout = new VerticalLayout();
+            itemsLayout.setSpacing(false);
+            itemsLayout.setPadding(false);
+
+            if (order.getItems() != null) {
+                OrderNode current = order.getItems().getHead();
+
+                while (current != null) {
+                    itemsLayout.add(new Span(
+                        current.getCartItem().getProduct().getProductName()
+                        + " x" + current.getCartItem().getQuantity()
+                    ));
+                    current = current.getNext();
+                }
+            }
+
+            card.add(info, itemsLayout);
+            layout.add(card);
+        }
 
         return layout;
     }
+
+    // private VerticalLayout buildManageOrdersTab() {
+    //     VerticalLayout layout = new VerticalLayout();
+    //     layout.setPadding(false);
+    //     layout.setSpacing(true);
+
+    //     Span emptyMessage = new Span("No active orders to manage.");
+    //     emptyMessage.getStyle()
+    //         .set("color", "rgba(255,255,255,0.3)")
+    //         .set("font-size", "13px")
+    //         .set("text-align", "center")
+    //         .set("padding", "2rem 0");
+
+    //     layout.add(emptyMessage);
+
+    //     return layout;
+    // }
 
     private void refreshManageOrders() {
         manageOrdersContent.removeAll();

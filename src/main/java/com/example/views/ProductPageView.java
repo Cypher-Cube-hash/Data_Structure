@@ -1,11 +1,15 @@
 package com.example.views;
 
+import org.aspectj.weaver.ast.Or;
+
 import com.example.datastructures.cart.CartSession;
+import com.example.datastructures.order.OrderQueue;
 import com.example.datastructures.product.ProductList;
 import com.example.models.Customer;
 import com.example.models.Product;
 import com.example.repositories.CustomerRepository;
 import com.example.services.CustomerServices;
+import com.example.services.OrderServices;
 import com.example.services.ProductServices;
 import com.example.views.components.card.Card;
 import com.example.views.components.cart.CartDrawerView;
@@ -32,24 +36,33 @@ public class ProductPageView extends Section implements BeforeEnterObserver {
     private final CustomerRepository customerRepository;
 
     private CartSession cartSession;
+    private final OrderServices orderList;
     private HeaderView productHeader;
     private Div productDisplay;
     private CartDrawerView cartDrawer;
     private CustomerProfileDrawerView profileDrawer;
+    private OrderServices orderServices;
     private Span cartBadge;
 
     public ProductPageView(ProductServices productServices,
+                            OrderServices orderList,
                            CustomerServices customerServices,
-                           CustomerRepository customerRepository) {
+                           CustomerRepository customerRepository,
+                           OrderServices orderServices
+                        ) {
+        this.orderList = orderList;
         this.productServices = productServices;
         this.customerServices = customerServices;
         this.customerRepository = customerRepository;
+        this.orderServices = orderServices;
+        this.cartSession = new CartSession();
     }
 
     @Override
     public void beforeEnter(BeforeEnterEvent event) {
         // Get userId from query param
         String userId = event.getRouteParameters().get("userId").orElse(null);
+        cartSession.setUserId(userId);
 
         Customer customer = null;
         if (userId != null) {
@@ -62,7 +75,7 @@ public class ProductPageView extends Section implements BeforeEnterObserver {
     private void buildUI(Customer customer) {
         removeAll();
 
-        this.cartSession = new CartSession();
+        // this.cartSession = new CartSession();
 
         addClassName("productPage");
         getStyle().set("position", "relative");
@@ -82,10 +95,10 @@ public class ProductPageView extends Section implements BeforeEnterObserver {
         cartIconWrapper.getStyle().set("position", "relative");
         cartIconWrapper.add(cartBadge);
 
-        cartDrawer = new CartDrawerView(cartSession, this::refreshCartBadge);
+        cartDrawer = new CartDrawerView(cartSession, orderList, this::refreshCartBadge);
         add(cartDrawer);
 
-        profileDrawer = new CustomerProfileDrawerView(customer, customerServices);
+        profileDrawer = new CustomerProfileDrawerView(customer, customerServices, orderServices);
         add(profileDrawer);
 
         cartIconWrapper.addClickListener(e -> {

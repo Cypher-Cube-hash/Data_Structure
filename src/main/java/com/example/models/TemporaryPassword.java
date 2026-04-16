@@ -16,7 +16,9 @@ public class TemporaryPassword {
     @Column(name = "temp_pass", nullable = false, unique = true)
     private String pass;
 
-    /* @Column(name = "duration_time", nullable = false) */
+    @Column(name = "duration_time", nullable = false)
+    private int durationTime;
+
     @Column(name = "expires_at", nullable = false)
     private LocalDateTime expiresAt;
 
@@ -30,6 +32,7 @@ public class TemporaryPassword {
 
     public TemporaryPassword(String pass) {
         this.pass = pass;
+        this.durationTime = 5; // Duration in minutes
         this.expiresAt = LocalDateTime.now().plusMinutes(5);
         this.createdAt = LocalDate.now();
         this.updatedAt = LocalDate.now();
@@ -40,6 +43,10 @@ public class TemporaryPassword {
 
     public String getPass() {
         return pass;
+    }
+
+    public int getDurationTime() {
+        return durationTime;
     }
 
     public LocalDateTime getExpiresAt() {

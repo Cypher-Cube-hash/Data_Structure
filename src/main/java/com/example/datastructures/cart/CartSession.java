@@ -10,14 +10,23 @@ public class CartSession {
     private final CartLinkedList cartList;
     private final CartStack<CartAction> undoStack;
     private final CartStack<CartAction> redoStack;
-
+    private String userId;
     private final ProductBst cartBst;
 
     public CartSession(){
+        this.userId = "";
         cartList = new CartLinkedList();
         undoStack = new CartStack<>();
         redoStack = new CartStack<>();
         cartBst = new ProductBst();
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public void addToCart(Product product) {

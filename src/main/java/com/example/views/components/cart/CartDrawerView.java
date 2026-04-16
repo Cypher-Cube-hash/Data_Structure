@@ -1,8 +1,14 @@
 package com.example.views.components.cart;
 
+import java.util.LinkedList;
+
+import org.aspectj.weaver.ast.Or;
+
 import com.example.datastructures.cart.CartItem;
 import com.example.datastructures.cart.CartNode;
 import com.example.datastructures.cart.CartSession;
+import com.example.datastructures.order.OrderLinkedList;
+import com.example.services.OrderServices;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.html.Div;
@@ -15,6 +21,7 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 public class CartDrawerView extends Div {
 
     private final CartSession cartSession;
+    private final OrderServices orderServices;
     private final Runnable    onCartChanged;
 
     private final Div  itemsContainer;
@@ -22,8 +29,9 @@ public class CartDrawerView extends Div {
     private final Button undoBtn;
     private final Button redoBtn;
 
-    public CartDrawerView(CartSession cartSession, Runnable onCartChanged) {
+    public CartDrawerView(CartSession cartSession, OrderServices orderServices, Runnable onCartChanged) {
         this.cartSession   = cartSession;
+        this.orderServices     = orderServices;
         this.onCartChanged = onCartChanged;
 
         getStyle()
@@ -172,11 +180,17 @@ public class CartDrawerView extends Div {
     }
     private void handleCheckout() {
         double total = calculateCartTotal();
-
-        showToast("Order placed! Total: $" + String.format("%.2f", total), false);
         
+        orderServices.checkout(
+            cartSession, 
+            total,
+            cartSession.getUserId()
+        );
+
         cartSession.getCartList().clear();
         refresh();
+
+        showToast("Order placed! Total: $" + String.format("%.2f", total), false);
         setVisible(false);
     }
     public void refresh() {

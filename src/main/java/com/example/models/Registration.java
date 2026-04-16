@@ -50,13 +50,13 @@ public class Registration {
         this.updatedAt = LocalDate.now();
     }
 
-    public Registration(String registrationId, User user, Account account, Telephone phone, LocalDate crDate, LocalDate uDate){
+    public Registration(String registrationId, User user, Account account, Telephone phone){
         this.registrationId = registrationId;
         this.user = user;
         this.account = account;
         this.phone = phone;
-        this.createAt = crDate;
-        this.updatedAt = uDate;
+        this.createAt = LocalDate.now();
+        this.updatedAt = LocalDate.now();
     }
 
 
@@ -65,8 +65,8 @@ public class Registration {
         this.user = registry.user;
         this.account = registry.account;
         this.phone = registry.phone;
-        this.createAt = registry.createAt;
-        this.updatedAt = registry.updatedAt;
+        this.createAt = LocalDate.now();
+        this.updatedAt = LocalDate.now();
     }
     public String getRegistrationId() {
         return registrationId;
